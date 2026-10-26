@@ -13,6 +13,10 @@ a{color:#0A1A2F}a:hover{color:#1F3A5F}
 @media (max-width: 640px){.navlink{display:none}}
 @media (max-width: 768px){.line-qr{display:none}}
 @media (max-width: 520px){.you-card{grid-column:1/-1}.you-tile{aspect-ratio:2/1!important}}
+.member-photo{width:100%;aspect-ratio:3/4;overflow:hidden;border-radius:4px;background:#FFFFFF}
+.member-photo img{width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;transform-origin:center bottom}
+/* hyuga JPEG has ~9.75% white above the hair; toggy's hair is flush with the top. Both feet sit on the bottom edge. */
+.member-photo img.hyuga{transform:scale(1.108)}
 </style>
 </head>
 <body>
@@ -163,13 +167,13 @@ a{color:#0A1A2F}a:hover{color:#1F3A5F}
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px 20px">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<img src="images/member_hyuga.jpg" alt="ヒューガー" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; border-radius: 4px; background: #F2F5F2">
+<div class="member-photo"><img class="hyuga" src="images/member_hyuga.jpg" alt="ヒューガー"></div>
 <div style="align-self: flex-start; font-size: 11px; font-weight: 700; background: #E5EBE8; padding: 2px 8px; border-radius: 2px">元BiS第3期</div>
 <div style="font-size: 18px; font-weight: 900; line-height: 1.5">ヒューガー</div>
 <div style="font-size: 13px; color: #4A5A55; line-height: 1.7">BiS第3期でオリコン週間3位獲得。圧倒的なライブパフォーマンスでグループの核を担う実力派。</div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 10px">
-<img src="images/member_toggy.jpg" alt="トギー" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; border-radius: 4px; background: #F2F5F2">
+<div class="member-photo"><img src="images/member_toggy.jpg" alt="トギー"></div>
 <div style="align-self: flex-start; font-size: 11px; font-weight: 700; background: #E5EBE8; padding: 2px 8px; border-radius: 2px">第3期BiS唯一のオリジナルメンバー</div>
 <div style="font-size: 18px; font-weight: 900; line-height: 1.5">トギー</div>
 <div style="font-size: 13px; color: #4A5A55; line-height: 1.7">2019年のBiS始動から約5年半にわたり中核を担い続けた。解散後11カ月の沈黙を経て2025年12月に電撃加入。</div>
