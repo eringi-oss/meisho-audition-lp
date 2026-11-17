@@ -48,7 +48,7 @@ try{if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.d
 :root{--ink:#0A1A2F;--accent:#87F035;--paper:#F3F0E8;--card:#FBFAF6;--muted:#5C675F;--line:#DDD6C8}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans JP",sans-serif;font-size:16px;line-height:1.7;text-wrap:pretty;line-break:strict;word-break:keep-all;overflow-wrap:anywhere;word-break:auto-phrase}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans JP",sans-serif;font-size:16px;line-height:1.7;text-wrap:pretty;line-break:strict;word-break:normal;overflow-wrap:break-word;word-break:auto-phrase}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -62,7 +62,9 @@ p,li,dd{line-height:1.7}
 .nav a,.nav-entry{min-height:44px;display:inline-flex;align-items:center;padding:0 8px;text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap}
 .nav-entry{background:var(--ink);color:var(--accent);padding:0 14px}
 .hero{position:relative;color:#F4F1EA;background:var(--ink);overflow:hidden;display:flex;align-items:flex-end;min-height:560px}
-.hero-media,.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero-media{position:absolute;inset:0;overflow:hidden}
+.hero-zoom,.hero-zoom img{width:100%;height:100%}
+.hero-zoom img{object-fit:cover;object-position:center 30%;display:block}
 .hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,47,.35) 0%,rgba(10,26,47,.55) 46%,rgba(10,26,47,.92) 100%)}
 .hero-copy{position:relative;z-index:1;padding:36px 0 32px}
 .eyebrow{margin:0;color:var(--accent);font-size:13px;font-weight:700;letter-spacing:.04em}
@@ -73,40 +75,46 @@ p,li,dd{line-height:1.7}
 .hero-actions{margin-top:18px}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;background:var(--accent);color:var(--ink);text-decoration:none;font-weight:700;border:1px solid var(--accent)}
 .btn:active{transform:scale(.98)}
-.sec{padding:48px 0;scroll-margin-top:108px}
+.sec{display:flow-root;position:relative;padding:48px 0;scroll-margin-top:108px}
+.nowrap{white-space:nowrap}
 .sec h2{margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line);font-size:clamp(26px,7vw,36px)}
 .lead{margin:0 0 14px}
-.qualities{list-style:none;margin:0;padding:0}
-.qualities li{padding:12px 0;border-top:1px solid var(--line);font-size:16px}
-.qualities strong{display:block;font-size:15px}
+.marquee{overflow:hidden;width:100%;background:var(--ink);color:#F4F1EA;border-bottom:1px solid rgba(135,240,53,.45)}
+.marquee-track{display:flex;width:max-content}
+.marquee span{font-family:"Space Grotesk","Noto Sans JP",sans-serif;font-weight:600;font-size:22px;letter-spacing:-.03em;line-height:1;padding:10px 18px;color:transparent;-webkit-text-stroke:1px rgba(244,241,234,.5);white-space:nowrap}
+.qualities{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.qualities li{background:var(--card);border-top:3px solid var(--accent);padding:14px 16px}
+.qualities b{display:block;font-family:"Space Grotesk","Noto Sans JP",sans-serif;font-size:22px;font-weight:600;line-height:1}
+.qualities strong{display:block;margin-top:8px;font-size:16px}
+.qualities p{margin:4px 0 0}
 .photos{display:grid;grid-template-columns:1.2fr .9fr .9fr;gap:4px}
 .photos img{width:100%;height:132px;object-fit:cover}
 .sheet{margin:0;border-top:1px solid var(--ink)}
-.sheet>div{display:grid;grid-template-columns:1fr;gap:2px;padding:14px 0;border-bottom:1px solid var(--line)}
+.sheet>div{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;padding:14px 0;border-bottom:1px solid var(--line)}
 .sheet dt{font-weight:700}
 .sheet dd{margin:0}
 .note{display:block;margin-top:4px;color:var(--muted);font-size:13px;line-height:1.7;font-weight:400}
 .stages{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
 .stages li{padding:14px 0;border-bottom:1px solid var(--line)}
-.stages .name{margin:0;font-weight:700;font-size:17px;line-height:1.45}
-.stages .when{margin:2px 0 0;font-size:17px;font-weight:700;line-height:1.45}
-.stages .desc{margin:2px 0 0;color:#314039}
+.stages .name{margin:0;color:var(--ink);font-weight:500;font-size:14px;line-height:1.45}
+.stages .when{margin:2px 0 0;color:#146C28;font-size:22px;font-weight:700;line-height:1.35}
+.stages .desc{margin:4px 0 0;color:#314039;font-size:15px}
 .notes-block{margin-top:8px}
 .notes-block .note{margin:0}
-.steps{list-style:none;margin:0 0 18px;padding:0;counter-reset:step}
-.steps li{counter-increment:step;display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:8px;align-items:center;min-height:48px;border-bottom:1px solid var(--line);font-weight:700}
-.steps li::before{content:counter(step);font-variant-numeric:tabular-nums}
+.apply{background:var(--ink);color:#F4F1EA}
+.apply h2,.apply h3{color:#F4F1EA;border-color:rgba(244,241,234,.25)}
+.apply h3{margin:22px 0 8px;font-size:18px;border:0}
+.join{list-style:none;margin:0;padding:0}
+.join li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;position:relative;padding-bottom:8px}
+.join li::before{content:"";position:absolute;left:31px;top:58px;bottom:0;width:2px;background:rgba(135,240,53,.75)}
+.join li:last-child::before{display:none}
+.join .n{width:64px;height:64px;border-radius:50%;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-size:26px;font-weight:700;position:relative;z-index:1}
+.join .card{background:rgba(255,253,248,.06);border:1px solid rgba(244,241,234,.16);padding:14px 14px 16px;margin-bottom:12px}
+.join .card p{margin:0 0 10px;font-size:18px;font-weight:700;line-height:1.45}
+.join .card p:last-child{margin:0}
+.qr{width:140px;height:140px;margin:8px 0;background:#fff;object-fit:contain}
 .plain{margin:0;padding-left:1.2em}
 .plain li{padding:3px 0}
-.shoot{margin:14px 0 0}
-.entry{background:var(--ink);color:#F4F1EA;text-align:center}
-.entry h2{border:0;color:var(--accent);font-family:"Space Grotesk","Noto Sans JP",sans-serif;font-size:clamp(40px,10vw,72px);letter-spacing:-.04em}
-.entry .catch{color:#F4F1EA}
-.entry-row{display:grid;gap:12px;margin-top:16px}
-.panel{border:1px solid rgba(244,241,234,.2);padding:16px}
-.panel p{margin:8px 0 0}
-.panel h3{margin:0;color:var(--accent);font-size:18px}
-.qr{width:140px;height:140px;margin:8px auto 0;background:#fff;object-fit:contain}
 .portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 18%}
 .role{margin:12px 0 0;font-size:13px;font-weight:700;letter-spacing:.04em}
 .person-name{margin:2px 0 0;font-size:clamp(32px,8vw,48px)}
@@ -121,9 +129,13 @@ p,li,dd{line-height:1.7}
 .bio summary{min-height:44px;display:inline-flex;align-items:center;cursor:pointer;font-weight:700;color:var(--muted);list-style:none}
 .bio summary::-webkit-details-marker{display:none}
 .ink .bio summary{color:#D5DDD6}
-.members{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.member-photo{aspect-ratio:3/4;overflow:hidden;background:#fff}
-.member-photo img{width:100%;height:100%;object-fit:cover;object-position:center 12%}
+.members{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.members>article{min-width:0}
+.member-photo{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;background:#fff}
+.member-photo picture{position:absolute;inset:0;display:block;width:100%;height:100%}
+.member-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.member-photo img.hyuga{object-position:center 42%}
+.member-photo img.toggy{object-position:center 0%}
 .tag{display:inline-block;margin:8px 0 0;padding:2px 6px;background:#E7E2D6;font-size:12px;font-weight:700;line-height:1.5}
 .members h3{margin:6px 0 4px;font-size:18px}
 .members p{margin:0;font-size:15px;line-height:1.6}
@@ -131,6 +143,15 @@ p,li,dd{line-height:1.7}
 .notes li{position:relative;padding:6px 0 6px 14px}
 .notes li::before{content:"";position:absolute;left:0;top:.75em;width:4px;height:4px;border-radius:50%;background:#B7B1A4}
 .notes a{text-decoration:underline}
+.faq-grid{display:grid;gap:8px}
+details.q{background:var(--card);border:1px solid var(--line)}
+details.q summary{list-style:none;cursor:pointer;min-height:48px;padding:12px 14px;display:flex;align-items:center;gap:10px;font-weight:700;line-height:1.45}
+details.q summary::-webkit-details-marker{display:none}
+details.q .ql{font-variant-numeric:tabular-nums;font-size:14px}
+details.q .qtext{flex:1}
+details.q summary::after{content:"+";margin-left:auto;font-size:22px;line-height:1}
+details.q[open] summary::after{content:"–"}
+details.q .answer{padding:0 14px 14px;font-size:15px}
 .contact p{margin:8px 0}
 .footer{border-top:1px solid var(--line);padding:28px 0 calc(28px + env(safe-area-inset-bottom))}
 .footer .wrap{display:flex;flex-wrap:wrap;gap:16px 24px;justify-content:space-between}
@@ -145,25 +166,38 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 @media (min-width:800px){
   .hero{min-height:calc(100svh - 108px)}
   .photos img{height:220px}
-  .entry-row{grid-template-columns:1fr 1fr}
+  .marquee span{font-size:clamp(28px,4vw,48px)}
   .people{grid-template-columns:1fr 1fr 1fr;gap:22px}
   .sheet>div{grid-template-columns:7.5em minmax(0,1fr);gap:8px 16px}
   .sec{padding:72px 0}
 }
 @media (max-width:799px){.qr{display:none}}
 @media (prefers-reduced-motion:no-preference){
+  html.motion .marquee-track{animation:slide 32s linear infinite}
+  html.motion .hero-zoom{animation:ken 18s ease-out both}
+  html.motion .hero-media{animation:unmask 1.05s cubic-bezier(.2,.7,.2,1) both}
   html.motion .hero-copy>*{animation:rise .7s ease both}
-  html.motion .hero-copy>*:nth-child(2){animation-delay:.08s}
-  html.motion .hero-copy>*:nth-child(3){animation-delay:.16s}
-  html.motion .hero-copy>*:nth-child(4){animation-delay:.24s}
+  html.motion .hero-copy>*:nth-child(2){animation-delay:.1s}
+  html.motion .hero-copy>*:nth-child(3){animation-delay:.2s}
+  html.motion .hero-copy>*:nth-child(4){animation-delay:.3s}
+  html.motion .hero-copy>*:nth-child(5){animation-delay:.4s}
   html.motion.animate .reveal:not(.is-in) .stagger{opacity:0;transform:translate3d(0,12px,0)}
-  html.motion.animate .reveal.is-in .stagger{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}
+  html.motion.animate .reveal.is-in .stagger{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease}
+  html.motion.animate .reveal:not(.is-in) .fade{opacity:0}
+  html.motion.animate .reveal.is-in .fade{opacity:1;transition:opacity .55s ease}
+  html.motion #sticky-entry.is-on a{animation:glow 1.3s ease 1}
+  html.motion details.q[open] .answer,html.motion details.bio[open] p{animation:rise .35s ease}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .stagger,.hero-copy>*{opacity:1 !important;transform:none !important;animation:none !important}
+  .marquee-track{animation:none}
+  .stagger,.hero-copy>*,.hero-zoom,.hero-media{opacity:1 !important;transform:none !important;animation:none !important}
 }
 @keyframes rise{from{opacity:0;transform:translate3d(0,12px,0)}to{opacity:1;transform:none}}
+@keyframes ken{from{transform:scale(1.12)}to{transform:scale(1)}}
+@keyframes unmask{from{clip-path:inset(10% 0 10% 0)}to{clip-path:inset(0)}}
+@keyframes slide{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(135,240,53,.45)}100%{box-shadow:0 0 0 16px rgba(135,240,53,0)}}
 </style>
 </head>
 <body>
@@ -185,34 +219,36 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <a href="#apply">応募方法</a>
 <a href="#judges">審査員</a>
 <a href="#member">メンバー</a>
+<a href="#faq">よくある質問</a>
 <a href="#notes">注意事項</a>
 <a href="#contact">お問い合わせ</a>
 </nav>
 </header>
 <main>
 <section class="hero" id="hero">
-<div class="hero-media"><picture><source srcset="images/hero_stage.webp" type="image/webp"><img src="images/hero_stage.jpg" width="1000" height="1250" alt="名称非公開のライブステージと客席" fetchpriority="high"></picture></div>
+<div class="hero-media"><div class="hero-zoom"><picture><source srcset="images/hero_stage.webp" type="image/webp"><img src="images/hero_stage.jpg" width="1000" height="1250" alt="名称非公開のライブステージと客席" fetchpriority="high"></picture></div></div>
 <div class="hero-shade" aria-hidden="true"></div>
 <div class="wrap hero-copy">
 <p class="eyebrow">名称非公開 新体制メンバーオーディション</p>
 <h1><span>NEW</span><span>MEMBER</span><span>AUDITION</span></h1>
-<p class="catch">次のステージに立つのは、あなただ。</p>
+<p class="catch">次のステージに立つのは、<span class="nowrap">あなただ。</span></p>
 <p class="deadline">応募締切 2026年11月30日(月)23:59</p>
 <div class="hero-actions"><a class="btn" id="hero-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">応募する</a></div>
 </div>
 </section>
+<div class="marquee" aria-hidden="true"><div class="marquee-track"><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span></div></div>
 
 <section class="sec reveal" id="about">
 <div class="wrap">
 <h2 class="stagger">概要</h2>
-<p class="catch stagger">泣けるライブから、心を動かす“本物”へ。</p>
-<p class="lead stagger">2025年5月結成。TVアニメ2作品のED、スタジアム、海外フェスへ。目指す場所は日本武道館。この第二章を、一緒に鳴らしてくれる人を探しています。</p>
-<p class="lead stagger">求めているのは、“上手い人”より“心を動かせる人”。</p>
-<ul class="qualities stagger">
-<li><strong>音楽</strong>名称非公開の音を、自分の声で鳴らしたい人</li>
-<li><strong>個性</strong>誰とも似ていない“自分”を武器にできる人</li>
-<li><strong>表現</strong>ステージで人の人生を揺さぶりたい人</li>
-</ul>
+<p class="catch stagger">泣けるライブから、心を動かす<span class="nowrap">“本物”へ。</span></p>
+<p class="lead stagger">2025年5月結成。TVアニメ2作品のED、<span class="nowrap">スタジアム、</span>海外フェスへ。目指す場所は日本武道館。この第二章を、一緒に鳴らしてくれる人を探しています。</p>
+<p class="lead stagger">求めているのは、“上手い人”より<span class="nowrap">“心を動かせる人”。</span></p>
+<ol class="qualities stagger">
+<li><b>01</b><strong>音楽</strong><p>名称非公開の音を、自分の声で<span class="nowrap">鳴らしたい人</span></p></li>
+<li><b>02</b><strong>個性</strong><p>誰とも似ていない“自分”を武器にできる人</p></li>
+<li><b>03</b><strong>表現</strong><p>ステージで人の人生を揺さぶりたい人</p></li>
+</ol>
 <p class="lead stagger">そして、本気で武道館を目指せる人。</p>
 </div>
 </section>
@@ -228,7 +264,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <h2 class="stagger">募集要項</h2>
 <dl class="sheet stagger">
 <div><dt>募集内容</dt><dd>名称非公開の新体制を担うメンバー</dd></div>
-<div><dt>募集人数</dt><dd>4名程度（予定）<span class="note">※最終的な人数は、審査の結果により変わる場合があります。</span></dd></div>
+<div><dt>募集人数</dt><dd>4名程度（予定）<span class="note">※最終的な人数は、審査の結果により変わる<span class="nowrap">場合があります。</span></span></dd></div>
 <div><dt>応募資格</dt><dd>28歳未満（目安）・未経験可。他事務所に所属中の方は、所属先の許可を得たうえでご応募ください。<span class="note">※28歳以上の方もご相談ください。</span><span class="note">※未成年の方は保護者の同意が必要です。</span></dd></div>
 <div><dt>活動条件</dt><dd>2027年1月24日(日)のお披露目と、5月23日(日)からの活動に参加できる方</dd></div>
 <div><dt>活動拠点</dt><dd>東京</dd></div>
@@ -244,29 +280,29 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <h2 class="stagger">選考スケジュール</h2>
 <ol class="stages stagger">
 <li><p class="name">一次審査（書類・動画）</p><p class="when">結果 12月6日(日)</p></li>
-<li><p class="name">二次審査（対面）</p><p class="when">12月9日(水)〜13日(日)</p><p class="desc">結果 12月16日(水)</p></li>
+<li><p class="name">二次審査（対面）</p><p class="when">12月9日(水)〜13日(日)</p><p class="when">結果 12月16日(水)</p></li>
 <li><p class="name">三次審査（合宿・2泊3日）</p><p class="when">12月25日(金)〜27日(日)・箱根</p><p class="desc">顔合わせ、グループ課題、最終パフォーマンス。</p></li>
-<li><p class="name">映像・告知展開</p><p class="desc">合宿のあと、新体制発表まで。</p></li>
 <li><p class="name">新体制発表</p><p class="when">2027年1月24日(日)</p></li>
 <li><p class="name">活動開始</p><p class="when">2027年5月23日(日)</p></li>
 </ol>
 <div class="notes-block stagger">
 <p class="note">※二次審査のオンライン参加は要相談。</p>
 <p class="note">※合宿に参加が難しい場合はご相談ください。</p>
-<p class="note">※日程・会場は予定です。変更がある場合は公式LINEでお知らせします。</p>
-<p class="note">※合宿の進行は仮案です。内容は変更となる場合があります。</p>
+<p class="note">※日程・会場は予定です。</p>
+<p class="note">※変更がある場合は公式LINEでお知らせします。</p>
+<p class="note">※合宿の進行は<span class="nowrap">仮案です。</span><span class="nowrap">内容は変更となる場合があります。</span></p>
 <p class="note">※合宿審査の様子は撮影し、映像として公開する場合があります。</p>
 </div>
 </div>
 </section>
 
-<section class="sec reveal" id="apply">
+<section class="sec apply reveal" id="apply">
 <div class="wrap">
 <h2 class="stagger">応募方法</h2>
-<ol class="steps stagger">
-<li>LINE友だち追加</li>
-<li>フォーム入力</li>
-<li>結果は公式LINEで</li>
+<ol class="join stagger">
+<li><span class="n">1</span><div class="card"><p>公式LINEを友だち追加</p><picture><source srcset="images/line_qr.webp" type="image/webp"><img class="qr" src="images/line_qr.png" width="540" height="540" alt="公式LINEの友だち追加QRコード" loading="lazy"></picture><a class="btn" id="entry-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">友だち追加する</a></div></li>
+<li><span class="n">2</span><div class="card"><p>LINEに届く応募フォームに<span class="nowrap">回答</span></p></div></li>
+<li><span class="n">3</span><div class="card"><p>結果は公式LINEでお知らせ</p></div></li>
 </ol>
 <div class="stagger">
 <h3>用意するもの</h3>
@@ -277,26 +313,6 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <li>ダンス動画</li>
 <li>自己PR・志望動機（動画）</li>
 </ul>
-<p class="shoot">加工・フィルター・AI加工なし。明るい場所で、顔がはっきり写るもの。上手さより、あなたらしさが伝わるものを。</p>
-</div>
-</div>
-</section>
-
-<section class="sec entry reveal" id="entry">
-<div class="wrap">
-<h2 class="stagger">JOIN US</h2>
-<p class="catch stagger">ステージで輝いているのは、あなたかもしれない。</p>
-<div class="entry-row stagger">
-<div class="panel">
-<h3>1</h3>
-<p>公式LINEを友だち追加</p>
-<picture><source srcset="images/line_qr.webp" type="image/webp"><img class="qr" src="images/line_qr.png" width="540" height="540" alt="公式LINEの友だち追加QRコード" loading="lazy"></picture>
-<a class="btn" id="entry-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">友だち追加する</a>
-</div>
-<div class="panel">
-<h3>2</h3>
-<p>LINEに届く応募フォームに回答</p>
-</div>
 </div>
 </div>
 </section>
@@ -328,7 +344,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <article>
 <p class="role">YouTuber／歌い手</p>
 <h3 class="person-name">タケヤキ翔</h3>
-<p>YouTube登録者280万人超。Andoのメンバー。</p>
+<p>YouTube登録者280万人超。<span class="nowrap">Andoのメンバー。</span></p>
 <div class="sns">
 <a href="https://x.com/takeyakii" target="_blank" rel="noopener" aria-label="タケヤキ翔のX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
 <a href="https://www.youtube.com/@takeyakisan" target="_blank" rel="noopener" aria-label="タケヤキ翔のYouTube（新しいタブで開く）"><svg><use href="#i-yt"/></svg></a>
@@ -350,7 +366,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <article>
 <p class="role">舞踊家／振付家</p>
 <h3 class="person-name">山之口理香子</h3>
-<p>元ZOC。多数のアイドルグループに振付を提供。</p>
+<p>元ZOC。多数のアイドルグループに<span class="nowrap">振付を提供。</span></p>
 <div class="sns">
 <a href="https://x.com/0oWatashi00" target="_blank" rel="noopener" aria-label="山之口理香子のX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
 <a href="https://www.instagram.com/riko0o_0o" target="_blank" rel="noopener" aria-label="山之口理香子のInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
@@ -365,20 +381,20 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <section class="sec reveal" id="member">
 <div class="wrap">
 <h2 class="stagger">メンバー</h2>
-<p class="lead stagger">挑発的な歌詞と、銃弾のようなミクスチャーロックサウンド。この2人と、新しい名称非公開をつくります。</p>
-<div class="members stagger">
+<p class="lead stagger">挑発的な歌詞と、銃弾のような<span class="nowrap">ミクスチャーロックサウンド。</span>この2人と、新しい名称非公開をつくります。</p>
+<div class="members fade">
 <article>
-<picture class="member-photo"><source srcset="images/member_hyuga.webp" type="image/webp"><img src="images/member_hyuga.jpg" width="600" height="800" alt="ヒューガー" loading="lazy"></picture>
+<div class="member-photo"><picture><source srcset="images/member_hyuga.webp" type="image/webp"><img class="hyuga" src="images/member_hyuga.jpg" width="600" height="800" alt="ヒューガー" loading="lazy"></picture></div>
 <p class="tag">元BiS第3期</p>
 <h3>ヒューガー</h3>
-<p>BiS第3期でオリコン週間3位獲得。圧倒的なライブパフォーマンスでグループの核を担う実力派。</p>
+<p>BiS第3期でオリコン週間3位獲得。圧倒的なライブパフォーマンスで<span class="nowrap">グループ</span>の核を担う<span class="nowrap">実力派。</span></p>
 <div class="sns">
 <a href="https://x.com/HYUGA_MEISHO" target="_blank" rel="noopener" aria-label="ヒューガーのX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
 <a href="https://www.instagram.com/hyuga_meisho/" target="_blank" rel="noopener" aria-label="ヒューガーのInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
 </div>
 </article>
 <article>
-<picture class="member-photo"><source srcset="images/member_toggy.webp" type="image/webp"><img src="images/member_toggy.jpg" width="600" height="800" alt="トギー" loading="lazy"></picture>
+<div class="member-photo"><picture><source srcset="images/member_toggy.webp" type="image/webp"><img class="toggy" src="images/member_toggy.jpg" width="600" height="800" alt="トギー" loading="lazy"></picture></div>
 <p class="tag">第3期BiS唯一のオリジナルメンバー</p>
 <h3>トギー</h3>
 <p>2019年のBiS始動から約5年半にわたり中核を担い続けた。解散後11カ月の沈黙を経て2025年12月に電撃加入。</p>
@@ -391,20 +407,37 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 </div>
 </section>
 
+<section class="sec reveal" id="faq">
+<div class="wrap">
+<h2 class="stagger">よくある質問</h2>
+<div class="faq-grid stagger">
+<details class="q"><summary><span class="ql">Q1</span><span class="qtext">未経験でも応募できますか？</span></summary><div class="answer"><p>はい、未経験の方もご応募いただけます。</p></div></details>
+<details class="q"><summary><span class="ql">Q2</span><span class="qtext">費用はかかりますか？</span></summary><div class="answer"><p>審査への参加は無料です。合宿審査の宿泊費は運営が負担します。各審査会場までの交通費のみ、ご自身でご負担ください。</p></div></details>
+<details class="q"><summary><span class="ql">Q3</span><span class="qtext">審査結果はどのように<span class="nowrap">届きますか？</span></span></summary><div class="answer"><p>審査結果のご連絡は、名称非公開公式LINEから<span class="nowrap">お送りします。</span>一次審査の結果は12月6日(日)、二次審査の結果は12月16日(水)です。公式LINEをブロックしないようにお願いします。SNSでお声がけする場合は、名称非公開の公式アカウントからのみご連絡します。</p></div></details>
+<details class="q"><summary><span class="ql">Q4</span><span class="qtext">他の事務所に所属していても応募できますか？</span></summary><div class="answer"><p>ご応募いただけます。その場合は、所属先の許可を得たうえでご応募ください。</p></div></details>
+<details class="q"><summary><span class="ql">Q5</span><span class="qtext">動画はスマートフォンで撮影してもいいですか？</span></summary><div class="answer"><p>問題ありません。秒数の指定はなく、縦・横、曲は自由です。過度な加工は避けてください。</p></div></details>
+<details class="q"><summary><span class="ql">Q6</span><span class="qtext">遠方のため、二次審査に行けないかもしれません。</span></summary><div class="answer"><p>オンラインでの参加もご相談いただけます。</p></div></details>
+<details class="q"><summary><span class="ql">Q7</span><span class="qtext">合宿に参加できない<span class="nowrap">場合は？</span></span></summary><div class="answer"><p>フォームまたは公式LINEでご相談ください。</p></div></details>
+<details class="q"><summary><span class="ql">Q8</span><span class="qtext">合格したら、いつから<span class="nowrap">活動しますか？</span></span></summary><div class="answer"><p>2027年1月24日(日)に新体制を発表し、2027年5月23日(日)から活動を開始します。活動拠点は東京です。</p></div></details>
+<details class="q"><summary><span class="ql">Q9</span><span class="qtext">お問い合わせはどこへすれば<span class="nowrap">いいですか？</span></span></summary><div class="answer"><p><a href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">公式LINEよりお問い合わせください（対応時間：平日10:00〜18:00。土日祝は翌営業日にご返信します）</a></p><p>メール：<a href="mailto:management@meisho.tokyo">management@meisho.tokyo</a></p></div></details>
+</div>
+</div>
+</section>
+
 <section class="sec reveal" id="notes">
 <div class="wrap">
 <h2 class="stagger">注意事項</h2>
 <ul class="notes stagger" id="caution">
-<li>オーディションのご案内・審査結果のご連絡は、名称非公開公式LINEからお送りします。SNSでお声がけする場合は、名称非公開の公式アカウントからのみご連絡します。個人アカウントからのご連絡や、金銭の要求、個人的な写真の送付依頼を行うことはありません。不審な連絡を受けた場合は、<a href="#contact">お問い合わせ窓口</a>へご連絡ください。</li>
+<li>オーディションのご案内・審査結果のご連絡は、名称非公開公式LINEから<span class="nowrap">お送りします。</span>SNSでお声がけする場合は、名称非公開の公式アカウントからのみ<span class="nowrap">ご連絡します。</span>個人アカウントからのご連絡や、金銭の要求、個人的な写真の送付依頼を行うことは<span class="nowrap">ありません。</span>不審な連絡を受けた場合は、<a href="#contact">お問い合わせ窓口</a>へ<span class="nowrap">ご連絡ください。</span></li>
 <li>応募はご本人に限ります。</li>
 <li>応募内容に虚偽があった場合は、合格を取り消すことがあります。</li>
-<li>未成年の方は、保護者の同意を得たうえでご応募ください。</li>
+<li>未成年の方は、保護者の同意を得たうえで<span class="nowrap">ご応募ください。</span></li>
 <li>他の芸能プロダクションに所属している方は、所属先の許可を得たうえでご応募ください。</li>
-<li>審査結果に関する個別のお問い合わせには応じられません。</li>
+<li>審査結果に関する個別のお問い合わせには<span class="nowrap">応じられません。</span></li>
 <li>お送りいただいた応募資料は返却いたしません。</li>
 <li>個人情報は、審査およびご連絡の目的以外には使用しません。</li>
-<li>審査の内容や結果を、SNSなどで公開しないでください。</li>
-<li>天候や災害などにより、日程を変更する場合があります。変更がある場合は公式LINEでお知らせします。</li>
+<li>審査の内容や結果を、SNSなどで<span class="nowrap">公開しないでください。</span></li>
+<li>天候や災害などにより、日程を変更<span class="nowrap">する場合があります。</span><span class="nowrap">変更がある場合は公式LINEでお知らせします。</span></li>
 <li>公式LINEをブロックすると、審査結果などのご連絡が届きません。</li>
 <li>審査結果は、応募者ご本人にのみお知らせします。</li>
 </ul>
