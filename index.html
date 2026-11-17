@@ -47,503 +47,502 @@ try{if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.d
 <style>
 :root{--ink:#0A1A2F;--accent:#87F035;--paper:#F3F0E8;--card:#FBFAF6;--muted:#5C675F;--line:#DDD6C8;--sans:"Space Grotesk","Noto Sans JP",sans-serif}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans JP",sans-serif;font-weight:400;font-size:16px;line-height:1.75}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans JP",sans-serif;font-size:16px;line-height:1.7;text-wrap:pretty;line-break:strict;word-break:keep-all;overflow-wrap:anywhere;word-break:auto-phrase}
 body::before{content:"";pointer-events:none;position:fixed;inset:0;z-index:60;opacity:.045;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");mix-blend-mode:multiply}
 img{max-width:100%;height:auto}
 a{color:inherit}
-a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.numeral{font-family:var(--sans);font-weight:600;font-variant-numeric:tabular-nums lining-nums}
-.wd{font-size:.62em;font-weight:600;letter-spacing:0;margin-left:.06em}
-.phrase{display:inline-block}
+a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3,.catch{text-wrap:balance;line-break:strict;word-break:keep-all;overflow-wrap:anywhere;word-break:auto-phrase}
+p,li,dd,.label,.sum,.alert{text-wrap:pretty;line-break:strict;word-break:keep-all;overflow-wrap:anywhere;word-break:auto-phrase}
+.keep{white-space:nowrap;word-break:keep-all;overflow-wrap:normal}
+.wd{font-size:.72em;font-weight:600;letter-spacing:0;margin-left:.04em}
 .wrap{width:min(1120px,calc(100% - 40px));margin:0 auto}
-.display{font-family:var(--sans);font-weight:600;letter-spacing:-.035em;line-height:.96;margin:0;font-variant-numeric:tabular-nums lining-nums}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;background:var(--accent);color:var(--ink);text-decoration:none;font-weight:700;letter-spacing:.08em;border:1px solid var(--accent);transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.display{font-family:var(--sans);font-weight:600;letter-spacing:-.04em;line-height:.92;margin:0;font-variant-numeric:tabular-nums lining-nums}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;background:var(--accent);color:var(--ink);text-decoration:none;font-weight:700;letter-spacing:.06em;border:1px solid var(--accent);transition:transform .15s ease,background-color .2s ease,color .2s ease}
 .btn:hover{background:var(--ink);color:var(--accent)}
-.hero .btn:hover{background:transparent;color:#F4F1EA;border-color:#F4F1EA}
-.site-header{position:sticky;top:0;z-index:30;background:rgba(243,240,232,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
-.logo img{height:46px;width:auto;display:block}
-.nav{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em}
-.nav a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
-.nav-entry{padding:0 14px;background:var(--ink);color:var(--accent)}
+.btn:active{transform:scale(.98)}
+.site-header{position:sticky;top:0;z-index:30;background:rgba(243,240,232,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar{width:min(1120px,calc(100% - 40px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;min-height:56px;gap:12px}
+.logo img{height:40px;width:auto;display:block}
+.nav{width:min(1120px,calc(100% - 40px));margin:0 auto;display:flex;gap:2px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:0 0 auto;min-height:44px;display:inline-flex;align-items:center;padding:0 10px;text-decoration:none;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.08em;white-space:nowrap}
+.nav-entry{min-height:44px;padding:0 14px;display:inline-flex;align-items:center;background:var(--ink);color:var(--accent);text-decoration:none;font-family:var(--sans);font-weight:600;letter-spacing:.12em}
 .nav-entry:hover{background:var(--accent);color:var(--ink)}
-@media (max-width:720px){.nav .navlink{display:none}}
-.hero{position:relative;min-height:100svh;display:flex;align-items:center;color:#F4F1EA;background:var(--ink);overflow:hidden}
-@media (max-width:760px){.hero{min-height:auto;align-items:stretch}}
-.hero-media,.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%}
-.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,47,.25) 0%,rgba(10,26,47,.55) 42%,rgba(10,26,47,.92) 100%),linear-gradient(90deg,rgba(10,26,47,.72),rgba(10,26,47,.15) 70%)}
-.hero-copy{position:relative;z-index:1;padding:72px 0 24px}
-@media (max-width:760px){.hero-copy{padding:28px 0 32px}}
-.eyebrow{display:inline-block;border:1px solid rgba(135,240,53,.7);color:var(--accent);font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.12em;padding:6px 12px}
-.hero h1{font-size:clamp(42px,5.4vw,76px);margin:12px 0 0;line-height:.96}
-.hero .rule{width:72px;height:2px;background:var(--accent);margin:18px 0 0}
-.catch{margin:14px 0 0;font-size:clamp(22px,2.4vw,34px);font-weight:700;line-height:1.4}
-.deck{margin:14px 0 0;max-width:38em;color:#E4E8E2}
-.facts{display:flex;flex-wrap:wrap;gap:0;margin:16px 0 0;padding:0;list-style:none;border-top:1px solid rgba(244,241,234,.28)}
-.facts li{padding:12px 16px 12px 0;margin-right:16px;font-weight:700;font-size:14px}
-.facts li+li{border-left:1px solid rgba(244,241,234,.28);padding-left:16px}
-@media (max-width:640px){
-  .facts{display:grid;grid-template-columns:1fr 1fr}
-  .facts li,.facts li+li{margin:0;border-left:0;border-bottom:1px solid rgba(244,241,234,.2);padding:12px 8px}
-}
-.deadline{margin:12px 0 0;font-weight:700}
-.state{margin:4px 0 0;color:#C9D3CC;font-size:14px}
-.hero-actions{margin-top:22px}
-.cue{position:absolute;z-index:2;right:24px;bottom:28px;color:#F4F1EA;text-decoration:none;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.2em}
-.cue i{display:block;width:1px;height:42px;margin:8px auto 0;background:var(--accent)}
-.marquee{overflow:hidden;background:var(--ink);border-top:1px solid rgba(135,240,53,.45);border-bottom:1px solid rgba(135,240,53,.45);color:#F4F1EA}
-.marquee-track{display:flex;width:max-content;animation:slide 32s linear infinite}
-.marquee span{font-family:var(--sans);font-weight:600;font-size:clamp(36px,5vw,64px);letter-spacing:-.03em;line-height:1;padding:.28em .6em;color:transparent;-webkit-text-stroke:1px rgba(244,241,234,.55);white-space:nowrap}
-@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.dates{background:var(--ink);color:#fff}
-.dates .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px 16px;padding:28px 0}
-.date-item{display:flex;flex-direction:column;gap:6px;min-width:0}
-.dates small{letter-spacing:.14em;font-size:11px;font-weight:700;color:#C9D3CC;white-space:nowrap}
-.dates strong{font-family:var(--sans);font-weight:600;font-variant-numeric:tabular-nums lining-nums;font-size:clamp(16px,1.45vw,24px);line-height:1.15;color:var(--accent);letter-spacing:-.03em;white-space:nowrap}
-@media (max-width:1100px){.dates .wrap{grid-template-columns:1fr 1fr;gap:22px 28px}.dates strong{font-size:26px}}
-@media (max-width:560px){.dates .wrap{grid-template-columns:1fr}.dates strong{font-size:30px}}
-.sec{padding:clamp(72px,9vw,120px) 0}
-.sec,#dates,#schedule,#faq,#overview,#caution,#contact,#flow{scroll-margin-top:84px}
-.sec-head{display:grid;gap:10px;margin:0 0 32px;padding-bottom:16px;border-bottom:1px solid var(--line)}
-.sec-en{margin:0;font-family:var(--sans);font-weight:500;font-size:clamp(28px,4.2vw,52px);letter-spacing:-.04em;line-height:.95;color:transparent;-webkit-text-stroke:1.15px rgba(10,26,47,.5);font-variant-numeric:tabular-nums lining-nums}
-.sec-en b{color:var(--ink);-webkit-text-stroke:0;font-weight:600;margin-right:.4em}
-.sec-en::after{content:"";display:inline-block;width:8px;height:8px;margin-left:12px;background:var(--accent);border-radius:50%;vertical-align:middle;-webkit-text-stroke:0}
-.sec-head h2{margin:0;font-size:clamp(22px,2.5vw,34px);font-weight:700;line-height:1.35}
+.hero{position:relative;display:flex;align-items:flex-end;color:#F4F1EA;background:var(--ink);overflow:hidden}
+.hero-media{position:absolute;inset:-8% 0;overflow:hidden}
+.hero-zoom{height:118%;width:100%}
+.hero-zoom img{width:100%;height:100%;object-fit:cover;object-position:center 28%;display:block}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,47,.42) 0%,rgba(10,26,47,.28) 30%,rgba(10,26,47,.78) 70%,rgba(10,26,47,.94) 100%)}
+.hero-copy{position:relative;z-index:1;padding:28px 0 32px}
+.eyebrow{display:inline-block;border:1px solid rgba(135,240,53,.75);color:var(--accent);font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.08em;padding:6px 10px}
+.hero h1{font-size:clamp(52px,14vw,84px);margin:14px 0 0}
+.hero h1 .line{display:block}
+.hero .rule{width:64px;height:2px;background:var(--accent);margin:16px 0 0}
+.catch{margin:12px 0 0;font-size:clamp(22px,2.6vw,32px);font-weight:700;line-height:1.45}
+.hero-facts{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:16px 0 0;padding:0;list-style:none;border-top:1px solid rgba(244,241,234,.28)}
+.hero-facts li{min-height:44px;display:flex;align-items:center;padding:8px 8px 8px 0;font-weight:700;font-size:15px;border-bottom:1px solid rgba(244,241,234,.2)}
+.hero-facts .count{font-family:var(--sans);font-weight:600;font-variant-numeric:tabular-nums;font-size:1.35em;color:var(--accent);margin-right:.15em}
+.deadline{margin:14px 0 0;font-weight:700;font-size:16px}
+.state{margin:4px 0 0;color:#D5DDD6;font-size:15px}
+.hero-actions{margin-top:18px}
+.cue{display:none}
+.marquee{overflow:hidden;background:var(--ink);color:#F4F1EA;border-bottom:1px solid rgba(135,240,53,.45)}
+.marquee-track{display:flex;width:max-content}
+.marquee span{font-family:var(--sans);font-weight:600;font-size:22px;letter-spacing:-.03em;line-height:1;padding:10px 18px;color:transparent;-webkit-text-stroke:1px rgba(244,241,234,.5);white-space:nowrap}
+.date-row{background:var(--ink);color:#fff}
+.date-row .wrap{display:flex;gap:8px;overflow-x:auto;padding:12px 0 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
+.date-row .wrap::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;scroll-snap-align:start;min-height:44px;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:8px 12px;text-decoration:none;border:1px solid rgba(135,240,53,.45);color:#F4F1EA}
+.chip small{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;color:#C9D3CC}
+.chip b{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:-.03em;color:var(--accent);font-variant-numeric:tabular-nums lining-nums}
+.sec{padding:56px 0}
+.sec,.date-row{scroll-margin-top:112px}
+.sec-head{display:grid;gap:6px;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.sec-en{margin:0;font-family:var(--sans);font-weight:500;font-size:clamp(22px,5vw,36px);letter-spacing:-.04em;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(10,26,47,.45);font-variant-numeric:tabular-nums}
+.sec-en b{color:var(--ink);-webkit-text-stroke:0;font-weight:600;margin-right:.35em}
+.sec-en::after{content:"";display:inline-block;width:7px;height:7px;margin-left:8px;background:var(--accent);border-radius:50%;vertical-align:middle}
+.sec-head h2{margin:0;font-size:clamp(22px,2.6vw,32px);font-weight:700;line-height:1.4}
+.lead{margin:0 0 12px;font-size:16px}
+.lead strong{font-weight:700}
+.keys{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.keys::-webkit-scrollbar{display:none}
+.key{flex:0 0 78%;scroll-snap-align:start;background:var(--card);border-top:2px solid var(--accent);padding:14px;min-height:132px}
+.key b{font-family:var(--sans);font-weight:600;font-size:20px;color:var(--accent);background:var(--ink);display:inline-grid;place-items:center;min-width:36px;height:28px;padding:0 6px}
+.key strong{display:block;margin:8px 0 4px;font-family:var(--sans);letter-spacing:.06em;font-size:15px}
+.key p{margin:0;font-size:15px}
+.aim{margin:12px 0 0;font-weight:700}
+.photos{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:4px;background:var(--ink)}
+.photos img{width:100%;height:120px;object-fit:cover;display:block}
+.fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fact{background:var(--card);border-top:2px solid var(--accent);padding:12px;min-height:104px;display:flex;flex-direction:column;gap:4px}
+.fact .ico{width:22px;height:22px;color:var(--ink)}
+.fact b{font-size:17px;line-height:1.35;color:var(--ink)}
+.fact b span{color:inherit}
+.fact>span{color:var(--muted);font-size:15px}
+.fact .count{font-family:var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);font-size:1.15em}
+.sheet{margin:8px 0 0}
+.sheet>div{display:grid;gap:4px;padding:12px 0;border-bottom:1px solid var(--line)}
+.sheet dt{font-weight:700}
+.sheet dd{margin:0}
+.timeline-wrap{position:relative}
+.timeline{list-style:none;margin:0;padding:0}
+.timeline-fill{position:absolute;left:5px;top:16px;bottom:16px;width:2px;background:var(--accent);transform-origin:top;transform:scaleY(1)}
+.timeline>li{position:relative;padding:0 0 10px 26px}
+.dot{position:absolute;left:0;top:20px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--ink);z-index:1}
+.timeline>li.is-lit .dot{background:var(--accent);border-color:var(--accent)}
+.step-card{background:var(--card);border:1px solid var(--line);padding:12px}
+.step-top{display:flex;gap:10px;align-items:flex-start}
+.num{flex:0 0 36px;height:36px;display:grid;place-items:center;background:var(--ink);color:var(--accent);font-family:var(--sans);font-weight:600;font-variant-numeric:tabular-nums;font-size:15px}
+.when{margin:0;font-family:var(--sans);font-weight:600;font-size:16px;letter-spacing:-.03em;line-height:1.3;font-variant-numeric:tabular-nums lining-nums}
+.label{margin:2px 0 0;font-weight:700;font-size:15px;line-height:1.45}
+.timeline li.finale .step-card{background:#0A1A2F;border-color:#0A1A2F;box-shadow:inset 3px 0 0 #87F035}
+.timeline li.finale .when{color:#87F035}
+.timeline li.finale .label{color:#F4F1EA}
+.timeline li.finale .num{background:var(--accent);color:var(--ink)}
+.note{color:var(--muted);font-size:15px;margin:12px 0 0}
+.days{display:grid;gap:8px;margin:8px 0}
+.day{border:1px solid var(--line);padding:10px 12px;background:#fff}
+.day h3{margin:0 0 4px;font-family:var(--sans);color:var(--accent);background:var(--ink);display:inline-block;padding:2px 8px;font-size:15px}
+.day ul{margin:0;padding-left:1.1em}
+.day li{padding:2px 0}
+.prep{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.prep li{display:flex;align-items:center;gap:10px;min-height:44px;background:var(--card);border-top:2px solid var(--accent);padding:8px 10px;font-weight:700}
+.prep svg{width:20px;height:20px;flex:0 0 20px}
+.cards{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}
+.card{background:var(--card);border-top:2px solid var(--ink);padding:12px;min-height:72px}
+.card h3{margin:0;font-size:15px;line-height:1.45}
+.card p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.closer{margin:12px 0 0;font-weight:700}
+.steps{list-style:none;margin:0;padding:0}
+.steps li{display:grid;grid-template-columns:36px 1fr;gap:8px;align-items:start;padding:8px 0;border-bottom:1px solid var(--line);min-height:44px}
+.steps b{font-family:var(--sans);color:var(--accent);background:var(--ink);display:grid;place-items:center;height:28px;font-size:14px}
+.steps strong{display:block}
+.steps .meta{display:block;color:var(--muted);font-size:15px;font-weight:400}
 .ink{background:var(--ink);color:#F4F1EA;position:relative;overflow:hidden}
 .ink .sec-head{border-bottom-color:rgba(244,241,234,.22)}
-.ink .sec-en{-webkit-text-stroke:1.15px rgba(244,241,234,.55)}
-.ink .sec-en b{color:#F4F1EA}
-.ink .sec-head h2{color:#F4F1EA}
-.split{display:grid;gap:28px}
-@media (min-width:900px){.split{grid-template-columns:1.05fr .95fr;gap:48px;align-items:stretch}}
-.keys{display:flex;flex-direction:column}
-.key{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--line)}
-.key b{font-family:var(--sans);font-weight:600;font-size:22px;font-variant-numeric:tabular-nums}
-.photos{display:grid;grid-template-columns:1fr;gap:6px;background:var(--ink)}
-@media (min-width:800px){.photos{grid-template-columns:1.35fr .8fr;grid-template-rows:1fr 1fr}.photos picture:first-child{grid-row:1/3}}
-.photos img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block;filter:saturate(.92) contrast(1.05)}
-.produce-grid{display:grid;gap:28px}
-@media (min-width:880px){.produce-grid{grid-template-columns:.86fr 1.14fr;gap:56px;align-items:center}}
-.portrait{overflow:hidden;background:#111}
-.portrait img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
-.judge-grid{display:grid;gap:14px}
-@media (min-width:860px){.judge-grid{grid-template-columns:1.15fr .9fr .9fr}}
-.judge{border-top:1px solid rgba(244,241,234,.25);padding:26px 8px 8px;min-height:100%;transition:background-color .2s ease}
-.judge:hover{background:rgba(255,253,248,.04)}
-.judge .role{display:inline-block;margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--ink);background:var(--accent);padding:4px 8px}
-.judge h3{margin:0 0 10px;font-size:clamp(26px,3vw,34px);font-weight:700;line-height:1.3}
-.judge p{margin:0;color:#D5DDD6;font-size:14.5px}
-.members{display:grid;gap:22px}
-@media (min-width:760px){.members{grid-template-columns:repeat(3,1fr)}}
-.member-photo{display:block;width:100%;aspect-ratio:3/4;overflow:hidden;background:#fff}
-.member-photo img{width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;transform-origin:center bottom}
-.member-photo img.hyuga{transform:scale(1.108)}
-.tag{display:inline-block;font-size:11px;font-weight:700;background:#E7E2D6;padding:3px 8px}
-.you{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit}
-.you-tile{aspect-ratio:3/4;background:var(--ink);color:var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-.you-tile strong{font-family:var(--sans);font-weight:600;font-size:clamp(52px,8vw,80px);line-height:1}
-@media (max-width:520px){.you{grid-column:1/-1}.you-tile{aspect-ratio:2/1}}
-.schedule{background:#E7E2D6}
-.timeline-wrap{position:relative}
-.timeline{position:relative;list-style:none;margin:32px 0 0;padding:0}
-.timeline-fill{position:absolute;left:31px;top:8px;bottom:8px;width:2px;background:var(--accent);transform-origin:top;transform:scaleY(1);z-index:0}
-.timeline li{z-index:1}
-.timeline li{position:relative;display:flex;background:var(--card);margin:0 0 10px;border:1px solid transparent;transition:border-color .2s ease}
-.timeline li:hover{border-color:var(--ink)}
-.num{flex:0 0 64px;background:var(--ink);color:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:600;font-variant-numeric:tabular-nums;font-size:22px;min-height:76px}
-.row-body{flex:1;min-width:0;padding:16px 18px;display:flex;flex-wrap:wrap;gap:6px 28px;align-items:center}
-.when{flex:1 1 240px;font-family:var(--sans);font-weight:600;font-variant-numeric:tabular-nums lining-nums;font-size:clamp(18px,2vw,26px);line-height:1.25;letter-spacing:-.03em;white-space:nowrap}
-.what{flex:1 1 240px}
-.what strong{display:block}
-.what span,.muted{color:var(--muted);font-size:14px}
-.mark{box-shadow:inset 3px 0 0 var(--accent)}
-.finale{background:var(--ink);color:#F4F1EA}
-.finale .what strong{color:#F4F1EA}
-.days{display:grid;gap:12px}
-@media (min-width:800px){.days{grid-template-columns:repeat(3,1fr)}}
-.day{border:1px solid rgba(244,241,234,.2);padding:22px}
-.day h3{margin:0 0 10px;font-family:var(--sans);font-weight:600;font-size:28px;color:var(--accent);font-variant-numeric:tabular-nums}
-.day ul{margin:0;padding-left:1.1em}
-.sheet{margin:8px 0 0;border-top:1px solid var(--ink)}
-.sheet>div{display:flex;flex-wrap:wrap;gap:6px 32px;padding:20px 0;border-bottom:1px solid var(--line)}
-.sheet dt{flex:0 0 168px;font-weight:700}
-.sheet dd{margin:0;flex:1 1 280px;color:#314039}
-@media (max-width:640px){.sheet dt,.sheet dd{flex-basis:100%}.when{flex-basis:100%}}
-.cards{display:grid;gap:12px}
-@media (min-width:760px){.cards{grid-template-columns:1fr 1fr}}
-.card{background:var(--card);padding:22px;border-top:1px solid var(--ink);transition:transform .2s ease}
-.card:hover{transform:translateY(-2px)}
-.card h3{margin:0;font-size:18px}
-.faq{background:#E7E2D6}
-.faq-grid{display:grid;gap:10px}
-details.q{background:var(--card);border:1px solid var(--line)}
-details.q summary{list-style:none;cursor:pointer;min-height:44px;padding:14px 16px;display:flex;align-items:center;gap:12px;font-weight:700;line-height:1.45}
-details.q summary::-webkit-details-marker{display:none}
-details.q summary::marker{content:""}
-details.q summary .qtext{flex:1}
-details.q .ql{font-family:var(--sans);font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.04em;font-size:14px}
-details.q summary::after{content:"+";flex:0 0 28px;text-align:center;font-family:var(--sans);font-weight:500;font-size:24px;line-height:1}
-details.q[open] summary::after{content:"−"}
-details.q .answer{padding:0 16px 16px 16px;border-top:1px solid var(--line);color:#314039}
-.flow-grid{display:grid;gap:16px}
-@media (min-width:860px){.flow-grid{grid-template-columns:1fr 1fr;align-items:stretch}}
-.flow-card{background:var(--card);border:1px solid var(--line);padding:28px 24px;display:flex;flex-direction:column;min-height:100%}
-.flow-card h3{margin:0 0 8px;font-size:22px;font-weight:700}
-.steps{list-style:none;margin:8px 0 0;padding:0;counter-reset:step}
-.steps li{counter-increment:step;display:grid;grid-template-columns:48px 1fr;gap:10px;padding:14px 0;border-top:1px solid var(--line);min-height:44px;align-items:start}
-.steps li::before{content:counter(step,decimal-leading-zero);font-family:var(--sans);font-weight:600;font-variant-numeric:tabular-nums;font-size:20px;line-height:1.4}
-.prep{margin:8px 0 0;padding-left:1.15em}
-.prep li{padding:6px 0}
-.notice{border-left:3px solid var(--accent);background:var(--card);padding:8px 22px 20px;margin:0}
+.ink .sec-en{-webkit-text-stroke-color:rgba(244,241,234,.5)}
+.ink .sec-en b,.ink .sec-head h2{color:#F4F1EA}
+.ink .note,.ink .fold summary,.ink .fold-body,.ink .fold-body p{color:#E4E8E2}
 .entry{text-align:center}
-.entry h2{font-size:clamp(26px,4vw,42px);font-weight:700;line-height:1.4;margin:12px 0 0}
-.entry-panel{width:min(880px,100%);margin:18px auto 0;display:grid;gap:14px}
-@media (min-width:800px){.entry-panel{grid-template-columns:1fr 1fr}}
-.panel{background:rgba(10,26,47,.78);border:1px solid rgba(244,241,234,.16);padding:28px 22px;display:flex;flex-direction:column;gap:12px;align-items:center}
-.panel h3{margin:0;font-family:var(--sans);font-weight:600;font-size:26px;color:var(--accent);font-variant-numeric:tabular-nums}
-.qr{width:160px;height:160px;background:#fff;object-fit:contain;padding:8px}
-@media (max-width:768px){.qr{display:none}}
-.footer{border-top:1px solid var(--line);padding:36px 0 28px}
-.footer .wrap{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:center;justify-content:space-between}
-.footer img{height:52px;width:auto}
+.entry h2{font-size:clamp(24px,6vw,40px);line-height:1.4;margin:8px 0 0}
+.entry .display{font-size:clamp(48px,12vw,96px);color:var(--accent)}
+.entry-panel{width:min(840px,100%);margin:16px auto 0;display:grid;gap:10px}
+.panel{background:rgba(10,26,47,.72);border:1px solid rgba(244,241,234,.18);padding:16px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.panel h3{margin:0;font-family:var(--sans);color:var(--accent);font-size:22px}
+.panel p{margin:0}
+.qr{width:148px;height:148px;background:#fff;object-fit:contain;padding:6px}
+.produce-top{display:grid;gap:14px}
+.portrait{width:min(100%,280px);overflow:hidden;background:#111}
+.portrait img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.role{display:inline-block;margin:0 0 6px;background:var(--accent);color:var(--ink);font-weight:700;font-size:12px;letter-spacing:.04em;padding:4px 8px}
+.person-name{margin:0;font-size:clamp(32px,8vw,56px);line-height:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;padding:0;list-style:none}
+.tags li{border:1px solid var(--line);background:#fff;padding:6px 8px;font-size:15px;font-weight:700;line-height:1.35}
+.sum{margin:8px 0;font-size:15px}
+.sns{display:flex;flex-wrap:wrap;gap:8px}
+.sns a{min-width:44px;min-height:44px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:#fff;color:var(--ink);text-decoration:none;font-family:var(--sans);font-size:12px;font-weight:600}
+.sns a:active{transform:scale(.98)}
+.sns svg{width:18px;height:18px;display:block}
+.judge-row{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.judge-row::-webkit-scrollbar{display:none}
+.judge{flex:0 0 86%;scroll-snap-align:start;border:1px solid rgba(244,241,234,.2);padding:14px;background:rgba(255,253,248,.03)}
+.avatar{width:48px;height:48px;display:grid;place-items:center;background:var(--accent);color:var(--ink);font-weight:700;font-size:20px;margin-bottom:8px}
+.judge h3{margin:0 0 6px;font-size:26px}
+.judge .sum{color:#E4E8E2}
+.judge .sns a{background:transparent;color:#F4F1EA;border-color:rgba(244,241,234,.35)}
+.members{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.member-photo{display:block;width:100%;aspect-ratio:3/4;overflow:hidden;background:#fff}
+.member-photo img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
+.member-photo img.hyuga{object-position:center 20%;transform:scale(1.08);transform-origin:center 30%}
+.tag{display:inline-block;margin:8px 0 0;font-size:12px;font-weight:700;background:#E7E2D6;padding:3px 6px;line-height:1.4}
+.members h3{margin:6px 0;font-size:18px}
+.members p{margin:0;font-size:15px;line-height:1.55}
+.members .sns{margin-top:8px}
+details.q,details.block{background:var(--card);border:1px solid var(--line)}
+details.q+.q,details.block{margin-top:8px}
+summary{list-style:none;cursor:pointer;min-height:48px;padding:12px;display:flex;align-items:center;gap:10px;font-weight:700;line-height:1.45}
+summary::-webkit-details-marker{display:none}
+summary .qtext{flex:1;font-size:15px}
+summary .ql{font-family:var(--sans);font-weight:600;font-size:14px}
+summary::after{content:"+";margin-left:auto;font-family:var(--sans);font-size:22px;line-height:1;flex:0 0 24px;text-align:center}
+details[open]>summary::after{content:"–"}
+.answer,.fold-body{padding:0 12px 12px;color:#314039;font-size:15px}
+.fold{margin-top:8px;background:transparent;border:0}
+.fold summary{min-height:44px;padding:8px 0 0;color:var(--muted);font-size:15px}
+.step-card .fold-body{padding:4px 0 0;color:var(--muted)}
+.timeline li.finale .fold summary{color:#D5DDD6}
+.alert{border-left:3px solid var(--accent);background:var(--card);padding:12px 14px;margin:0 0 10px}
+.alert a{font-weight:700}
+.notes{margin:0;padding:0;list-style:none}
+.notes li{position:relative;padding:10px 0 10px 16px;border-bottom:1px solid var(--line)}
+.notes li::before{content:"";position:absolute;left:0;top:1.15em;width:6px;height:6px;background:var(--accent)}
+.contact-actions{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.footer{border-top:1px solid var(--line);padding:28px 0 calc(24px + env(safe-area-inset-bottom))}
+.footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:flex-start;justify-content:space-between}
+.footer img{height:48px;width:auto}
 .footer nav{display:flex;flex-wrap:wrap;gap:4px}
-.footer a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:8px 10px;color:var(--muted);text-decoration:none}
-.footer a:hover{color:var(--ink)}
-#final,#entry{position:relative}
-.bleed{position:absolute;inset:0;display:block}
-.bleed img{width:100%;height:100%;object-fit:cover;display:block}
-.ink .wrap,#entry .wrap{position:relative;z-index:1}
+.footer nav a{min-height:44px;display:inline-flex;align-items:center;padding:8px 10px;color:var(--muted);text-decoration:none}
+.legal p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+#entry .bleed{position:absolute;inset:0}
+#entry .bleed img{width:100%;height:100%;object-fit:cover;opacity:.28}
+#entry .wrap{position:relative;z-index:1}
 #sticky-entry{display:none}
 #sticky-entry.is-on{display:block;position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(10,26,47,.96);border-top:1px solid rgba(135,240,53,.5);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
-#sticky-entry a{display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 20px;background:var(--accent);color:var(--ink);font-weight:700;letter-spacing:.04em;text-decoration:none}
-html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
-@media (min-width:769px){#sticky-entry a{width:fit-content;max-width:100%;margin-left:auto;min-height:44px}}
+#sticky-entry a{display:flex;align-items:center;justify-content:center;min-height:52px;background:var(--accent);color:var(--ink);font-weight:700;text-decoration:none}
+html.has-sticky-entry{padding-bottom:var(--sticky-h,84px)}
+#to-top{position:fixed;right:12px;bottom:16px;z-index:45;width:44px;height:44px;display:grid;place-items:center;background:var(--ink);color:var(--accent);text-decoration:none;opacity:0;pointer-events:none;transform:translateY(8px);border:1px solid rgba(135,240,53,.6)}
+#to-top.is-on{opacity:1;pointer-events:auto;transform:none}
+html.has-sticky-entry #to-top{bottom:calc(var(--sticky-h, 84px) + 12px)}
+#to-top svg{width:18px;height:18px}
+@media (min-width:800px){
+  .hero{min-height:calc(100svh - 112px);align-items:flex-end}
+  .hero-copy{padding:72px 0 48px}
+  .hero-facts{display:flex;flex-wrap:wrap;border-bottom:0}
+  .hero-facts li{border-bottom:0;border-right:1px solid rgba(244,241,234,.28);padding:12px 16px 12px 0;margin-right:16px}
+  .cue{display:block;position:absolute;z-index:2;right:24px;bottom:28px;color:#F4F1EA;text-decoration:none;font-family:var(--sans);font-size:11px;letter-spacing:.18em}
+  .marquee span{font-size:clamp(28px,4vw,48px)}
+  .photos img{height:220px}
+  .fact-grid{grid-template-columns:repeat(3,1fr)}
+  .keys{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible}
+  .key{flex:none}
+  .cards{grid-template-columns:1fr 1fr}
+  .days{grid-template-columns:repeat(3,1fr)}
+  .entry-panel{grid-template-columns:1fr 1fr}
+  .produce-top{grid-template-columns:240px 1fr;align-items:center}
+  .judge-row{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible}
+  .judge{flex:none}
+  .members{max-width:760px;gap:22px}
+  .sec{padding:72px 0}
+}
+@media (max-width:799px){
+  .qr{display:none}
+  p,h2,.lead,.sum,.label,.alert{max-width:none}
+  .produce-top{grid-template-columns:104px 1fr;align-items:start}
+  .portrait{width:104px}
+  .hero-shade{background:linear-gradient(180deg,rgba(10,26,47,.5) 0%,rgba(10,26,47,.55) 42%,rgba(10,26,47,.9) 100%)}
+}
+@media (min-width:800px){
+  .hero-shade{background:linear-gradient(90deg,rgba(10,26,47,.88) 0%,rgba(10,26,47,.62) 42%,rgba(10,26,47,.18) 100%)}
+}
 @media (prefers-reduced-motion:no-preference){
-  html.motion .hero-reveal{animation:rise .85s ease both}
-  html.motion .hero-reveal:nth-child(2){animation-delay:.08s}
-  html.motion .hero-reveal:nth-child(3){animation-delay:.16s}
-  html.motion .hero-reveal:nth-child(4){animation-delay:.24s}
-  html.motion .hero-reveal:nth-child(5){animation-delay:.32s}
-  html.motion .hero-reveal:nth-child(6){animation-delay:.4s}
-  html.motion .hero-reveal:nth-child(7){animation-delay:.48s}
-  html.motion .hero-media img{animation:ken 22s ease-out both;transform-origin:center 30%}
-  html.motion .cue i{animation:cue 1.8s ease infinite;transform-origin:top}
-  html.motion .reveal .stagger{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
-  html.motion .reveal.is-in .stagger{opacity:1;transform:none}
-  html.motion .reveal.is-in .stagger:nth-child(2){transition-delay:.08s}
-  html.motion .reveal.is-in .stagger:nth-child(3){transition-delay:.16s}
-  html.motion .reveal.is-in .shot{clip-path:inset(0 0 0 0);transition:clip-path .9s ease}
-  html.motion .shot{clip-path:inset(12% 0 12% 0)}
-  html.motion .timeline-fill{transform:scaleY(var(--draw,0))}
-  #sticky-entry.is-on{animation:bar-in .4s ease}
-  details.q[open] .answer{animation:faq-open .35s ease}
+  html.motion .marquee-track{animation:slide 32s linear infinite}
+  html.motion .hero-zoom{animation:ken 18s ease-out both}
+  html.motion .hero-media{animation:unmask 1.05s cubic-bezier(.2,.7,.2,1) both}
+  html.motion .line{animation:rise .75s cubic-bezier(.2,.7,.2,1) both}
+  html.motion .line:nth-child(1){animation-delay:.12s}
+  html.motion .line:nth-child(2){animation-delay:.24s}
+  html.motion .line:nth-child(3){animation-delay:.36s}
+  html.motion .hero-reveal{animation:rise .7s ease both}
+  html.motion .d1{animation-delay:.42s}
+  html.motion .d2{animation-delay:.52s}
+  html.motion .d3{animation-delay:.62s}
+  html.motion .d4{animation-delay:.72s}
+  html.motion .hero-facts li{animation:rise .55s ease both}
+  html.motion .hero-facts li:nth-child(1){animation-delay:.48s}
+  html.motion .hero-facts li:nth-child(2){animation-delay:.56s}
+  html.motion .hero-facts li:nth-child(3){animation-delay:.64s}
+  html.motion .hero-facts li:nth-child(4){animation-delay:.72s}
+  html.motion.animate .reveal:not(.is-in) .stagger{opacity:0;transform:translate3d(0,16px,0)}
+  html.motion.animate .reveal.is-in .stagger{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+  html.motion.animate .reveal.is-in .stagger:nth-child(2){transition-delay:.06s}
+  html.motion.animate .reveal.is-in .stagger:nth-child(3){transition-delay:.12s}
+  html.motion #sticky-entry.is-on a{animation:glow 1.3s ease 1}
+  html.motion .timeline-fill{transform:scaleY(var(--draw,1))}
+  html.motion details[open] .answer,html.motion details[open] .fold-body{animation:rise .35s ease}
+  .fact:active,.key:active,.card:active,.chip:active,.step-card:active{transform:scale(.985)}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .marquee-track{animation:none}
-  .card:hover,.judge:hover{transform:none}
+  .marquee-track,.hero-zoom,.hero-media,.line,.hero-reveal,.hero-facts li{animation:none !important}
+  .stagger,.line,.hero-reveal,.step-card,.label,.when{opacity:1 !important;transform:none !important}
 }
-.marquee-track{display:flex;width:max-content}
-@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-@keyframes ken{from{transform:scale(1.08)}to{transform:scale(1)}}
-@keyframes cue{0%{transform:scaleY(.2)}50%{transform:scaleY(1)}100%{transform:scaleY(.2)}}
-@keyframes bar-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@keyframes faq-open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translate3d(0,16px,0)}to{opacity:1;transform:none}}
+@keyframes ken{from{transform:scale(1.12)}to{transform:scale(1)}}
+@keyframes unmask{from{clip-path:inset(10% 0 10% 0)}to{clip-path:inset(0)}}
+@keyframes slide{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(135,240,53,.45)}100%{box-shadow:0 0 0 16px rgba(135,240,53,0)}}
 </style>
 </head>
 <body>
+<svg class="sprite" aria-hidden="true">
+<symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" d="M14.7 3h3.1l-6.8 7.8L19 21h-3.2l-5-6.5L6.2 21H3.1l7.3-8.3L3 3h3.3l4.5 6L14.7 3Zm-1.1 16.2h1.7L6.5 4.7H4.7l8.9 14.5Z"/></symbol>
+<symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
+<symbol id="i-yt" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path fill="currentColor" d="M11 9.2v5.6l5-2.8-5-2.8Z"/></symbol>
+<symbol id="i-tt" viewBox="0 0 24 24"><path fill="currentColor" d="M14 3h2.2c.2 1.8 1.3 3.4 3 4.2v2.3c-1.1 0-2.2-.3-3.2-.9v6.2c0 3-2.4 5.4-5.4 5.4S5.2 17.8 5.2 14.8c0-2.9 2.3-5.3 5.2-5.4v2.4c-1.6.1-2.9 1.5-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3H14Z"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 19c.6-3 2.8-4.5 5.5-4.5S14 16 14.5 19" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17" cy="9" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 14.6c2.2.3 3.8 1.6 4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="11" r="2" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.5 12.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="i-yen" viewBox="0 0 24 24"><path d="M7 5l5 7 5-7M8 12h8M8 15h8M12 12v7" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path fill="currentColor" d="M4 5h16v10H9l-4 4V5z"/></symbol>
+<symbol id="i-cam" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M4 8h3l1.5-2h7L17 8h3v11H4V8Z"/><circle cx="12" cy="13" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><path fill="currentColor" d="M15 4v9.2a3.2 3.2 0 1 1-2-3V6.2L15 4Z"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 3.5V7M16 3.5V7M4 10h16" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+</svg>
+
 <header class="site-header">
-<div class="wrap">
-<a class="logo" href="https://meisho.tokyo/">
-<picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" width="600" height="464" alt="名称非公開"></picture>
-</a>
-<nav class="nav" aria-label="ページ内">
-<a class="navlink" href="#about">ABOUT</a>
-<a class="navlink" href="#produce">PRODUCE</a>
-<a class="navlink" href="#judges">JUDGES</a>
-<a class="navlink" href="#member">MEMBER</a>
-<a class="navlink" href="#schedule">SCHEDULE</a>
-<a class="navlink" href="#faq">FAQ</a>
+<div class="bar">
+<a class="logo" href="https://meisho.tokyo/"><picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" width="600" height="464" alt="名称非公開"></picture></a>
 <a class="nav-entry" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">ENTRY</a>
-</nav>
 </div>
+<nav class="nav" aria-label="ページ内">
+<a href="#about">ABOUT</a>
+<a href="#overview">募集要項</a>
+<a href="#schedule">SCHEDULE</a>
+<a href="#apply">応募方法</a>
+<a href="#entry">ENTRY</a>
+<a href="#produce">PRODUCE</a>
+<a href="#judges">JUDGES</a>
+<a href="#member">MEMBER</a>
+<a href="#faq">FAQ</a>
+<a href="#notes">注意事項</a>
+<a href="#contact">お問い合わせ</a>
+</nav>
 </header>
 
 <main>
 <section class="hero" id="hero">
 <div class="hero-media parallax">
-<picture>
-<source srcset="images/hero_stage.webp" type="image/webp">
-<img src="images/hero_stage.jpg" width="1000" height="1250" alt="名称非公開のライブステージと客席" fetchpriority="high">
-</picture>
+<div class="hero-zoom">
+<picture><source srcset="images/hero_stage.webp" type="image/webp"><img src="images/hero_stage.jpg" width="1000" height="1250" alt="名称非公開のライブステージと客席" fetchpriority="high"></picture>
+</div>
 </div>
 <div class="hero-shade" aria-hidden="true"></div>
 <div class="wrap hero-copy">
-<p class="eyebrow hero-reveal">名称非公開 新体制メンバーオーディション</p>
-<h1 class="display hero-reveal">NEW<br>MEMBER<br>AUDITION</h1>
-<div class="rule hero-reveal" aria-hidden="true"></div>
-<p class="catch hero-reveal"><span class="phrase">次のステージに立つのは、</span><span class="phrase">あなただ。</span></p>
-<p class="deck hero-reveal"><span class="phrase">音楽グループ「名称非公開」が、</span><span class="phrase">ANCHORの全面プロデュースによる</span><span class="phrase">新体制メンバーオーディションを開催。</span><span class="phrase">2027年1月24日（日）の新体制発表に向けて、</span><span class="phrase">新しい仲間を募集します。</span></p>
-<ul class="facts hero-reveal">
-<li>募集 4名程度（予定）</li>
+<p class="eyebrow hero-reveal d1">名称非公開 新体制メンバーオーディション</p>
+<h1 class="display"><span class="line">NEW</span><span class="line">MEMBER</span><span class="line">AUDITION</span></h1>
+<div class="rule hero-reveal d2" aria-hidden="true"></div>
+<p class="catch hero-reveal d2"><span class="keep">次のステージに立つのは、</span><br><span class="keep">あなただ。</span></p>
+<ul class="hero-facts">
+<li><span class="count" data-count="4">4</span>名程度（予定）</li>
 <li>未経験可</li>
 <li>審査無料</li>
-<li>締切 11.30<span class="wd">(月)</span> 23:59</li>
+<li>活動拠点 <span class="keep">東京</span></li>
 </ul>
-<p class="deadline hero-reveal">応募締切　2026年11月30日（月）23:59</p>
-<p class="state hero-reveal" data-entry-state>受付は2026年11月21日（土）0:00から、11月30日（月）23:59までです。</p>
-<div class="hero-actions hero-reveal">
+<p class="deadline hero-reveal d3">応募締切　<span class="keep">2026年11月30日（月）23:59</span></p>
+<p class="state hero-reveal d3" data-entry-state>受付は2026年11月21日（土）0:00から、11月30日（月）23:59までです。</p>
+<div class="hero-actions hero-reveal d4">
 <a class="btn" id="hero-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">ENTRY　応募する</a>
 </div>
 </div>
-<a class="cue" href="#dates">SCROLL<i></i></a>
+<a class="cue" href="#about">SCROLL</a>
 </section>
 
-<div class="marquee" aria-hidden="true">
-<div class="marquee-track">
-<span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span>
-<span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span>
-</div>
-</div>
+<div class="marquee" aria-hidden="true"><div class="marquee-track"><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span></div></div>
 
-<section class="dates" id="dates" aria-label="主な日程">
+<section class="date-row" id="dates" aria-label="主な日程">
 <div class="wrap">
-<div class="date-item"><small>ENTRY</small><strong>11.21<span class="wd">(土)</span> — 11.30<span class="wd">(月)</span></strong></div>
-<div class="date-item"><small>2ND AUDITION</small><strong>12.09<span class="wd">(水)</span> — 12.13<span class="wd">(日)</span></strong></div>
-<div class="date-item"><small>FINAL CAMP</small><strong>12.25<span class="wd">(金)</span> — 12.27<span class="wd">(日)</span></strong></div>
-<div class="date-item"><small>NEW CHAPTER</small><strong>2027.01.24<span class="wd">(日)</span></strong></div>
-<div class="date-item"><small>START</small><strong>2027.05.23<span class="wd">(日)</span></strong></div>
+<a class="chip" href="#schedule"><small>ENTRY</small><b><span class="keep">11.21<span class="wd">(土)</span></span>–<span class="keep">11.30<span class="wd">(月)</span></span></b></a>
+<a class="chip" href="#schedule"><small>2ND</small><b><span class="keep">12.09<span class="wd">(水)</span></span>–<span class="keep">12.13<span class="wd">(日)</span></span></b></a>
+<a class="chip" href="#final"><small>CAMP</small><b><span class="keep">12.25<span class="wd">(金)</span></span>–<span class="keep">12.27<span class="wd">(日)</span></span></b></a>
+<a class="chip" href="#schedule"><small>NEW</small><b class="keep">2027.01.24<span class="wd">(日)</span></b></a>
+<a class="chip" href="#schedule"><small>START</small><b class="keep">2027.05.23<span class="wd">(日)</span></b></a>
 </div>
 </section>
 
 <section class="sec reveal" id="about">
 <div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>01</b>ABOUT</p><h2>新しい名称非公開を作るためのオーディション</h2></header>
-<div class="split">
-<div class="stagger">
-<p class="catch" style="font-size:clamp(22px,2.6vw,32px);margin:0"><span class="phrase">泣けるライブから、</span><span class="phrase">心を動かす“本物”へ。</span></p>
-<p><span class="phrase">2025年5月結成。</span><span class="phrase">TVアニメ2作品のED、</span><span class="phrase">スタジアム、海外フェスへ。</span><br><span class="phrase">届く場所は広がった。</span><span class="phrase">でも、目指す場所は</span><span class="phrase">もっと先にある──日本武道館。</span><br><span class="phrase">そのために、グループごと生まれ変わる。</span><br><span class="phrase">この第二章を、</span><span class="phrase">一緒に鳴らしてくれる人を</span><span class="phrase">探しています。</span></p>
+<header class="sec-head stagger"><p class="sec-en"><b>01</b>ABOUT</p><h2>新しい<span class="keep">名称非公開</span>を作るための<span class="keep">オーディション</span></h2></header>
+<p class="catch stagger">泣けるライブから、<br>心を動かす“本物”へ。</p>
+<p class="lead stagger">2025年5月結成。<wbr>TVアニメ2作品のED、<wbr>スタジアム、海外フェスへ。<wbr>目指す場所は<span class="keep">日本武道館</span>。<wbr>この第二章を、<wbr>一緒に鳴らしてくれる人を探しています。</p>
+<p class="lead stagger"><strong>求めているのは、“上手い人”より“心を動かせる人”。</strong></p>
+<div class="keys stagger">
+<article class="key"><b>01</b><strong>MUSIC</strong><p><span class="keep">名称非公開</span>の音を、<wbr>自分の声で鳴らしたい人</p></article>
+<article class="key"><b>02</b><strong>INDIVIDUALITY</strong><p>誰とも似ていない“自分”を<wbr>武器にできる人</p></article>
+<article class="key"><b>03</b><strong>PERFORMANCE</strong><p>ステージで人の人生を<wbr>揺さぶりたい人</p></article>
 </div>
-<div class="stagger">
-<p style="margin:0 0 8px;font-weight:700"><span class="phrase">求めているのは、</span><span class="phrase">“上手い人”より</span><span class="phrase">“心を動かせる人”。</span></p>
-<div class="keys">
-<div class="key"><b>01</b><div><strong>MUSIC</strong><div><span class="phrase">名称非公開の音を、</span><span class="phrase">自分の声で鳴らしたい人</span></div></div></div>
-<div class="key"><b>02</b><div><strong>INDIVIDUALITY</strong><div><span class="phrase">誰とも似ていない“自分”を</span><span class="phrase">武器にできる人</span></div></div></div>
-<div class="key"><b>03</b><div><strong>PERFORMANCE</strong><div><span class="phrase">ステージで人の人生を</span><span class="phrase">揺さぶりたい人</span></div></div></div>
-</div>
-<p><strong>そして、本気で武道館を目指せる人。</strong></p>
-</div>
-</div>
+<p class="aim stagger">そして、本気で<span class="keep">武道館</span>を目指せる人。</p>
 </div>
 </section>
 
-<section class="reveal photos" aria-label="ライブ写真">
+<section class="photos reveal" aria-label="ライブ写真">
 <picture class="shot"><source srcset="images/live_1.webp" type="image/webp"><img src="images/live_1.jpg" width="1000" height="700" alt="ライブ写真" loading="lazy"></picture>
 <picture class="shot"><source srcset="images/live_2.webp" type="image/webp"><img src="images/live_2.jpg" width="1600" height="900" alt="ライブ写真" loading="lazy"></picture>
 <picture class="shot"><source srcset="images/live_3.webp" type="image/webp"><img src="images/live_3.jpg" width="1000" height="700" alt="ライブ写真" loading="lazy"></picture>
 </section>
 
-<section class="sec reveal" id="produce">
+<section class="sec reveal" id="overview">
 <div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>02</b>PRODUCE</p><h2>企画・音楽・最終審査のクリエイティブディレクション</h2></header>
-<div class="produce-grid">
-<div class="portrait shot stagger">
-<picture><source srcset="images/anchor.webp" type="image/webp"><img src="images/anchor.jpg" width="800" height="800" alt="ANCHOR" loading="lazy"></picture>
+<header class="sec-head stagger"><p class="sec-en"><b>02</b>OVERVIEW</p><h2>募集要項</h2></header>
+<div class="fact-grid stagger">
+<article class="fact"><svg class="ico"><use href="#i-users"/></svg><b><span class="count" data-count="4">4</span>名程度</b><span>（予定）</span></article>
+<article class="fact"><svg class="ico"><use href="#i-cal"/></svg><b><span class="keep">28歳未満</span></b><span>目安</span></article>
+<article class="fact"><svg class="ico"><use href="#i-check"/></svg><b>未経験可</b><span>未経験の方もご応募いただけます</span></article>
+<article class="fact"><svg class="ico"><use href="#i-yen"/></svg><b>審査無料</b><span>宿泊費は運営負担・交通費は自己負担</span></article>
+<article class="fact"><svg class="ico"><use href="#i-pin"/></svg><b>活動拠点</b><span class="keep">東京</span></article>
+<article class="fact"><svg class="ico"><use href="#i-chat"/></svg><b>応募方法</b><span>公式LINE</span></article>
 </div>
-<div class="stagger">
-<p class="display" style="font-size:clamp(48px,6vw,84px)">ANCHOR</p>
-<p><span class="phrase">ANCHORが全面プロデュースする</span><span class="phrase">新体制メンバーオーディションを開催</span></p>
-<p>アニメ、ゲーム、声優、アイドル、アーティストへの楽曲提供・プロデュースを手がける音楽プロデューサー。TVアニメ「地縛少年花子くん」OPテーマ「No.7」（地縛少年バンド）を制作。スマートフォン向けゲーム「A3!」では第四部主題歌をはじめ多数の楽曲を担当。</p>
-<p>2017年にピエール中野（凛として時雨）、Nob（MY FIRST STORY）、滝善充（9mm Parabellum Bullet）とクリエイターユニットZiNGを結成。大森靖子・ZOCのサウンドプロデュースも手がける。2022年にTOY'S FACTORYからメジャーデビューし、映画「サバカン SABAKAN」の主題歌を担当。2026年にはタケヤキ翔、声優・廣瀬大介と3人組音楽ユニット「Ando（アンドゥ）」を結成し、TVアニメ「乙女ゲー世界はモブに厳しい世界です2」主題歌「人生エンドロール」の作詞・作編曲を担当。</p>
+<details class="block stagger">
+<summary>詳しい募集要項</summary>
+<div class="answer"><dl class="sheet">
+<div><dt>募集内容</dt><dd><span class="keep">名称非公開</span>の新体制を担うメンバー</dd></div>
+<div><dt>募集人数</dt><dd>4名程度（予定）<span class="note">※最終的な人数は、審査の結果により変わる場合があります。</span></dd></div>
+<div><dt>応募資格</dt><dd>未経験の方もご応募いただけます。<wbr>他の芸能プロダクションに所属している方もご応募いただけます。<wbr>その場合は、所属先の許可を得たうえでご応募ください。<wbr>年齢：<span class="keep">28歳未満（目安）</span><span class="note">※28歳以上の方もご相談ください。未成年の方は保護者の同意が必要です。</span></dd></div>
+<div><dt>応募期間</dt><dd><span class="keep">2026年11月21日（土）</span>〜<span class="keep">11月30日（月）</span><span class="note">一次審査の結果は<span class="keep">12月6日（日）</span>に公式LINEでご連絡します。</span></dd></div>
+<div><dt>応募締切</dt><dd><span class="keep">2026年11月30日（月）23:59</span></dd></div>
+<div><dt>選考</dt><dd>一次（書類・動画）→ 二次（対面・<span class="keep">2026年12月9日（水）</span>〜<span class="keep">12月13日（日）</span>）→ 三次（合宿・<span class="keep">2026年12月25日（金）</span>〜<span class="keep">12月27日（日）</span>、箱根）。<span class="note">二次審査の結果は<span class="keep">12月16日（水）</span>に公式LINEでご連絡します。二次審査のオンライン参加は要相談。参加が難しい場合はご相談ください。</span></dd></div>
+<div><dt>審査員</dt><dd>タケヤキ翔、廣瀬大介、山之口理香子 ほか</dd></div>
+<div><dt>提出内容</dt><dd>プロフィール・活動歴／顔写真・全身写真／歌唱動画・ダンス動画／自己PR・志望動機（動画）</dd></div>
+<div><dt>審査費用</dt><dd>審査への参加は無料です。<wbr>合宿審査の宿泊費は運営が負担します。<wbr>各審査会場までの交通費のみ、ご自身でご負担ください。</dd></div>
+<div><dt>活動条件</dt><dd><span class="keep">2027年1月24日（日）</span>のお披露目と、<span class="keep">5月23日（日）</span>からの活動に参加できる方</dd></div>
+<div><dt>活動拠点</dt><dd>東京</dd></div>
+<div><dt>新体制発表</dt><dd><span class="keep">2027年1月24日（日）</span></dd></div>
+<div><dt>活動開始</dt><dd><span class="keep">2027年5月23日（日）</span></dd></div>
+<div><dt>撮影について</dt><dd>合宿審査の様子は撮影し、映像として公開する場合があります</dd></div>
+</dl>
+<p class="note">※日程・会場は予定です。変更がある場合は公式LINEでお知らせします。</p>
 </div>
-</div>
+</details>
 </div>
 </section>
 
-<section class="sec ink reveal" id="judges">
+<section class="sec reveal" id="schedule">
 <div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>03</b>JUDGES</p><h2>審査員</h2></header>
-<p class="stagger">ANCHORとともに音楽ユニット「Ando」で活動するタケヤキ翔・廣瀬大介、そして元ZOCの振付家・山之口理香子が、あなたの歌とパフォーマンスを審査します。</p>
-<div class="judge-grid stagger">
-<article class="judge"><p class="role">YouTuber／歌い手</p><h3>タケヤキ翔</h3><p>2013年より大阪を拠点に活動する、YouTube登録者280万人超のトップYouTuber。2025年からはSTPR所属「騎士X -Knight X-」のメンバーとして歌い手としても活動。2026年、ANCHOR・廣瀬大介と音楽ユニット「Ando」を結成。</p></article>
-<article class="judge"><p class="role">声優</p><h3>廣瀬大介</h3><p>「プロジェクトセカイ カラフルステージ！ feat. 初音ミク」天馬司役をはじめ、舞台・アニメなど幅広い作品で活躍する声優。2026年、ANCHOR・タケヤキ翔と音楽ユニット「Ando」を結成。</p></article>
-<article class="judge"><p class="role">舞踊家／振付家</p><h3>山之口理香子</h3><p>元ZOC。「雅雀りこ」名義で振付師兼メンバーとして活動。3歳からバレエを学び、文化庁選抜新人舞踊公演 新人賞など受賞多数。多数のアイドルグループに振付を提供している。</p></article>
-</div>
-<p class="note">ほか、審査員は決定次第お知らせします。</p>
-</div>
-</section>
-
-<section class="sec reveal" id="member">
-<div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>04</b>MEMBER</p><h2><span class="phrase">この2人と、</span><span class="phrase">新しい名称非公開をつくる人へ。</span></h2></header>
-<p class="stagger">世論を切り裂く挑発的な歌詞と、銃弾のようなミクスチャーロックサウンドが特徴の音楽グループ。元BiSをはじめ、異なるフィールドの才能が集結。ANCHORによる全曲プロデュース。2027年1月24日（日）、ヒューガー・トギーと新メンバーで新体制へ。</p>
-<div class="members stagger">
-<article>
-<picture class="member-photo shot"><source srcset="images/member_hyuga.webp" type="image/webp"><img class="hyuga" src="images/member_hyuga.jpg" width="600" height="800" alt="ヒューガー" loading="lazy"></picture>
-<p class="tag">元BiS第3期</p>
-<h3>ヒューガー</h3>
-<p>BiS第3期でオリコン週間3位獲得。圧倒的なライブパフォーマンスでグループの核を担う実力派。</p>
-</article>
-<article>
-<picture class="member-photo shot"><source srcset="images/member_toggy.webp" type="image/webp"><img src="images/member_toggy.jpg" width="600" height="800" alt="トギー" loading="lazy"></picture>
-<p class="tag">第3期BiS唯一のオリジナルメンバー</p>
-<h3>トギー</h3>
-<p>2019年のBiS始動から約5年半にわたり中核を担い続けた。解散後11カ月の沈黙を経て2025年12月に電撃加入。</p>
-</article>
-<a class="you" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">
-<div class="you-tile"><strong>YOU</strong><span>応募はこちら</span></div>
-<p class="tag">NEXT MEMBER</p>
-<h3><span class="phrase">ここに立つのは、</span><span class="phrase">あなたかもしれない。</span></h3>
-<p><span class="phrase">あなたの名前と、あなたの色が、</span><span class="phrase">このカードに入る。</span></p>
-</a>
-</div>
-</div>
-</section>
-
-<section class="sec schedule reveal" id="schedule">
-<div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>05</b>SCHEDULE</p><h2>応募から2027年1月24日（日）の新体制発表までの流れ</h2></header>
+<header class="sec-head stagger"><p class="sec-en"><b>03</b>SCHEDULE</p><h2>審査スケジュール</h2></header>
 <div class="timeline-wrap stagger">
 <div class="timeline-fill" aria-hidden="true"></div>
 <ol class="timeline">
-<li><div class="num">01</div><div class="row-body"><div class="when">2026.11.21<span class="wd">(土)</span> — 11.30<span class="wd">(月)</span></div><div class="what"><strong><span class="phrase">応募受付・一次審査</span><span class="phrase">（書類・動画）</span></strong><span><span class="phrase">一次審査の結果は12月6日（日）に</span><span class="phrase">公式LINEでご連絡します。</span></span></div></div></li>
-<li><div class="num">02</div><div class="row-body"><div class="when">2026.12.09<span class="wd">(水)</span> — 12.13<span class="wd">(日)</span></div><div class="what"><strong>二次審査（対面）</strong><span><span class="phrase">結果は12月16日（水）に公式LINEでご連絡します。</span><span class="phrase">オンラインでの参加もご相談いただけます。</span></span></div></div></li>
-<li class="mark"><div class="num">03</div><div class="row-body"><div class="when">2026.12.25<span class="wd">(金)</span> — 12.27<span class="wd">(日)</span></div><div class="what"><strong>三次審査（合宿・2泊3日）</strong><span><span class="phrase">会場：箱根。</span><span class="phrase">参加が難しい場合はご相談ください。</span></span></div></div></li>
-<li><div class="num">04</div><div class="row-body"><div class="when">合宿後 — 発表前</div><div class="what"><strong>映像・告知展開</strong></div></div></li>
-<li class="finale"><div class="num">05</div><div class="row-body"><div class="when">2027.01.24<span class="wd">(日)</span></div><div class="what"><strong>新体制発表</strong></div></div></li>
-<li><div class="num">06</div><div class="row-body"><div class="when">2027.05.23<span class="wd">(日)</span></div><div class="what"><strong>活動開始</strong><span>新メンバーとしての活動を開始します。</span></div></div></li>
-</ol>
-</div>
-<p class="muted">※日程・会場は予定です。変更がある場合は公式LINEでお知らせします。</p>
-</div>
-</section>
-
-<section class="sec ink reveal" id="final">
-<picture class="bleed"><source srcset="images/bg_final_selection.webp" type="image/webp"><img src="images/bg_final_selection.jpg" width="1600" height="900" alt="" loading="lazy" style="opacity:.22"></picture>
-<div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>06</b>FINAL</p><h2><span class="phrase">三次審査｜</span><span class="phrase">最終候補者による</span><span class="phrase">2泊3日の合宿審査</span></h2></header>
-<p class="stagger">日程　2026年12月25日（金）〜12月27日（日）<br>会場　箱根<br>参加が難しい場合はご相談ください。</p>
-<div class="days stagger">
+<li>
+<span class="dot" aria-hidden="true"></span>
+<article class="step-card">
+<div class="step-top"><span class="num">01</span><div><p class="when"><span class="keep">2026.11.21<span class="wd">(土)</span></span> – <span class="keep">11.30<span class="wd">(月)</span></span></p><p class="label">応募受付・一次審査<wbr>（書類・動画）</p></div></div>
+<details class="fold"><summary>詳細</summary><div class="fold-body"><div><p>一次審査の結果は<span class="keep">12月6日（日）</span>に公式LINEでご連絡します。</p></div></div></details>
+</article>
+</li>
+<li>
+<span class="dot" aria-hidden="true"></span>
+<article class="step-card">
+<div class="step-top"><span class="num">02</span><div><p class="when"><span class="keep">2026.12.09<span class="wd">(水)</span></span> – <span class="keep">12.13<span class="wd">(日)</span></span></p><p class="label">二次審査（対面）</p></div></div>
+<details class="fold"><summary>詳細</summary><div class="fold-body"><div><p>結果は<span class="keep">12月16日（水）</span>に公式LINEでご連絡します。<wbr>オンラインでの参加もご相談いただけます。</p></div></div></details>
+</article>
+</li>
+<li id="final">
+<span class="dot" aria-hidden="true"></span>
+<article class="step-card">
+<div class="step-top"><span class="num">03</span><div><p class="when"><span class="keep">2026.12.25<span class="wd">(金)</span></span> – <span class="keep">12.27<span class="wd">(日)</span></span></p><p class="label">三次審査（合宿・2泊3日）　箱根</p></div></div>
+<details class="fold"><summary>3日間の内容</summary><div class="fold-body"><div>
+<p>参加が難しい場合はご相談ください。</p>
+<div class="days">
 <article class="day"><h3>01</h3><ul><li>顔合わせ・オリエンテーション</li><li>体力テスト・タレント力テスト</li></ul></article>
 <article class="day"><h3>02</h3><ul><li>グループ課題・レッスン</li><li>中間発表</li></ul></article>
 <article class="day"><h3>03</h3><ul><li>最終課題・パフォーマンス</li><li>結果通知</li></ul></article>
 </div>
-<p>全日程を通して　<span class="phrase">歌唱・ダンス・グループ課題、</span><span class="phrase">候補者インタビュー、</span><span class="phrase">合宿の撮影があります。</span></p>
-<p class="note">※進行は仮案です。内容は変更となる場合があります。</p>
+<p>全日程を通して、歌唱・ダンス・グループ課題、候補者インタビュー、合宿の撮影があります。</p>
+<p>合宿審査の様子は撮影し、映像として公開する場合があります。</p>
+<p>※進行は仮案です。内容は変更となる場合があります。</p>
+</div></div></details>
+</article>
+</li>
+<li>
+<span class="dot" aria-hidden="true"></span>
+<article class="step-card">
+<div class="step-top"><span class="num">04</span><div><p class="when">合宿後 – 発表前</p><p class="label">映像・告知展開</p></div></div>
+</article>
+</li>
+<li class="finale">
+<span class="dot" aria-hidden="true"></span>
+<article class="step-card">
+<div class="step-top"><span class="num">05</span><div><p class="when"><span class="keep">2027.01.24<span class="wd">(日)</span></span></p><p class="label">新体制発表</p></div></div>
+</article>
+</li>
+<li>
+<span class="dot" aria-hidden="true"></span>
+<article class="step-card">
+<div class="step-top"><span class="num">06</span><div><p class="when"><span class="keep">2027.05.23<span class="wd">(日)</span></span></p><p class="label">活動開始</p></div></div>
+</article>
+</li>
+</ol>
+</div>
+<p class="note stagger">※日程・会場は予定です。変更がある場合は公式LINEでお知らせします。</p>
 </div>
 </section>
 
-<section class="sec reveal" id="overview">
+<section class="sec reveal" id="apply">
 <div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>07</b>OVERVIEW</p><h2>募集要項</h2></header>
-<dl class="sheet stagger">
-<div><dt>募集内容</dt><dd>名称非公開の新体制を担うメンバー</dd></div>
-<div><dt>募集人数</dt><dd>4名程度（予定）<br>※最終的な人数は、審査の結果により変わる場合があります。</dd></div>
-<div><dt>応募資格</dt><dd><span class="phrase">未経験の方もご応募いただけます。</span><span class="phrase">他の芸能プロダクションに所属している方もご応募いただけます。</span><span class="phrase">その場合は、所属先の許可を得たうえでご応募ください。</span><span class="phrase">年齢：28歳未満（目安）</span><span class="phrase">※28歳以上の方もご相談ください。</span><span class="phrase">未成年の方は保護者の同意が必要です。</span></dd></div>
-<div><dt>応募受付</dt><dd>2026年11月21日（土）〜11月30日（月）<br><span class="phrase">一次審査の結果は12月6日（日）に</span><span class="phrase">公式LINEでご連絡します。</span></dd></div>
-<div><dt>応募締切</dt><dd>応募締切　2026年11月30日（月）23:59<br><span class="state" data-entry-state>受付は2026年11月21日（土）0:00から、11月30日（月）23:59までです。</span></dd></div>
-<div><dt>選考</dt><dd><span class="phrase">一次（書類・動画）</span><span class="phrase">→ 二次（対面・2026年12月9日（水）〜12月13日（日））</span><span class="phrase">→ 三次（合宿・2026年12月25日（金）〜12月27日（日）、箱根）。</span><br><span class="phrase">二次審査の結果は12月16日（水）に公式LINEでご連絡します。</span><br>二次審査のオンライン参加は要相談。<span class="phrase">参加が難しい場合はご相談ください。</span></dd></div>
-<div><dt>審査員</dt><dd>タケヤキ翔、廣瀬大介、山之口理香子 ほか</dd></div>
-<div><dt>提出内容</dt><dd><ul class="prep"><li>プロフィール・活動歴</li><li>顔写真・全身写真</li><li>歌唱動画・ダンス動画</li><li>自己PR・志望動機（動画）</li></ul></dd></div>
-<div><dt>審査費用</dt><dd><span class="phrase">審査への参加は無料です。</span><span class="phrase">合宿審査の宿泊費は運営が負担します。</span><span class="phrase">各審査会場までの交通費のみ、ご自身でご負担ください。</span></dd></div>
-<div><dt>活動条件</dt><dd><span class="phrase">2027年1月24日（日）のお披露目と、</span><span class="phrase">5月23日（日）からの活動に参加できる方</span></dd></div>
-<div><dt>活動拠点</dt><dd>東京</dd></div>
-<div><dt>新体制発表</dt><dd>2027年1月24日（日）</dd></div>
-<div><dt>活動開始</dt><dd>2027年5月23日（日）</dd></div>
-<div><dt>撮影について</dt><dd><span class="phrase">合宿審査の様子は撮影し、</span><span class="phrase">映像として公開する場合があります</span></dd></div>
-</dl>
-<p class="muted">※日程・会場は予定です。変更がある場合は公式LINEでお知らせします。</p>
+<header class="sec-head stagger"><p class="sec-en"><b>04</b>APPLY</p><h2>応募方法</h2></header>
+<div id="flow" class="stagger">
+<h3>応募の流れ</h3>
+<ol class="steps">
+<li><b>01</b><div><strong>LINE友だち追加</strong></div></li>
+<li><b>02</b><div><strong>フォーム入力</strong></div></li>
+<li><b>03</b><div><strong>一次結果</strong><span class="meta"><span class="keep">12月6日（日）</span>に公式LINEでご連絡します。</span></div></li>
+<li><b>04</b><div><strong>二次審査</strong><span class="meta"><span class="keep">12月9日（水）〜13日（日）</span>。オンラインでの参加もご相談いただけます。</span></div></li>
+<li><b>05</b><div><strong>合宿</strong><span class="meta"><span class="keep">12月25日（金）〜27日（日）</span>。箱根。</span></div></li>
+</ol>
 </div>
-</section>
-
-<section class="sec reveal" id="shoot">
-<div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>08</b>SHOOT</p><h2>写真・動画の撮り方</h2></header>
-<p class="stagger"><span class="phrase">提出いただく顔写真・全身写真と、</span><span class="phrase">歌唱動画・ダンス動画は、</span><span class="phrase">次の点を意識して撮ってください。</span></p>
-<div class="cards stagger">
+<div class="stagger">
+<h3>用意するもの</h3>
+<ul class="prep">
+<li><svg><use href="#i-users"/></svg>プロフィール・活動歴</li>
+<li><svg><use href="#i-cam"/></svg>顔写真・全身写真</li>
+<li><svg><use href="#i-note"/></svg>歌唱動画</li>
+<li><svg><use href="#i-users"/></svg>ダンス動画</li>
+<li><svg><use href="#i-check"/></svg>自己PR・志望動機（動画）</li>
+</ul>
+<p>動画は秒数の指定なし。<wbr>縦・横、曲は自由です。<wbr>スマートフォンで撮影したもので問題ありません。</p>
+</div>
+<div id="shoot" class="stagger">
+<h3>写真・動画の撮り方</h3>
+<div class="cards">
 <article class="card"><h3>01　加工・フィルター・AI加工なし</h3></article>
 <article class="card"><h3>02　明るい場所で、顔がはっきり写るもの</h3></article>
 <article class="card"><h3>03　バストアップと全身</h3><p>顔写真・全身写真</p></article>
 <article class="card"><h3>04　スマホ撮影でOK</h3></article>
 </div>
-<p><strong><span class="phrase">上手さより、</span><span class="phrase">あなたらしさが伝わるものを。</span></strong></p>
+<p class="closer">上手さより、あなたらしさが伝わるものを。</p>
 </div>
-</section>
-
-<section class="sec faq reveal" id="faq">
-<div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>09</b>FAQ</p><h2>よくある質問</h2></header>
-<div class="faq-grid stagger">
-<details class="q"><summary><span class="ql">Q1</span><span class="qtext">未経験でも応募できますか？</span></summary><div class="answer"><p><span class="phrase">はい、未経験の方も</span><span class="phrase">ご応募いただけます。</span></p></div></details>
-<details class="q"><summary><span class="ql">Q2</span><span class="qtext">費用はかかりますか？</span></summary><div class="answer"><p><span class="phrase">審査への参加は無料です。</span><span class="phrase">合宿審査の宿泊費は運営が負担します。</span><span class="phrase">各審査会場までの交通費のみ、</span><span class="phrase">ご自身でご負担ください。</span></p></div></details>
-<details class="q"><summary><span class="ql">Q3</span><span class="qtext">審査結果はどのように届きますか？</span></summary><div class="answer"><p><span class="phrase">審査結果のご連絡は、名称非公開公式LINEからお送りします。</span><span class="phrase">一次審査の結果は12月6日（日）、</span><span class="phrase">二次審査の結果は12月16日（水）です。</span><span class="phrase">公式LINEをブロックしないようにお願いします。</span><span class="phrase">SNSでお声がけする場合は、</span><span class="phrase">名称非公開の公式アカウントからのみご連絡します。</span></p></div></details>
-<details class="q"><summary><span class="ql">Q4</span><span class="qtext">他の事務所に所属していても応募できますか？</span></summary><div class="answer"><p><span class="phrase">ご応募いただけます。</span><span class="phrase">その場合は、所属先の許可を得たうえで</span><span class="phrase">ご応募ください。</span></p></div></details>
-<details class="q"><summary><span class="ql">Q5</span><span class="qtext">動画はスマートフォンで撮影してもいいですか？</span></summary><div class="answer"><p><span class="phrase">問題ありません。</span><span class="phrase">秒数の指定はなく、縦・横、曲は自由です。</span><span class="phrase">過度な加工は避けてください。</span></p></div></details>
-<details class="q"><summary><span class="ql">Q6</span><span class="qtext">遠方のため、二次審査に行けないかもしれません。</span></summary><div class="answer"><p>オンラインでの参加もご相談いただけます。</p></div></details>
-<details class="q"><summary><span class="ql">Q7</span><span class="qtext">合宿に参加できない場合は？</span></summary><div class="answer"><p>フォームまたは公式LINEでご相談ください。</p></div></details>
-<details class="q"><summary><span class="ql">Q8</span><span class="qtext">合格したら、いつから活動しますか？</span></summary><div class="answer"><p><span class="phrase">2027年1月24日（日）に新体制を発表し、</span><span class="phrase">2027年5月23日（日）から活動を開始します。</span><span class="phrase">活動拠点は東京です。</span></p></div></details>
-<details class="q"><summary><span class="ql">Q9</span><span class="qtext">お問い合わせはどこへすればいいですか？</span></summary><div class="answer"><p><a href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener"><span class="phrase">公式LINEよりお問い合わせください</span><span class="phrase">（対応時間：平日10:00〜18:00。</span><span class="phrase">土日祝は翌営業日にご返信します）</span></a><br>メール：<a href="mailto:management@meisho.tokyo">management@meisho.tokyo</a></p></div></details>
-</div>
-</div>
-</section>
-
-<section class="sec reveal" id="flow">
-<div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>10</b>APPLY</p><h2>応募について</h2></header>
-<div class="flow-grid stagger">
-<article class="flow-card">
-<h3>応募の流れ</h3>
-<ol class="steps">
-<li><div><strong>LINE友だち追加</strong></div></li>
-<li><div><strong>フォーム入力</strong></div></li>
-<li><div><strong>一次結果</strong><div><span class="phrase">12月6日（日）に</span><span class="phrase">公式LINEでご連絡します。</span></div></div></li>
-<li><div><strong>二次審査</strong><div><span class="phrase">12月9日（水）〜13日（日）。</span><span class="phrase">オンラインでの参加もご相談いただけます。</span></div></div></li>
-<li><div><strong>合宿</strong><div><span class="phrase">12月25日（金）〜27日（日）。</span><span class="phrase">箱根。</span></div></div></li>
-</ol>
-</article>
-<article class="flow-card">
-<h3>準備するもの</h3>
-<p>フォームを開く前に、次の点を用意しておくと一度で応募が終わります。</p>
-<ul class="prep">
-<li>プロフィール・活動歴</li>
-<li>顔写真・全身写真</li>
-<li>歌唱動画</li>
-<li>ダンス動画</li>
-<li>自己PR・志望動機（動画）</li>
-</ul>
-<p><span class="phrase">動画は秒数の指定なし。</span><span class="phrase">縦・横、曲は自由です。</span><span class="phrase">スマートフォンで撮影したもので</span><span class="phrase">問題ありません。</span></p>
-</article>
-</div>
-</div>
-</section>
-
-<section class="sec reveal" id="caution">
-<div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>11</b>CAUTION</p><h2>なりすまし・詐欺注意</h2></header>
-<div class="notice stagger">
-<p>オーディションのご案内・審査結果のご連絡は、名称非公開公式LINEからお送りします。SNSでお声がけする場合は、名称非公開の公式アカウントからのみご連絡します。個人アカウントからのご連絡や、金銭の要求、個人的な写真の送付依頼を行うことはありません。不審な連絡を受けた場合は、<a href="#contact">お問い合わせ窓口</a>へご連絡ください。</p>
-</div>
-</div>
-</section>
-
-<section class="sec reveal" id="contact">
-<div class="wrap">
-<header class="sec-head stagger"><p class="sec-en"><b>12</b>CONTACT</p><h2>お問い合わせ</h2></header>
-<p class="stagger"><a class="btn" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener" style="background:var(--ink);color:var(--accent)">公式LINEよりお問い合わせください</a></p>
-<p class="stagger"><span class="phrase">対応時間：平日10:00〜18:00。</span><span class="phrase">土日祝は翌営業日にご返信します。</span></p>
-<p class="stagger">メール：<a href="mailto:management@meisho.tokyo">management@meisho.tokyo</a></p>
 </div>
 </section>
 
 <section class="sec ink entry reveal" id="entry">
-<picture class="bleed"><source srcset="images/bg_join_us.webp" type="image/webp"><img src="images/bg_join_us.jpg" width="1600" height="900" alt="" loading="lazy" style="opacity:.28"></picture>
+<picture class="bleed"><source srcset="images/bg_join_us.webp" type="image/webp"><img src="images/bg_join_us.jpg" width="1600" height="900" alt="" loading="lazy"></picture>
 <div class="wrap">
-<p class="display" style="font-size:clamp(64px,10vw,120px);color:var(--accent)">JOIN US</p>
-<h2><span class="phrase">2027年1月24日（日）、</span><br><span class="phrase">ステージで輝いているのは、</span><span class="phrase">あなたかもしれない。</span></h2>
-<p class="deadline">応募締切　2026年11月30日（月）23:59</p>
-<p class="state" data-entry-state>受付は2026年11月21日（土）0:00から、11月30日（月）23:59までです。</p>
-<div class="entry-panel">
+<p class="display stagger">JOIN US</p>
+<h2 class="stagger"><span class="keep">2027年1月24日（日）、</span><br><span class="keep">ステージで輝いているのは、</span><br><span class="keep">あなたかもしれない。</span></h2>
+<div class="entry-panel stagger">
 <div class="panel">
 <h3>01</h3>
 <p>公式LINEを友だち追加</p>
@@ -552,13 +551,165 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 </div>
 <div class="panel">
 <h3>02</h3>
-<p><span class="phrase">LINEに届く</span><span class="phrase">応募フォームに回答</span></p>
-<p><span class="phrase">友だち追加後にLINEでお送りする</span><span class="phrase">応募フォームにご回答ください。</span></p>
-<p><span class="phrase">審査結果のご連絡も</span><span class="phrase">公式LINEからお届けします。</span></p>
+<p>LINEに届く応募フォームに回答</p>
 </div>
 </div>
-<p><span class="phrase">最新情報は公式X</span> <a href="https://x.com/MEISHOHIKOKAI">@MEISHOHIKOKAI</a> <span class="phrase">でお知らせします。</span></p>
-<picture><source srcset="images/logo_kanji_white.webp" type="image/webp"><img src="images/logo_kanji_white.png" width="1200" height="344" alt="名称非公開" loading="lazy" style="width:min(280px,70%);height:auto;margin-top:20px"></picture>
+<p class="stagger">最新情報は公式X <a href="https://x.com/MEISHOHIKOKAI" target="_blank" rel="noopener">@MEISHOHIKOKAI</a></p>
+</div>
+</section>
+
+<section class="sec reveal" id="produce">
+<div class="wrap">
+<header class="sec-head stagger"><p class="sec-en"><b>05</b>PRODUCE</p><h2>プロデューサー</h2></header>
+<article class="produce-top stagger">
+<div class="portrait shot"><picture><source srcset="images/anchor.webp" type="image/webp"><img src="images/anchor.jpg" width="800" height="800" alt="ANCHOR" loading="lazy"></picture></div>
+<div>
+<p class="role">企画・音楽・最終審査のクリエイティブディレクション</p>
+<h3 class="person-name">ANCHOR</h3>
+<ul class="tags">
+<li>「地縛少年花子くん」OP</li>
+<li>ZiNG</li>
+<li>Ando</li>
+<li><span class="keep">名称非公開</span>全曲プロデュース</li>
+</ul>
+<div class="sns">
+<a href="https://x.com/anchor_suzuki" target="_blank" rel="noopener" aria-label="ANCHORのX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
+<a href="https://www.instagram.com/anchor_sound" target="_blank" rel="noopener" aria-label="ANCHORのInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
+</div>
+</div>
+</article>
+<details class="block stagger">
+<summary>プロフィールを見る</summary>
+<div class="answer">
+<p>アニメ、ゲーム、声優、アイドル、アーティストへの楽曲提供・プロデュースを手がける音楽プロデューサー。TVアニメ「地縛少年花子くん」OPテーマ「No.7」（地縛少年バンド）を制作。スマートフォン向けゲーム「A3!」では第四部主題歌をはじめ多数の楽曲を担当。</p>
+<p>2017年にピエール中野（凛として時雨）、Nob<wbr>（MY FIRST STORY）、滝善充<wbr>（9mm Parabellum Bullet）とクリエイターユニットZiNGを結成。大森靖子・ZOCのサウンドプロデュースも手がける。2022年にTOY'S FACTORYからメジャーデビューし、映画「サバカン SABAKAN」の主題歌を担当。2026年にはタケヤキ翔、声優・廣瀬大介と3人組音楽ユニット「Ando<wbr>（アンドゥ）」を結成し、TVアニメ「乙女ゲー世界はモブに厳しい世界です2」主題歌「人生エンドロール」の作詞・作編曲を担当。</p>
+</div>
+</details>
+</div>
+</section>
+
+<section class="sec ink reveal" id="judges">
+<div class="wrap">
+<header class="sec-head stagger"><p class="sec-en"><b>06</b>JUDGES</p><h2>審査員</h2></header>
+<div class="judge-row stagger">
+<article class="judge">
+<div class="avatar" aria-hidden="true">翔</div>
+<p class="role">YouTuber／歌い手</p>
+<h3>タケヤキ翔</h3>
+<p class="sum">YouTube登録者280万人超。Andoのメンバー。</p>
+<div class="sns">
+<a href="https://x.com/takeyakii" target="_blank" rel="noopener" aria-label="タケヤキ翔のX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
+<a href="https://www.youtube.com/@takeyakisan" target="_blank" rel="noopener" aria-label="タケヤキ翔のYouTube（新しいタブで開く）"><svg><use href="#i-yt"/></svg></a>
+<a href="https://www.instagram.com/takeyakisyou" target="_blank" rel="noopener" aria-label="タケヤキ翔のInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
+<a href="https://www.tiktok.com/@takeyakisyo" target="_blank" rel="noopener" aria-label="タケヤキ翔のTikTok（新しいタブで開く）"><svg><use href="#i-tt"/></svg></a>
+</div>
+<details class="fold"><summary>プロフィールを見る</summary><div class="fold-body"><div><p>2013年より大阪を拠点に活動する、YouTube登録者280万人超のトップYouTuber。2025年からはSTPR所属「騎士X -Knight X-」のメンバーとして歌い手としても活動。2026年、ANCHOR・廣瀬大介と音楽ユニット「Ando」を結成。</p></div></div></details>
+</article>
+<article class="judge">
+<div class="avatar" aria-hidden="true">廣</div>
+<p class="role">声優</p>
+<h3>廣瀬大介</h3>
+<p class="sum">「プロジェクトセカイ」天馬司役ほか。Andoのメンバー。</p>
+<div class="sns">
+<a href="https://x.com/da_sukemaru" target="_blank" rel="noopener" aria-label="廣瀬大介のX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
+<a href="https://www.tiktok.com/@hirose_daisuke" target="_blank" rel="noopener" aria-label="廣瀬大介のTikTok（新しいタブで開く）"><svg><use href="#i-tt"/></svg></a>
+</div>
+<details class="fold"><summary>プロフィールを見る</summary><div class="fold-body"><div><p>「プロジェクトセカイ カラフルステージ！ feat. 初音ミク」天馬司役をはじめ、舞台・アニメなど幅広い作品で活躍する声優。2026年、ANCHOR・タケヤキ翔と音楽ユニット「Ando」を結成。</p></div></div></details>
+</article>
+<article class="judge">
+<div class="avatar" aria-hidden="true">山</div>
+<p class="role">舞踊家／振付家</p>
+<h3>山之口理香子</h3>
+<p class="sum">元ZOC。多数のアイドルグループに振付を提供。</p>
+<div class="sns">
+<a href="https://x.com/0oWatashi00" target="_blank" rel="noopener" aria-label="山之口理香子のX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
+<a href="https://www.instagram.com/riko0o_0o" target="_blank" rel="noopener" aria-label="山之口理香子のInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
+</div>
+<details class="fold"><summary>プロフィールを見る</summary><div class="fold-body"><div><p>元ZOC。「雅雀りこ」名義で振付師兼メンバーとして活動。3歳からバレエを学び、文化庁選抜新人舞踊公演 新人賞など受賞多数。多数のアイドルグループに振付を提供している。</p></div></div></details>
+</article>
+</div>
+<p class="note stagger">ほか、審査員は決定次第お知らせします。</p>
+</div>
+</section>
+
+<section class="sec reveal" id="member">
+<div class="wrap">
+<header class="sec-head stagger"><p class="sec-en"><b>07</b>MEMBER</p><h2>この2人と、<span class="keep">名称非公開</span>をつくる人へ。</h2></header>
+<p class="lead stagger">挑発的な歌詞と、銃弾のようなミクスチャーロックサウンド。<wbr><span class="keep">2027年1月24日（日）</span>、<span class="keep">ヒューガー・トギー</span>と新体制へ。</p>
+<div class="members stagger">
+<article>
+<picture class="member-photo"><source srcset="images/member_hyuga.webp" type="image/webp"><img class="hyuga" src="images/member_hyuga.jpg" width="600" height="800" alt="ヒューガー" loading="lazy"></picture>
+<p class="tag">元BiS第3期</p>
+<h3>ヒューガー</h3>
+<p>BiS第3期でオリコン週間3位獲得。圧倒的なライブパフォーマンスでグループの核を担う実力派。</p>
+<div class="sns">
+<a href="https://x.com/HYUGA_MEISHO" target="_blank" rel="noopener" aria-label="ヒューガーのX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
+<a href="https://lit.link/hyuga098" target="_blank" rel="noopener" aria-label="ヒューガーのlit.link（新しいタブで開く）">lit.link</a>
+</div>
+</article>
+<article>
+<picture class="member-photo"><source srcset="images/member_toggy.webp" type="image/webp"><img src="images/member_toggy.jpg" width="600" height="800" alt="トギー" loading="lazy"></picture>
+<p class="tag">第3期BiS唯一のオリジナルメンバー</p>
+<h3>トギー</h3>
+<p>2019年のBiS始動から約5年半にわたり中核を担い続けた。解散後11カ月の沈黙を経て2025年12月に電撃加入。</p>
+<div class="sns">
+<a href="https://x.com/TOGGY_MEISHO" target="_blank" rel="noopener" aria-label="トギーのX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
+<a href="https://www.instagram.com/toggy_meisho" target="_blank" rel="noopener" aria-label="トギーのInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section class="sec reveal" id="faq">
+<div class="wrap">
+<header class="sec-head stagger"><p class="sec-en"><b>08</b>FAQ</p><h2>よくある質問</h2></header>
+<div class="stagger">
+<details class="q"><summary><span class="ql">Q1</span><span class="qtext">未経験でも応募できますか？</span></summary><div class="answer"><p>はい、未経験の方もご応募いただけます。</p></div></details>
+<details class="q"><summary><span class="ql">Q2</span><span class="qtext">費用はかかりますか？</span></summary><div class="answer"><p>審査への参加は無料です。<wbr>合宿審査の宿泊費は運営が負担します。<wbr>各審査会場までの交通費のみ、ご自身でご負担ください。</p></div></details>
+<details class="q"><summary><span class="ql">Q3</span><span class="qtext">審査結果はどのように届きますか？</span></summary><div class="answer"><p>審査結果のご連絡は、<span class="keep">名称非公開</span>公式LINEからお送りします。<wbr>一次審査の結果は<span class="keep">12月6日（日）</span>、<wbr>二次審査の結果は<span class="keep">12月16日（水）</span>です。<wbr>公式LINEをブロックしないようにお願いします。<wbr>SNSでお声がけする場合は、<span class="keep">名称非公開</span>の公式アカウントからのみご連絡します。</p></div></details>
+<details class="q"><summary><span class="ql">Q4</span><span class="qtext">他の事務所に所属していても応募できますか？</span></summary><div class="answer"><p>ご応募いただけます。<wbr>その場合は、所属先の許可を得たうえでご応募ください。</p></div></details>
+<details class="q"><summary><span class="ql">Q5</span><span class="qtext">動画はスマートフォンで撮影してもいいですか？</span></summary><div class="answer"><p>問題ありません。<wbr>秒数の指定はなく、縦・横、曲は自由です。<wbr>過度な加工は避けてください。</p></div></details>
+<details class="q"><summary><span class="ql">Q6</span><span class="qtext">遠方のため、二次審査に行けないかもしれません。</span></summary><div class="answer"><p>オンラインでの参加もご相談いただけます。</p></div></details>
+<details class="q"><summary><span class="ql">Q7</span><span class="qtext">合宿に参加できない場合は？</span></summary><div class="answer"><p>フォームまたは公式LINEでご相談ください。</p></div></details>
+<details class="q"><summary><span class="ql">Q8</span><span class="qtext">合格したら、いつから活動しますか？</span></summary><div class="answer"><p><span class="keep">2027年1月24日（日）</span>に新体制を発表し、<span class="keep">2027年5月23日（日）</span>から活動を開始します。<wbr>活動拠点は東京です。</p></div></details>
+<details class="q"><summary><span class="ql">Q9</span><span class="qtext">お問い合わせはどこへすればいいですか？</span></summary><div class="answer"><p><a href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">公式LINEよりお問い合わせください（対応時間：平日10:00〜18:00。土日祝は翌営業日にご返信します）</a></p><p>メール：<a href="mailto:management@meisho.tokyo">management@meisho.tokyo</a></p></div></details>
+</div>
+</div>
+</section>
+
+<section class="sec reveal" id="notes">
+<div class="wrap">
+<header class="sec-head stagger"><p class="sec-en"><b>09</b>NOTES</p><h2>注意事項</h2></header>
+<div class="alert stagger" id="caution"><p>オーディションのご案内・審査結果のご連絡は、<span class="keep">名称非公開</span>公式LINEからお送りします。<wbr>SNSでお声がけする場合は、<span class="keep">名称非公開</span>の公式アカウントからのみご連絡します。<wbr>個人アカウントからのご連絡や、金銭の要求、個人的な写真の送付依頼を行うことはありません。<wbr>不審な連絡を受けた場合は、<a href="#contact">お問い合わせ窓口</a>へご連絡ください。</p></div>
+<details class="block stagger">
+<summary>応募にあたっての注意事項</summary>
+<div class="answer"><ul class="notes">
+<li>応募はご本人に限ります。</li>
+<li>応募内容に虚偽があった場合は、合格を取り消すことがあります。</li>
+<li>未成年の方は、保護者の同意を得たうえでご応募ください。</li>
+<li>他の芸能プロダクションに所属している方は、所属先の許可を得たうえでご応募ください。</li>
+<li>審査結果に関する個別のお問い合わせには応じられません。</li>
+<li>お送りいただいた応募資料は返却いたしません。</li>
+<li>個人情報は、審査およびご連絡の目的以外には使用しません。</li>
+<li>審査の内容や結果を、SNSなどで公開しないでください。</li>
+<li>各審査会場までの交通費はご自身のご負担です。合宿審査の宿泊費は運営が負担します。</li>
+<li>天候や災害などにより、日程を変更する場合があります。変更がある場合は公式LINEでお知らせします。</li>
+<li>公式LINEをブロックすると、審査結果などのご連絡が届きません。</li>
+<li>審査結果は、応募者ご本人にのみお知らせします。</li>
+</ul></div>
+</details>
+</div>
+</section>
+
+<section class="sec reveal" id="contact">
+<div class="wrap">
+<header class="sec-head stagger"><p class="sec-en"><b>10</b>CONTACT</p><h2>お問い合わせ</h2></header>
+<div class="contact-actions stagger">
+<a class="btn" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">公式LINEよりお問い合わせください</a>
+<p>対応時間：<span class="keep">平日10:00〜18:00</span>。<wbr>土日祝は翌営業日にご返信します。</p>
+<p>メール：<a href="mailto:management@meisho.tokyo">management@meisho.tokyo</a></p>
+</div>
 </div>
 </section>
 </main>
@@ -568,14 +719,21 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" width="600" height="464" alt="名称非公開" loading="lazy"></picture>
 <nav aria-label="関連リンク">
 <a href="https://meisho.tokyo/">オフィシャルサイト</a>
+<a href="https://lit.link/MEISHOHIKOKAI" target="_blank" rel="noopener">lit.link</a>
+<a href="https://x.com/MEISHOHIKOKAI" target="_blank" rel="noopener">X</a>
+<a href="https://www.instagram.com/meishohikokai/" target="_blank" rel="noopener">Instagram</a>
+<a href="https://www.youtube.com/channel/UC7sb86iHbvGq10r9pWN1GuQ" target="_blank" rel="noopener">YouTube</a>
 <a href="#contact">お問い合わせ</a>
-<a href="https://x.com/MEISHOHIKOKAI">X</a>
-<a href="https://www.instagram.com/meishohikokai/">Instagram</a>
-<a href="https://www.youtube.com/channel/UC7sb86iHbvGq10r9pWN1GuQ">YouTube</a>
 </nav>
-<div>運営：ROJIURA Records（株式会社LanTech）<br>© MEISHOHIKOKAI</div>
+<div class="legal">
+<p>運営：ROJIURA Records</p>
+<p>株式会社LanTech</p>
+<p>© 名称非公開</p>
+</div>
 </div>
 </footer>
+
+<a href="#hero" id="to-top" aria-label="ページ上部へ戻る"><svg><use href="#i-up"/></svg></a>
 
 <div id="sticky-entry" aria-hidden="true">
 <a href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">友だち追加して応募する</a>
@@ -601,64 +759,103 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
   var bar = document.getElementById("sticky-entry");
   var heroCta = document.getElementById("hero-cta");
   var entryCta = document.getElementById("entry-cta");
-  if (!bar || !heroCta || !entryCta) return;
-  var heroCtaVisible = true;
-  var entryCtaVisible = false;
-  var wasShown = false;
-  function sync() {
-    var show = !heroCtaVisible && !entryCtaVisible;
-    bar.classList.toggle("is-on", show);
-    bar.setAttribute("aria-hidden", show ? "false" : "true");
-    if (show) document.documentElement.style.setProperty("--sticky-h", bar.offsetHeight + "px");
-    var nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
-    document.documentElement.classList.toggle("has-sticky-entry", show);
-    if (show && !wasShown && nearBottom) requestAnimationFrame(function () { window.scrollTo(0, document.documentElement.scrollHeight); });
-    wasShown = show;
+  var top = document.getElementById("to-top");
+  if (bar && heroCta && entryCta) {
+    var heroCtaVisible = true;
+    var entryCtaVisible = false;
+    function syncBar() {
+      var show = !heroCtaVisible && !entryCtaVisible;
+      bar.classList.toggle("is-on", show);
+      bar.setAttribute("aria-hidden", show ? "false" : "true");
+      if (show) document.documentElement.style.setProperty("--sticky-h", bar.offsetHeight + "px");
+      document.documentElement.classList.toggle("has-sticky-entry", show);
+    }
+    new IntersectionObserver(function (ents) { heroCtaVisible = ents[0].isIntersecting; syncBar(); }, { threshold: 0.4 }).observe(heroCta);
+    new IntersectionObserver(function (ents) { entryCtaVisible = ents[0].isIntersecting; syncBar(); }, { threshold: 0.4 }).observe(entryCta);
   }
-  new IntersectionObserver(function (ents) {
-    heroCtaVisible = ents[0].isIntersecting;
-    sync();
-  }, { threshold: 0.4 }).observe(heroCta);
-  new IntersectionObserver(function (ents) {
-    entryCtaVisible = ents[0].isIntersecting;
-    sync();
-  }, { threshold: 0.4 }).observe(entryCta);
+  if (top) {
+    function syncTop() { top.classList.toggle("is-on", window.scrollY > 640); }
+    syncTop();
+    window.addEventListener("scroll", syncTop, { passive: true });
+  }
 })();
 (function () {
-  if (!document.documentElement.classList.contains("motion")) return;
-  if (!("IntersectionObserver" in window)) return;
-  var nodes = document.querySelectorAll(".reveal");
-  var pending = [];
-  nodes.forEach(function (n) {
-    var r = n.getBoundingClientRect();
-    if (r.top < window.innerHeight * 0.92 && r.bottom > 0) n.classList.add("is-in");
-    else pending.push(n);
-  });
-  if (!pending.length) return;
-  var io = new IntersectionObserver(function (ents) {
-    ents.forEach(function (ent) {
-      if (!ent.isIntersecting) return;
-      ent.target.classList.add("is-in");
-      io.unobserve(ent.target);
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-  pending.forEach(function (n) { io.observe(n); });
-})();
-(function () {
-  if (!document.documentElement.classList.contains("motion")) return;
+  var reduce = false;
+  try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+  var root = document.documentElement;
+  function showAll() {
+    document.querySelectorAll(".reveal").forEach(function (n) { n.classList.add("is-in"); });
+    document.querySelectorAll(".timeline > li").forEach(function (n) { n.classList.add("is-lit"); });
+    var line = document.querySelector(".timeline-wrap");
+    if (line) line.style.setProperty("--draw", "1");
+    document.querySelectorAll("[data-count]").forEach(function (n) { n.textContent = n.getAttribute("data-count"); });
+  }
+  if (reduce || !root.classList.contains("motion")) { showAll(); return; }
   var line = document.querySelector(".timeline-wrap");
-  var heroImg = document.querySelector(".hero-media");
-  if (!line && !heroImg) return;
-  function onScroll() {
+  var steps = Array.prototype.slice.call(document.querySelectorAll(".timeline > li"));
+  var counts = Array.prototype.slice.call(document.querySelectorAll("[data-count]"));
+  var counted = false;
+  function inView(el, ratio) {
+    var r = el.getBoundingClientRect();
+    return r.top < window.innerHeight * ratio && r.bottom > 0;
+  }
+  function mark() {
+    document.querySelectorAll(".reveal").forEach(function (n) {
+      if (inView(n, 0.94)) n.classList.add("is-in");
+    });
+    steps.forEach(function (step) {
+      if (inView(step, 0.78)) step.classList.add("is-lit");
+    });
     if (line) {
       var r = line.getBoundingClientRect();
-      var p = (window.innerHeight - r.top) / (r.height + window.innerHeight * 0.4);
+      var p = (window.innerHeight * 0.72 - r.top) / (r.height || 1);
       line.style.setProperty("--draw", String(Math.max(0, Math.min(1, p))));
     }
-    if (heroImg) heroImg.style.transform = "translate3d(0," + (window.scrollY * 0.18) + "px,0)";
+    if (!counted && counts.length) {
+      var hero = document.querySelector(".hero-facts");
+      if (hero && hero.getBoundingClientRect().top < window.innerHeight) {
+        counted = true;
+        var start = performance.now();
+        function tick(t) {
+          var k = Math.min(1, (t - start) / 700);
+          var eased = 1 - Math.pow(1 - k, 3);
+          counts.forEach(function (n) {
+            var end = Number(n.getAttribute("data-count")) || 0;
+            n.textContent = String(Math.round(end * eased));
+          });
+          if (k < 1) requestAnimationFrame(tick);
+          else counts.forEach(function (n) { n.textContent = n.getAttribute("data-count"); });
+        }
+        requestAnimationFrame(tick);
+      }
+    }
+  }
+  mark();
+  root.classList.add("animate");
+  var pending = Array.prototype.filter.call(document.querySelectorAll(".reveal"), function (n) { return !n.classList.contains("is-in"); });
+  if ("IntersectionObserver" in window && pending.length) {
+    var io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (ent) {
+        if (!ent.isIntersecting) return;
+        ent.target.classList.add("is-in");
+        io.unobserve(ent.target);
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -4% 0px" });
+    pending.forEach(function (n) { io.observe(n); });
+  } else if (!("IntersectionObserver" in window)) showAll();
+  var media = document.querySelector(".hero-media");
+  function onScroll() {
+    mark();
+    if (media) media.style.transform = "translate3d(0," + (window.scrollY * 0.08) + "px,0)";
   }
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.setTimeout(function () {
+    document.querySelectorAll(".reveal").forEach(function (n) {
+      if (inView(n, 1)) n.classList.add("is-in");
+    });
+    document.querySelectorAll("[data-count]").forEach(function (n) { n.textContent = n.getAttribute("data-count"); });
+  }, 1200);
 })();
 </script>
 </body>
