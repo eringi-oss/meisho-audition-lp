@@ -98,6 +98,7 @@ p,li,dd{line-height:1.7}
 .stages li{padding:14px 0;border-bottom:1px solid var(--line)}
 .stages .name{margin:0;color:var(--ink);font-weight:500;font-size:14px;line-height:1.45}
 .stages .when{margin:2px 0 0;color:#146C28;font-size:22px;font-weight:700;line-height:1.35}
+.stages .result{margin:2px 0 0;color:var(--ink);font-size:14px;font-weight:500;line-height:1.5}
 .stages .desc{margin:4px 0 0;color:#314039;font-size:15px}
 .notes-block{margin-top:8px}
 .notes-block .note{margin:0}
@@ -129,16 +130,16 @@ p,li,dd{line-height:1.7}
 .bio summary{min-height:44px;display:inline-flex;align-items:center;cursor:pointer;font-weight:700;color:var(--muted);list-style:none}
 .bio summary::-webkit-details-marker{display:none}
 .ink .bio summary{color:#D5DDD6}
-.members{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
-.members>article{min-width:0}
+.members{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto auto auto;column-gap:12px}
+.members>article{display:grid;grid-template-rows:subgrid;grid-row:span 5;min-width:0;align-content:start}
 .member-photo{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;background:#fff}
 .member-photo picture{position:absolute;inset:0;display:block;width:100%;height:100%}
 .member-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .member-photo img.hyuga{object-position:center 42%}
 .member-photo img.toggy{object-position:center 0%}
-.tag{display:inline-block;margin:8px 0 0;padding:2px 6px;background:#E7E2D6;font-size:12px;font-weight:700;line-height:1.5}
+.tag{display:block;margin:8px 0 0;padding:2px 6px;background:#E7E2D6;font-size:12px;font-weight:700;line-height:1.5;min-height:2.8em}
 .members h3{margin:6px 0 4px;font-size:18px}
-.members p{margin:0;font-size:15px;line-height:1.6}
+.members p{margin:0;font-size:15px;line-height:1.6;word-break:normal;line-break:strict;-webkit-line-break:strict;overflow-wrap:break-word}
 .notes{margin:0;padding:0;list-style:none;color:var(--muted);font-size:13px;line-height:1.7}
 .notes li{position:relative;padding:6px 0 6px 14px}
 .notes li::before{content:"";position:absolute;left:0;top:.75em;width:4px;height:4px;border-radius:50%;background:#B7B1A4}
@@ -268,7 +269,6 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <div><dt>応募資格</dt><dd>28歳未満（目安）・未経験可。他事務所に所属中の方は、所属先の許可を得たうえでご応募ください。<span class="note">※28歳以上の方もご相談ください。</span><span class="note">※未成年の方は保護者の同意が必要です。</span></dd></div>
 <div><dt>活動条件</dt><dd>2027年1月24日(日)のお披露目と、5月23日(日)からの活動に参加できる方</dd></div>
 <div><dt>活動拠点</dt><dd>東京</dd></div>
-<div><dt>応募期間</dt><dd>2026年11月21日(土)〜11月30日(月)</dd></div>
 <div><dt>費用</dt><dd>審査無料。合宿の宿泊費は運営が負担します。交通費は自己負担です。</dd></div>
 <div><dt>応募方法</dt><dd>公式LINEから</dd></div>
 </dl>
@@ -279,18 +279,15 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <div class="wrap">
 <h2 class="stagger">選考スケジュール</h2>
 <ol class="stages stagger">
-<li><p class="name">一次審査（書類・動画）</p><p class="when">結果 12月6日(日)</p></li>
-<li><p class="name">二次審査（対面）</p><p class="when">12月9日(水)〜13日(日)</p><p class="when">結果 12月16日(水)</p></li>
+<li><p class="name">一次審査（書類・動画）</p><p class="when">11月21日(土)〜30日(月)</p><p class="result">結果 12月6日(日)</p></li>
+<li><p class="name">二次審査（対面）</p><p class="when">12月9日(水)〜13日(日)</p><p class="result">結果 12月16日(水)</p></li>
 <li><p class="name">三次審査（合宿・2泊3日）</p><p class="when">12月25日(金)〜27日(日)・箱根</p><p class="desc">顔合わせ、グループ課題、最終パフォーマンス。</p></li>
 <li><p class="name">新体制発表</p><p class="when">2027年1月24日(日)</p></li>
-<li><p class="name">活動開始</p><p class="when">2027年5月23日(日)</p></li>
 </ol>
 <div class="notes-block stagger">
 <p class="note">※二次審査のオンライン参加は要相談。</p>
 <p class="note">※合宿に参加が難しい場合はご相談ください。</p>
-<p class="note">※日程・会場は予定です。</p>
-<p class="note">※変更がある場合は公式LINEでお知らせします。</p>
-<p class="note">※合宿の進行は<span class="nowrap">仮案です。</span><span class="nowrap">内容は変更となる場合があります。</span></p>
+<p class="note">※日程・会場・内容は予定です。変更がある場合は公式LINEでお知らせします。</p>
 <p class="note">※合宿審査の様子は撮影し、映像として公開する場合があります。</p>
 </div>
 </div>
@@ -381,13 +378,13 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <section class="sec reveal" id="member">
 <div class="wrap">
 <h2 class="stagger">メンバー</h2>
-<p class="lead stagger">挑発的な歌詞と、銃弾のような<span class="nowrap">ミクスチャーロックサウンド。</span>この2人と、新しい名称非公開をつくります。</p>
+<p class="lead stagger">挑発的な歌詞と、銃弾のようなミクスチャーロックサウンド。この2人と、新しい名称非公開をつくります。</p>
 <div class="members fade">
 <article>
 <div class="member-photo"><picture><source srcset="images/member_hyuga.webp" type="image/webp"><img class="hyuga" src="images/member_hyuga.jpg" width="600" height="800" alt="ヒューガー" loading="lazy"></picture></div>
 <p class="tag">元BiS第3期</p>
 <h3>ヒューガー</h3>
-<p>BiS第3期でオリコン週間3位獲得。圧倒的なライブパフォーマンスで<span class="nowrap">グループ</span>の核を担う<span class="nowrap">実力派。</span></p>
+<p>BiS第3期でオリコン週間3位獲得。圧倒的なライブパフォーマンスで<span class="nowrap">グループ</span>の<span class="nowrap">核を担う実力派。</span></p>
 <div class="sns">
 <a href="https://x.com/HYUGA_MEISHO" target="_blank" rel="noopener" aria-label="ヒューガーのX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
 <a href="https://www.instagram.com/hyuga_meisho/" target="_blank" rel="noopener" aria-label="ヒューガーのInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
