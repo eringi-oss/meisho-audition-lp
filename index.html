@@ -47,7 +47,7 @@ try{if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.d
 <style>
 :root{--ink:#0A1A2F;--accent:#87F035;--paper:#F3F0E8;--card:#FBFAF6;--muted:#5C675F;--line:#DDD6C8}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:200px}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans JP",sans-serif;font-size:16px;line-height:1.7;text-wrap:pretty;line-break:strict;word-break:normal;overflow-wrap:break-word;word-break:auto-phrase}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
@@ -55,7 +55,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-of
 h1,h2,h3{line-height:1.35;text-wrap:balance;font-weight:700;word-break:keep-all;overflow-wrap:anywhere;word-break:auto-phrase}
 p,li,dd{line-height:1.7}
 .wrap{width:min(1080px,calc(100% - 40px));margin:0 auto}
-.site-header{position:sticky;top:0;z-index:30;background:rgba(243,240,232,.96);border-bottom:1px solid var(--line)}
+.site-header{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line)}
 .bar{width:min(1080px,calc(100% - 40px));margin:0 auto;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .logo img{height:40px;width:auto}
 .nav{width:min(1080px,calc(100% - 40px));margin:0 auto;display:flex;flex-wrap:wrap;gap:0 2px}
@@ -75,7 +75,7 @@ p,li,dd{line-height:1.7}
 .hero-actions{margin-top:18px}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;background:var(--accent);color:var(--ink);text-decoration:none;font-weight:700;border:1px solid var(--accent)}
 .btn:active{transform:scale(.98)}
-.sec{display:flow-root;position:relative;padding:48px 0;scroll-margin-top:108px}
+.sec{display:flow-root;position:relative;padding:48px 0;scroll-margin-top:0}
 .nowrap{white-space:nowrap}
 .sec h2{margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line);font-size:clamp(26px,7vw,36px)}
 .lead{margin:0 0 14px}
@@ -139,7 +139,7 @@ p,li,dd{line-height:1.7}
 .member-photo img.toggy{object-position:center 0%}
 .tag{display:block;margin:8px 0 0;padding:2px 6px;background:#E7E2D6;font-size:12px;font-weight:700;line-height:1.5;min-height:2.8em}
 .members h3{margin:6px 0 4px;font-size:18px}
-.members p{margin:0;font-size:15px;line-height:1.6;word-break:normal;line-break:strict;-webkit-line-break:strict;overflow-wrap:break-word}
+.members p{margin:0;font-size:15px;line-height:1.65;word-break:auto-phrase;line-break:strict;-webkit-line-break:strict;overflow-wrap:break-word}
 .notes{margin:0;padding:0;list-style:none;color:var(--muted);font-size:13px;line-height:1.7}
 .notes li{position:relative;padding:6px 0 6px 14px}
 .notes li::before{content:"";position:absolute;left:0;top:.75em;width:4px;height:4px;border-radius:50%;background:#B7B1A4}
@@ -384,7 +384,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <div class="member-photo"><picture><source srcset="images/member_hyuga.webp" type="image/webp"><img class="hyuga" src="images/member_hyuga.jpg" width="600" height="800" alt="ヒューガー" loading="lazy"></picture></div>
 <p class="tag">元BiS第3期</p>
 <h3>ヒューガー</h3>
-<p>BiS第3期でオリコン週間3位獲得。圧倒的なライブパフォーマンスで<span class="nowrap">グループ</span>の<span class="nowrap">核を担う実力派。</span></p>
+<p>BiS第3期でオリコン週間3位獲得。圧倒的なライブパフォーマンスでグループの核を担う実力派。</p>
 <div class="sns">
 <a href="https://x.com/HYUGA_MEISHO" target="_blank" rel="noopener" aria-label="ヒューガーのX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
 <a href="https://www.instagram.com/hyuga_meisho/" target="_blank" rel="noopener" aria-label="ヒューガーのInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
