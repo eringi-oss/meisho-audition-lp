@@ -171,16 +171,19 @@ p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:s
 .notes li{position:relative;padding:6px 0 6px 14px}
 .notes li::before{content:"";position:absolute;left:0;top:.75em;width:4px;height:4px;border-radius:50%;background:#B7B1A4}
 .notes a{text-decoration:underline}
+#faq.sec{padding:44px 0}
+#faq h2{margin-bottom:16px;padding-bottom:10px}
 .faq-grid{display:grid;gap:0}
 details.q{background:transparent;border-top:1px solid var(--line)}
 details.q:last-child{border-bottom:1px solid var(--line)}
-details.q summary{list-style:none;cursor:pointer;min-height:48px;padding:12px 0;display:flex;align-items:center;gap:10px;font-weight:500;line-height:1.55}
+details.q summary{list-style:none;cursor:pointer;min-height:44px;padding:8px 0;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;line-height:1.65}
 details.q summary::-webkit-details-marker{display:none}
 details.q .ql{flex:0 0 auto;font-variant-numeric:tabular-nums;font-size:13px;font-weight:500;color:var(--muted)}
 details.q .qtext{flex:1;font-weight:500}
-details.q summary::after{content:"+";margin-left:auto;font-size:18px;font-weight:400;line-height:1;color:var(--muted)}
+details.q summary::after{content:"+";margin-left:auto;font-size:16px;font-weight:400;line-height:1;color:var(--muted)}
 details.q[open] summary::after{content:"–"}
-details.q .answer{padding:0 0 14px;font-size:15px;font-weight:400;line-height:1.75;color:var(--ink)}
+details.q .answer{padding:0 0 10px;font-size:13px;font-weight:400;line-height:1.7;color:var(--ink)}
+details.q .answer p{margin:0}
 .contact p{margin:8px 0}
 .footer{border-top:1px solid var(--line);padding:28px 0 calc(28px + env(safe-area-inset-bottom))}
 .footer .wrap{display:flex;flex-wrap:wrap;gap:16px 24px;justify-content:space-between}
@@ -204,6 +207,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
   .support-grid{grid-template-columns:1fr 1fr;gap:0 32px}
   .support-grid li{padding:18px 0}
   .sec{padding:72px 0}
+  #faq.sec{padding:56px 0}
 }
 @media (max-width:799px){.qr{display:none}}
 @media (prefers-reduced-motion:no-preference){
