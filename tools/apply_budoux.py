@@ -65,7 +65,11 @@ ATOMS = sorted(
 )
 
 # Multi-word Latin units must not wrap at their internal spaces.
-NOWRAP_ATOMS = {"Anime Festival Asia", "Next Stage", "NOAH HAKONE（箱根）"}
+NOWRAP_ATOMS = {
+    "Anime Festival Asia", "Next Stage", "NOAH HAKONE（箱根）",
+    "“本物”へ。", "“本物”へ", "“心を動かせる人”。", "“心を動かせる人”", "“上手い人”",
+    "『ここ俺』", "『モブせか2』",
+}
 
 MANUAL = {
     "Anime Festival Asia Indonesia 2026 Next Stage出演": [
@@ -188,6 +192,11 @@ def _merge_chunks(chunks: list[str]) -> list[str]:
             merged.append(ph)
             continue
         if TRAIL_ATTACH.fullmatch(ph) and ph != "":
+            # Keep a break after a long proper noun rather than gluing
+            # での/では onto it (that forced earlier wraps on narrow screens).
+            if re.fullmatch(r"^(?:での|では)[、。]*$", ph) and len(merged[-1]) >= 6:
+                merged.append(ph)
+                continue
             merged[-1] += ph
             continue
         if ph[0] in "”」』）)]" and not LEAD_PUNCT.fullmatch(ph):
@@ -230,7 +239,7 @@ def phrases_to_html(phrases: list[str]) -> str:
     for i, ph in enumerate(phrases):
         if i:
             out.append("<wbr>")
-        if ph in NOWRAP_ATOMS:
+        if ph in NOWRAP_ATOMS or any(ph == a or (ph.startswith(a) and len(ph) - len(a) <= 4) for a in NOWRAP_ATOMS):
             out.append(f'<span class="nowrap">{ph}</span>')
         else:
             out.append(ph)

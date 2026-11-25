@@ -49,12 +49,12 @@ try{if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.d
 :root{--ink:#0A1A2F;--accent:#87F035;--paper:#F3F0E8;--card:#FBFAF6;--muted:#5C675F;--line:#DDD6C8;--display:"Archivo","Zen Kaku Gothic New",sans-serif;--heading:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;--body:"Noto Sans JP",sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:112px;overflow-x:clip}
-body{margin:0;max-width:100%;overflow-x:clip;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75;text-wrap:pretty;line-break:strict;word-break:keep-all;overflow-wrap:anywhere}
+body{margin:0;max-width:100%;overflow-x:clip;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75;text-wrap:wrap;line-break:strict;word-break:keep-all;overflow-wrap:break-word}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-h1,h2,h3{font-family:var(--heading);line-height:1.35;text-wrap:balance;font-weight:700;word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
-p,li,dd,dt{line-height:1.75;word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+h1,h2,h3{font-family:var(--heading);line-height:1.35;text-wrap:balance;font-weight:700;word-break:keep-all;overflow-wrap:break-word;line-break:strict}
+p,li,dd,dt{line-height:1.75;text-wrap:wrap;word-break:keep-all;overflow-wrap:break-word;line-break:strict}
 .wrap,.bar,.nav{width:min(1080px,100%);margin-inline:auto;padding-inline:20px;--photo-col:calc((min(1080px, 100vw) - 40px - 12px) / 2)}
 .site-header{position:sticky;top:0;z-index:30;max-width:100%;background:var(--paper);border-bottom:1px solid var(--line)}
 .bar{min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}
@@ -98,7 +98,7 @@ p,li,dd,dt{line-height:1.75;word-break:keep-all;overflow-wrap:anywhere;line-brea
 .history li:last-child{padding-bottom:2px}
 .history li::before{content:"";position:absolute;left:0;top:.55em;width:9px;height:9px;border-radius:50%;background:var(--ink);box-sizing:border-box}
 .history .h-date{display:block;margin:0 0 4px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.06em;line-height:1.4}
-.history .h-body{display:block;font-size:15px;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+.history .h-body{display:block;font-size:15px;line-height:1.75;word-break:keep-all;overflow-wrap:break-word;line-break:strict}
 .history li.history-now::before{background:var(--accent);box-shadow:0 0 0 3px rgba(135,240,53,.3)}
 .history li.history-now .h-date{color:var(--ink)}
 .history li.history-now .h-body{margin-top:2px;font-family:var(--heading);font-size:18px;font-weight:700;line-height:1.5}
@@ -165,7 +165,7 @@ p,li,dd,dt{line-height:1.75;word-break:keep-all;overflow-wrap:anywhere;line-brea
 .member-photo img.toggy{top:5.95%;left:-26.6%}
 .tag{display:block;margin:8px 0 0;padding:2px 6px;background:#E7E2D6;font-size:12px;font-weight:700;line-height:1.5;min-height:2.8em}
 .members h3{margin:6px 0 4px;font-size:18px}
-.members p{margin:0;font-size:15px;line-height:1.7;word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+.members p{margin:0;font-size:15px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word;line-break:strict}
 .notes{margin:0;padding:0;list-style:none;color:var(--muted);font-size:13px;line-height:1.7}
 .notes li{position:relative;padding:6px 0 6px 14px}
 .notes li::before{content:"";position:absolute;left:0;top:.75em;width:4px;height:4px;border-radius:50%;background:#B7B1A4}
@@ -276,11 +276,11 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 <section class="sec reveal" id="about">
 <div class="wrap">
 <h2 class="stagger">概要</h2>
-<p class="catch stagger">泣ける<wbr>ライブから、<wbr>心を動かす<wbr>“本物”へ。</p>
+<p class="catch stagger">泣ける<wbr>ライブから、<wbr>心を動かす<wbr><span class="nowrap">“本物”へ。</span></p>
 <p class="lead stagger">名称非公開、<wbr>第二章へ。<wbr>新たな<wbr>仲間と、<wbr>日本武道館を<wbr>目指す。</p>
-<p class="lead stagger">名称非公開は、<wbr>2025年9月、<wbr>ヒューリックホール東京での<wbr>ワンマンライブで<wbr>デビューしました。<wbr>翌年には<wbr>品川インターシティホールで、<wbr>2度目の<wbr>ホールワンマンを<wbr>開催。<wbr>2026年夏には、<wbr>TVアニメ<wbr>『ここ俺』<wbr>『モブせか2』の<wbr>エンディングテーマを<wbr>担当し、<wbr>エスコンフィールドHOKKAIDOでの<wbr>試合後ライブや、<wbr>インドネシアの<wbr>Anime Festival Asiaにも<wbr>出演しました。</p>
+<p class="lead stagger">名称非公開は、<wbr>2025年9月、<wbr>ヒューリックホール東京<wbr>での<wbr>ワンマンライブで<wbr>デビューしました。<wbr>翌年には<wbr>品川インターシティホールで、<wbr>2度目の<wbr>ホールワンマンを<wbr>開催。<wbr>2026年夏には、<wbr>TVアニメ<wbr><span class="nowrap">『ここ俺』</span><wbr><span class="nowrap">『モブせか2』の</span><wbr>エンディングテーマを<wbr>担当し、<wbr>エスコンフィールドHOKKAIDO<wbr>での<wbr>試合後ライブや、<wbr>インドネシアの<wbr><span class="nowrap">Anime Festival Asiaにも</span><wbr>出演しました。</p>
 <p class="lead stagger">第一章を<wbr>経て、<wbr>2027年は<wbr>さらなる<wbr>タイアップも<wbr>決定。<wbr>2028年の<wbr>日本武道館<wbr>公演を<wbr>目標に、<wbr>第二章を<wbr>ともに<wbr>歩む仲間を<wbr>迎える<wbr>ため、<wbr>新メンバーオーディションを<wbr>開催します。</p>
-<p class="lead stagger">求めているのは、<wbr>“上手い人”より<wbr>“心を動かせる人”。</p>
+<p class="lead stagger">求めているのは、<wbr><span class="nowrap">“上手い人”より</span><wbr><span class="nowrap">“心を動かせる人”。</span></p>
 <ol class="qualities stagger">
 <li><b>1</b><strong>音楽</strong><p>名称非公開の<wbr>音を、<wbr>自分の<wbr>声で<wbr>鳴らしたい<wbr>人</p></li>
 <li><b>2</b><strong>個性</strong><p>誰とも<wbr>似ていない<wbr>“自分”を<wbr>武器に<wbr>できる<wbr>人</p></li>
