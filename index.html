@@ -124,6 +124,7 @@ p,li,dd{line-height:1.7}
 .plain{margin:0;padding-left:1.2em}
 .plain li{padding:3px 0}
 .portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 18%}
+.people .portrait{margin:0 0 8px}
 .role{margin:12px 0 0;font-size:13px;font-weight:700;letter-spacing:.04em}
 .person-name{margin:2px 0 0;font-family:var(--heading);font-size:clamp(32px,8vw,48px)}
 .credits{margin:8px 0 0}
@@ -176,6 +177,9 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
   .photos img{height:220px}
   .marquee span{font-size:clamp(28px,4vw,48px)}
   .people{grid-template-columns:1fr 1fr 1fr;gap:22px}
+  #judges .people{grid-template-columns:1fr 1fr}
+  #judges .judge-card.has-photo{display:grid;grid-template-columns:200px minmax(0,1fr);gap:8px 16px;align-items:start}
+  #judges .judge-card.has-photo .portrait{margin:0}
   .sheet>div{grid-template-columns:7.5em minmax(0,1fr);gap:8px 16px}
   .sec{padding:72px 0}
 }
@@ -365,15 +369,24 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <p>1人で何役も演じ分ける、<span class="nowrap">独特な歌声。</span></p>
 <details class="bio"><summary>プロフィールを見る</summary><p>音楽ボーカリスト、アニメ・ゲーム声優、舞台、朗読劇などで活躍するマルチアーティスト。1人で何役も演じ分ける独特な歌声で人気を集め、2015年1月に発売した1stアルバム「ボクらの最終定理」はオリコンウィークリーチャート8位を記録。名称非公開の元メンバー。</p></details>
 </article>
-<article>
-<p class="role">舞踊家／振付家</p>
+<article class="judge-card has-photo">
+<div class="portrait"><picture><source srcset="images/judge_yamanokuchi.webp" type="image/webp"><img src="images/judge_yamanokuchi.jpg" width="1200" height="1500" alt="山之口理香子" loading="lazy"></picture></div>
+<div class="judge-body">
+<p class="role">舞踊家・振付家</p>
 <h3 class="person-name">山之口理香子</h3>
-<p>元ZOC。多数のアイドルグループに<span class="nowrap">振付を提供。</span></p>
+<p>ZOCの振付師兼メンバーとして3年半活動。<span class="nowrap">「名称非公開」はじめ、</span>様々なアイドルグループに振付を提供。</p>
 <div class="sns">
-<a href="https://x.com/0oWatashi00" target="_blank" rel="noopener" aria-label="山之口理香子のX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
+<a href="https://x.com/0owatashi00" target="_blank" rel="noopener" aria-label="山之口理香子のX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
 <a href="https://www.instagram.com/riko0o_0o" target="_blank" rel="noopener" aria-label="山之口理香子のInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
 </div>
-<details class="bio"><summary>プロフィールを見る</summary><p>舞踊家・振付家。元ZOC。多摩美術大学 演劇舞踊デザイン学科卒業。文化庁制定選抜新人舞踊公演新人賞をはじめ、全国規模のコンクールで受賞多数。根本宗子作品への振付・出演のほか、多数のアイドルグループに振付を提供している。</p></details>
+<details class="bio"><summary>プロフィールを見る</summary>
+<p>舞踊家・振付家。</p>
+<p>多摩美術大学演劇舞踊デザイン学科卒業。</p>
+<p>文化庁制定新人賞、全国舞踊コンクール第2位、ヨコハマコンペティション第1位、埼玉全国舞踊コンクール第2位、座間全国舞踊コンクール第1位など全国規模のコンクールにて幼い頃より様々な賞を受賞。</p>
+<p>コロナ禍をきっかけに、アイドルグループ「ZOC」の振付師兼メンバーとして3年半活動した。</p>
+<p>近年では劇作・演出家根本宗子の作品に振付出演の他、様々な舞踊作品に出演、「名称非公開」はじめ様々なアイドルグループに振付提供もしている。また自身が着用するゴシック＆ロリータブランドのイベント等多岐に渡り活躍している。</p>
+</details>
+</div>
 </article>
 </div>
 <p class="note stagger">※ほか、審査員は決定次第お知らせします。</p>
