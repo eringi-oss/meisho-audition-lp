@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Insert BudouX phrase-boundary <wbr> into the audition LP HTML (idempotent)."""
+"""Keep the audition LP on natural Japanese wrapping (idempotent).
+
+Strips BudouX <wbr> and phrase nowrap (deadline dates stay two lines),
+and keeps typography on word-break:normal + line-break:strict.
+"""
 from __future__ import annotations
 
 import re
@@ -357,19 +361,13 @@ def phrases_to_html(phrases: list[str]) -> str:
 
 
 def update_css(html: str) -> str:
-    # Keep typography on wrap + break-word (not pretty / anywhere), so
-    # WebKit fills lines instead of wrapping at earlier phrase breaks.
+    # Natural Japanese wrap: fill each line to the edge. Kinsoku only
+    # via line-break:strict; long English may wrap via break-word.
     html = html.replace("overflow-wrap:anywhere", "overflow-wrap:break-word")
     html = html.replace("text-wrap:pretty", "text-wrap:wrap")
+    html = html.replace("text-wrap:balance", "text-wrap:wrap")
+    html = html.replace("word-break:keep-all", "word-break:normal")
     html = html.replace(".catch{margin:16px 0 0;", ".catch{margin:16px 0 14px;")
-    html = html.replace(
-        "word-break:normal;overflow-wrap:break-word;line-break:strict",
-        "word-break:keep-all;overflow-wrap:break-word;line-break:strict",
-    )
-    html = html.replace(
-        "line-break:strict;word-break:normal;overflow-wrap:break-word",
-        "line-break:strict;word-break:keep-all;overflow-wrap:break-word",
-    )
     html = html.replace("p,li,dd{", "p,li,dd,dt{", 1)
     html = html.replace(".bio{margin-top:4px}", ".bio{margin-top:10px}")
     html = html.replace(
@@ -402,76 +400,9 @@ def _unwrap_nowrap_outside_deadline(html: str) -> str:
 
 
 def transform_markup(html: str) -> str:
-    """Unwrap leftover nowrap (except deadline), drop old wbr, insert new wbr."""
-    # Re-join text nodes before tokenizing so the pass is idempotent.
+    """Drop BudouX <wbr> and phrase nowrap. Keep deadline date nowrap."""
     html = html.replace("<wbr>", "").replace("<wbr/>", "").replace("<wbr />", "")
-    html = _unwrap_nowrap_outside_deadline(html)
-    out: list[str] = []
-    stack: list[tuple[str, list[str]]] = []
-    unwrap_depth = 0  # number of nowrap spans we are stripping
-
-    def in_classes(wanted: set[str]) -> bool:
-        for _, cls in stack:
-            if any(c in wanted for c in cls):
-                return True
-        return False
-
-    for tok in TOKEN_RE.findall(html):
-        if tok.startswith("<") and not tok.startswith("<!--"):
-            name = tag_name(tok)
-            closing = tok.startswith("</")
-            classes = tag_classes(tok)
-
-            if not closing and name == "wbr":
-                # drop existing wbr; new ones are inserted in text
-                continue
-
-            if not closing and name == "span" and "nowrap" in classes:
-                if in_classes(KEEP_NOWRAP_IN) or "deadline" in classes:
-                    stack.append((name, classes))
-                    out.append(tok)
-                    continue
-                # unwrap this nowrap span
-                unwrap_depth += 1
-                stack.append((name, classes + ["__unwrap__"]))
-                continue
-
-            if closing and name == "span" and stack and stack[-1][0] == "span" and "__unwrap__" in stack[-1][1]:
-                stack.pop()
-                unwrap_depth = max(0, unwrap_depth - 1)
-                continue
-
-            if closing:
-                # pop matching opening
-                for i in range(len(stack) - 1, -1, -1):
-                    if stack[i][0] == name:
-                        stack.pop(i)
-                        break
-                out.append(tok)
-                continue
-
-            if name not in SKIP_TAGS and not is_void_or_selfclose(tok, name):
-                stack.append((name, classes))
-            out.append(tok)
-            continue
-
-        # comments or skipped raw blocks
-        if tok.startswith("<!--") or tok.startswith("<script") or tok.startswith("<style") or tok.startswith("<svg"):
-            out.append(tok)
-            continue
-
-        # text node
-        if in_classes(SKIP_PROCESS_IN) or any(n in SKIP_TAGS for n, _ in stack):
-            out.append(tok)
-            continue
-        # Don't touch text that is only whitespace, or clearly non-prose (pure ASCII short)
-        if not tok or tok.isspace():
-            out.append(tok)
-            continue
-        phrases = split_phrases(tok)
-        out.append(phrases_to_html(phrases))
-
-    return "".join(out)
+    return _unwrap_nowrap_outside_deadline(html)
 
 
 def apply(html: str) -> str:
@@ -488,8 +419,10 @@ def main() -> None:
     path.write_text(dst)
     print(f"wrote {path} ({len(src)} -> {len(dst)} bytes)")
     # sanity
-    if "word-break:keep-all" not in dst:
-        raise SystemExit("keep-all not applied")
+    if "word-break:keep-all" in dst or "text-wrap:pretty" in dst or "text-wrap:balance" in dst:
+        raise SystemExit("phrase-wrap typography still present")
+    if "<wbr>" in dst or "<wbr/>" in dst:
+        raise SystemExit("wbr still present")
     if "1人で何役も演じ分ける、独特な歌声。" in dst or "ZOCの振付師兼メンバーとして3年半活動。" in dst.split("プロフィールを見る")[0]:
         # The short blurbs should be gone from the card teaser; bio may still mention similar wording after the summary.
         head, _, rest = dst.partition('id="judges"')
@@ -500,7 +433,7 @@ def main() -> None:
     plain = dst.replace("<wbr>", "")
     if "プロフィールを見る" not in plain or "多摩美術大学演劇舞踊デザイン学科卒業" not in plain:
         raise SystemExit("yamanokuchi full profile missing")
-    print("sanity ok; wbr count", dst.count("<wbr>"))
+    print("sanity ok; wbr", dst.count("<wbr>"), "keep-all", "word-break:keep-all" in dst)
 
 
 if __name__ == "__main__":
