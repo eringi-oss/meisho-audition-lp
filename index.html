@@ -74,7 +74,7 @@ p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:s
 .hero h1{margin:12px 0 0;font-family:var(--display);font-weight:600;font-size:clamp(48px,13vw,80px);letter-spacing:-.045em;line-height:.9}
 .hero h1 span{display:block}
 .catch{margin:16px 0 0;font-family:var(--heading);font-size:clamp(22px,5.6vw,32px);font-weight:700;line-height:1.35;text-wrap:wrap}
-.deadline{margin:20px 0 0;font-family:var(--heading);font-weight:700;line-height:1.5}.dl-label{display:block;margin:0 0 6px;font-size:13px;letter-spacing:.08em;color:var(--accent)}.dl-range{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.2em;font-size:clamp(17px,4.8vw,22px);line-height:1.5}.dl-to{margin:0 .15em}
+.deadline{margin:20px 0 0;font-family:var(--heading);font-weight:700;line-height:1.5}.dl-label{display:block;margin:0 0 6px;font-size:13px;letter-spacing:.08em;color:var(--accent)}.dl-range{display:flex;flex-direction:column;align-items:flex-start;font-size:clamp(17px,4.8vw,22px);line-height:1.45}.dl-to{margin:0 .15em}
 .hero-actions{margin-top:18px}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;background:var(--accent);color:var(--ink);text-decoration:none;font-weight:700;border:1px solid var(--accent)}
 .btn:active{transform:scale(.98)}.btn-ghost{margin-top:10px;background:transparent;color:var(--ink);border:1px solid var(--ink)}
@@ -106,6 +106,11 @@ p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:s
 .photos{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr) minmax(0,.9fr);gap:4px;width:100%;max-width:100%}
 .photos>*{min-width:0}
 .photos img{width:100%;height:148px;object-fit:cover}
+.support-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:12px}
+.support-grid li{margin:0;padding:16px 0;border-top:1px solid var(--line)}
+.support-grid li:last-child{border-bottom:1px solid var(--line)}
+.support-grid h3{margin:0 0 6px;font-size:16px;font-weight:700;letter-spacing:.04em}
+.support-grid p{margin:0;font-size:15px;line-height:1.75}
 .sheet{margin:0;border-top:1px solid var(--ink)}
 .sheet>div{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:16px 0;border-bottom:1px solid var(--line)}
 .sheet dt{font-weight:700}
@@ -194,6 +199,8 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
   #judges .judge-card.has-photo{grid-column:1/-1;display:grid;grid-template-columns:var(--photo-col) minmax(0,1fr);gap:8px 16px;align-items:start}
   #judges .judge-card.has-photo .portrait{margin:0;width:var(--photo-col)}
   .sheet>div{grid-template-columns:7.5em minmax(0,1fr);gap:8px 16px}
+  .support-grid{grid-template-columns:1fr 1fr;gap:0 32px}
+  .support-grid li{padding:18px 0}
   .sec{padding:72px 0}
 }
 @media (max-width:799px){.qr{display:none}}
@@ -254,7 +261,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <div class="wrap hero-copy">
 <p class="eyebrow">名称非公開 新体制メンバーオーディション</p>
 <h1><span>NEW</span><span>MEMBER</span><span>AUDITION</span></h1>
-<p class="catch">次のステージに立つのは、<span class="nowrap">あなただ。</span></p>
+<p class="catch">次のステージに立つのは、あなただ。</p>
 <p class="deadline"><span class="dl-label">応募受付</span><span class="dl-range"><span class="nowrap">2026年11月25日(水) 0:00</span> <span class="nowrap">〜 12月15日(火) 23:59</span></span></p>
 <div class="hero-actions"><a class="btn" id="hero-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">応募する</a></div>
 </div>
@@ -264,17 +271,17 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <section class="sec reveal" id="about">
 <div class="wrap">
 <h2 class="stagger">概要</h2>
-<p class="catch stagger">泣けるライブから、心を動かす<span class="nowrap">“本物”へ。</span></p>
-<p class="lead stagger">名称非公開、第二章へ。<span class="nowrap">新たな仲間と、日本武道館を目指す。</span></p>
-<p class="lead stagger">名称非公開は、2025年9月、<span class="nowrap">ヒューリックホール東京</span>でのワンマンライブでデビューしました。翌年には<span class="nowrap">品川インターシティホール</span>で、2度目の<span class="nowrap">ホールワンマン</span>を開催。2026年夏には、<span class="nowrap">TVアニメ</span>『ここ俺』『モブせか2』の<span class="nowrap">エンディングテーマ</span>を担当し、<span class="nowrap">エスコンフィールドHOKKAIDO</span>での試合後ライブや、インドネシアのAnime Festival Asiaにも<span class="nowrap">出演しました。</span></p>
-<p class="lead stagger">第一章を経て、2027年はさらなる<span class="nowrap">タイアップ</span>も決定。2028年の日本武道館公演を目標に、<span class="nowrap">第二章</span>をともに歩む仲間を迎えるため、新メンバーオーディションを開催します。</p>
-<p class="lead stagger">求めているのは、“上手い人”より<span class="nowrap">“心を動かせる人”。</span></p>
+<p class="catch stagger">泣けるライブから、心を動かす“本物”へ。</p>
+<p class="lead stagger">名称非公開、第二章へ。新たな仲間と、日本武道館を目指す。</p>
+<p class="lead stagger">名称非公開は、2025年9月、ヒューリックホール東京でのワンマンライブでデビューしました。翌年には品川インターシティホールで、2度目のホールワンマンを開催。2026年夏には、TVアニメ『ここ俺』『モブせか2』のエンディングテーマを担当し、エスコンフィールドHOKKAIDOでの試合後ライブや、インドネシアのAnime Festival Asiaにも出演しました。</p>
+<p class="lead stagger">第一章を経て、2027年はさらなるタイアップも決定。2028年の日本武道館公演を目標に、第二章をともに歩む仲間を迎えるため、新メンバーオーディションを開催します。</p>
+<p class="lead stagger">求めているのは、“上手い人”より“心を動かせる人”。</p>
 <ol class="qualities stagger">
-<li><b>01</b><strong>音楽</strong><p>名称非公開の音を、<wbr><span class="nowrap">自分の声で鳴らしたい人</span></p></li>
+<li><b>01</b><strong>音楽</strong><p>名称非公開の音を、自分の声で鳴らしたい人</p></li>
 <li><b>02</b><strong>個性</strong><p>誰とも似ていない“自分”を武器にできる人</p></li>
 <li><b>03</b><strong>表現</strong><p>ステージで人の人生を揺さぶりたい人</p></li>
 </ol>
-<p class="closer stagger">そして、<span class="nowrap">本気で武道館を目指せる人。</span></p>
+<p class="closer stagger">そして、本気で武道館を目指せる人。</p>
 <h3 class="stagger">これまでの歩み</h3>
 <ul class="history stagger">
 <li><span class="h-date">2025年9月14日</span><span class="h-body"><span class="nowrap">ヒューリックホール東京</span>で<span class="nowrap">ワンマンライブデビュー</span></span></li>
@@ -303,11 +310,23 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <div><dt>応募資格</dt><dd>年齢不問・未経験可。<span class="note">※他事務所に所属中の方は、応募後に所属先へ確認のご連絡をさせていただく場合があります。</span><span class="note">※未成年の方は保護者の同意が必要です。</span></dd></div>
 <div><dt>活動条件</dt><dd>2027年1月下旬からライブに参加できる方。開始時期はご相談ください。5月中旬から本格始動します。</dd></div>
 <div><dt>活動環境</dt><dd>レッスン・リハーサルを実施。プロユースのスタジオでのレコーディングや、レーベルスタッフによるサポートがあります。</dd></div>
-<div><dt>所属後の待遇</dt><dd>レッスン無料。<span class="note">※チェキバックなど、そのほかの条件は合格後に書面でご案内します。</span></dd></div>
 <div><dt>活動拠点</dt><dd>東京</dd></div>
 <div><dt>費用</dt><dd>審査無料。合宿の宿泊費は運営が負担します。交通費は自己負担です。</dd></div>
 <div><dt>応募方法</dt><dd>公式LINEから（先着順ではありません）</dd></div>
 </dl>
+</div>
+</section>
+
+
+<section class="sec reveal" id="support">
+<div class="wrap">
+<h2 class="stagger">加入後のサポート</h2>
+<ul class="support-grid stagger">
+<li><h3>レッスン・リハーサル</h3><p>ライブに向けて、歌やダンス、ステージでの表現を磨きます。</p></li>
+<li><h3>衣装・ステージ演出</h3><p>楽曲の世界観を、衣装やステージ上の表現にもつなげていきます。</p></li>
+<li><h3>レコーディング</h3><p>プロユースのスタジオで、グループの楽曲をレコーディングします。</p></li>
+<li><h3>マネジメント</h3><p>レーベルスタッフが、メンバーとしての活動をサポートします。</p></li>
+</ul>
 </div>
 </section>
 
