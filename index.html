@@ -79,7 +79,7 @@ p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:s
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;background:var(--accent);color:var(--ink);text-decoration:none;font-weight:700;border:1px solid var(--accent)}
 .btn:active{transform:scale(.98)}.btn-ghost{margin-top:10px;background:transparent;color:var(--ink);border:1px solid var(--ink)}
 .sec{display:flow-root;position:relative;padding:56px 0;scroll-margin-top:0}
-.nowrap{white-space:nowrap}.sp-break{display:none}@media (max-width:799px){.sp-break{display:block}}
+.nowrap{white-space:nowrap}
 .sec h2{margin:0 0 22px;padding-bottom:12px;border-bottom:1px solid var(--ink);font-size:clamp(26px,7vw,36px)}
 .lead{margin:0 0 16px}
 .marquee{overflow:clip;contain:paint;width:100%;max-width:100%;background:var(--ink);color:#F4F1EA;border-bottom:1px solid rgba(135,240,53,.45)}
@@ -93,8 +93,16 @@ p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:s
 .closer{margin:28px 0 0;padding:22px 0 2px;border-top:1px solid var(--ink);font-family:var(--heading);font-size:clamp(20px,5.6vw,28px);font-weight:700;line-height:1.5;letter-spacing:.03em}
 #about h3{margin:36px 0 12px;font-size:16px;font-weight:700;letter-spacing:.08em}
 #about h3{margin:28px 0 10px;font-size:16px}
-.history{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.history li{background:var(--card);border-left:3px solid var(--accent);padding:12px 14px}.history .h-date{display:block;margin:0 0 4px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.04em;line-height:1.4}.history .h-body{display:block;font-size:15px;line-height:1.7}
+.history{list-style:none;margin:8px 0 0;padding:0;position:relative}
+.history::before{content:"";position:absolute;left:4px;top:.45em;bottom:.45em;width:1px;background:var(--ink);opacity:.22}
+.history li{position:relative;margin:0;padding:0 0 22px 26px;background:none;border:0}
+.history li:last-child{padding-bottom:2px}
+.history li::before{content:"";position:absolute;left:0;top:.55em;width:9px;height:9px;border-radius:50%;background:var(--ink);box-sizing:border-box}
+.history .h-date{display:block;margin:0 0 4px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.06em;line-height:1.4}
+.history .h-body{display:block;font-size:15px;line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:strict}
+.history li.history-now::before{background:var(--accent);box-shadow:0 0 0 3px rgba(135,240,53,.3)}
+.history li.history-now .h-date{color:var(--ink)}
+.history li.history-now .h-body{margin-top:2px;font-family:var(--heading);font-size:18px;font-weight:700;line-height:1.5}
 .photos{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr) minmax(0,.9fr);gap:4px;width:100%;max-width:100%}
 .photos>*{min-width:0}
 .photos img{width:100%;height:148px;object-fit:cover}
@@ -258,8 +266,8 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <h2 class="stagger">概要</h2>
 <p class="catch stagger">泣けるライブから、心を動かす<span class="nowrap">“本物”へ。</span></p>
 <p class="lead stagger">名称非公開、第二章へ。<span class="nowrap">新たな仲間と、日本武道館を目指す。</span></p>
-<p class="lead stagger">名称非公開は、2025年9月、<wbr><span class="nowrap">ヒューリックホール東京での</span><wbr><span class="nowrap">ワンマンライブでデビューしました。</span><span class="sp-break"></span><span class="nowrap">翌年には品川インターシティホールで、</span><wbr><span class="nowrap">2度目のホールワンマンを開催。</span><span class="sp-break"></span><span class="nowrap">2026年夏には、</span>TVアニメ<span class="nowrap">『ここ俺』</span><span class="nowrap">『モブせか2』</span>の<wbr><span class="nowrap">エンディングテーマを担当し、</span><wbr><span class="nowrap">エスコンフィールドHOKKAIDOでの</span><wbr><span class="nowrap">試合後ライブや、</span><wbr>インドネシアの<span class="nowrap">Anime Festival Asia</span>にも<span class="nowrap">出演しました。</span></p>
-<p class="lead stagger">第一章を経て、2027年はさらなる<span class="nowrap">タイアップ</span>も決定。2028年の日本武道館公演を目標に、第二章をともに歩む仲間を迎えるため、新メンバーオーディションを開催します。</p>
+<p class="lead stagger">名称非公開は、2025年9月、<span class="nowrap">ヒューリックホール東京</span>でのワンマンライブでデビューしました。翌年には<span class="nowrap">品川インターシティホール</span>で、2度目の<span class="nowrap">ホールワンマン</span>を開催。2026年夏には、<span class="nowrap">TVアニメ</span>『ここ俺』『モブせか2』の<span class="nowrap">エンディングテーマ</span>を担当し、<span class="nowrap">エスコンフィールドHOKKAIDO</span>での試合後ライブや、インドネシアのAnime Festival Asiaにも<span class="nowrap">出演しました。</span></p>
+<p class="lead stagger">第一章を経て、2027年はさらなる<span class="nowrap">タイアップ</span>も決定。2028年の日本武道館公演を目標に、<span class="nowrap">第二章</span>をともに歩む仲間を迎えるため、新メンバーオーディションを開催します。</p>
 <p class="lead stagger">求めているのは、“上手い人”より<span class="nowrap">“心を動かせる人”。</span></p>
 <ol class="qualities stagger">
 <li><b>01</b><strong>音楽</strong><p>名称非公開の音を、<wbr><span class="nowrap">自分の声で鳴らしたい人</span></p></li>
@@ -275,7 +283,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <li><span class="h-date">2026年夏</span><span class="h-body">TVアニメ『乙女ゲー世界はモブに厳しい<wbr><span class="nowrap">世界です2』</span><span class="nowrap">ED主題歌</span><span class="nowrap">「あしたはあしたのけせらせら！」</span>担当</span></li>
 <li><span class="h-date">2026年7月15日</span><span class="h-body"><span class="nowrap">エスコンフィールドHOKKAIDO</span> <span class="nowrap">試合後スペシャルライブ出演</span></span></li>
 <li><span class="h-date">2026年8月</span><span class="h-body">Anime Festival Asia Indonesia 2026 Next Stage出演</span></li>
-<li><span class="h-date">2027年</span><span class="h-body">新たなタイアップが決定</span></li>
+<li class="history-now"><span class="h-date">2027年</span><span class="h-body">新たなタイアップが決定</span></li>
 </ul>
 </div>
 </section>
