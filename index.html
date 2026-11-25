@@ -107,16 +107,17 @@ p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:s
 .photos>*{min-width:0}
 .photos img{width:100%;height:148px;object-fit:cover}
 .support-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:12px}
-.support-grid li{margin:0;padding:16px 0;border-top:1px solid var(--line)}
+.support-grid li{margin:0;padding:16px 0}
+.support-grid li+li{border-top:1px solid var(--line)}
 .support-grid li:last-child{border-bottom:1px solid var(--line)}
 .support-grid h3{margin:0 0 6px;font-size:16px;font-weight:700;letter-spacing:.04em}
 .support-grid p{margin:0;font-size:15px;line-height:1.75}
-.sheet{margin:0;border-top:1px solid var(--ink)}
+.sheet{margin:0}
 .sheet>div{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:16px 0;border-bottom:1px solid var(--line)}
 .sheet dt{font-weight:700}
 .sheet dd{margin:0}
 .note{display:block;margin-top:4px;color:var(--muted);font-size:13px;line-height:1.7;font-weight:400}
-.stages{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.stages{list-style:none;margin:0;padding:0}
 .stages li{padding:18px 0;border-bottom:1px solid var(--line)}
 .stages .name{margin:0;color:var(--muted);font-weight:700;font-size:13px;letter-spacing:.06em;line-height:1.45}
 .stages .when{margin:6px 0 0;color:#146C28;font-family:var(--heading);font-size:clamp(20px,5.8vw,24px);font-weight:700;line-height:1.45}
@@ -147,7 +148,7 @@ p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:s
 .sns a{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
 .sns svg{width:18px;height:18px;display:block}
 .people{display:grid;gap:28px}
-.people article{padding-top:8px;border-top:1px solid var(--line)}
+.people article+article{padding-top:8px;border-top:1px solid var(--line)}
 #produce .portrait,#judges .portrait{width:var(--photo-col);margin:0 0 14px}
 #judges .portrait img{object-position:center 14%}
 
@@ -170,15 +171,16 @@ p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:s
 .notes li{position:relative;padding:6px 0 6px 14px}
 .notes li::before{content:"";position:absolute;left:0;top:.75em;width:4px;height:4px;border-radius:50%;background:#B7B1A4}
 .notes a{text-decoration:underline}
-.faq-grid{display:grid;gap:8px}
-details.q{background:var(--card);border:1px solid var(--line)}
-details.q summary{list-style:none;cursor:pointer;min-height:48px;padding:12px 14px;display:flex;align-items:center;gap:10px;font-weight:700;line-height:1.45}
+.faq-grid{display:grid;gap:0}
+details.q{background:transparent;border-top:1px solid var(--line)}
+details.q:last-child{border-bottom:1px solid var(--line)}
+details.q summary{list-style:none;cursor:pointer;min-height:48px;padding:12px 0;display:flex;align-items:center;gap:10px;font-weight:500;line-height:1.55}
 details.q summary::-webkit-details-marker{display:none}
-details.q .ql{font-variant-numeric:tabular-nums;font-size:14px}
-details.q .qtext{flex:1}
-details.q summary::after{content:"+";margin-left:auto;font-size:22px;line-height:1}
+details.q .ql{flex:0 0 auto;font-variant-numeric:tabular-nums;font-size:13px;font-weight:500;color:var(--muted)}
+details.q .qtext{flex:1;font-weight:500}
+details.q summary::after{content:"+";margin-left:auto;font-size:18px;font-weight:400;line-height:1;color:var(--muted)}
 details.q[open] summary::after{content:"–"}
-details.q .answer{padding:0 14px 14px;font-size:15px}
+details.q .answer{padding:0 0 14px;font-size:15px;font-weight:400;line-height:1.75;color:var(--ink)}
 .contact p{margin:8px 0}
 .footer{border-top:1px solid var(--line);padding:28px 0 calc(28px + env(safe-area-inset-bottom))}
 .footer .wrap{display:flex;flex-wrap:wrap;gap:16px 24px;justify-content:space-between}
@@ -277,9 +279,9 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <p class="lead stagger">第一章を経て、2027年はさらなるタイアップも決定。2028年の日本武道館公演を目標に、第二章をともに歩む仲間を迎えるため、新メンバーオーディションを開催します。</p>
 <p class="lead stagger">求めているのは、“上手い人”より“心を動かせる人”。</p>
 <ol class="qualities stagger">
-<li><b>01</b><strong>音楽</strong><p>名称非公開の音を、自分の声で鳴らしたい人</p></li>
-<li><b>02</b><strong>個性</strong><p>誰とも似ていない“自分”を武器にできる人</p></li>
-<li><b>03</b><strong>表現</strong><p>ステージで人の人生を揺さぶりたい人</p></li>
+<li><b>1</b><strong>音楽</strong><p>名称非公開の音を、自分の声で鳴らしたい人</p></li>
+<li><b>2</b><strong>個性</strong><p>誰とも似ていない“自分”を武器にできる人</p></li>
+<li><b>3</b><strong>表現</strong><p>ステージで人の人生を揺さぶりたい人</p></li>
 </ol>
 <p class="closer stagger">そして、本気で武道館を目指せる人。</p>
 <h3 class="stagger">これまでの歩み</h3>
@@ -394,11 +396,14 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <div class="wrap">
 <h2 class="stagger">審査員</h2>
 <div class="people stagger">
-<article>
+<article class="judge-card has-photo">
+<div class="portrait"><picture><source srcset="images/judge_ikasan.webp" type="image/webp"><img src="images/judge_ikasan.jpg" width="1200" height="1500" alt="いかさん" loading="lazy"></picture></div>
+<div class="judge-body">
 <p class="role">名称非公開 元メンバー／ボーカリスト／声優</p>
 <h3 class="person-name">いかさん</h3>
 <p>1人で何役も演じ分ける、<span class="nowrap">独特な歌声。</span></p>
 <details class="bio"><summary>プロフィールを見る</summary><p>音楽ボーカリスト、アニメ・ゲーム声優、舞台、朗読劇などで活躍するマルチアーティスト。1人で何役も演じ分ける独特な歌声で人気を集め、2015年1月に発売した1stアルバム「ボクらの最終定理」はオリコンウィークリーチャート8位を記録。名称非公開の元メンバー。</p></details>
+</div>
 </article>
 <article class="judge-card has-photo">
 <div class="portrait"><picture><source srcset="images/judge_yamanokuchi.webp" type="image/webp"><img src="images/judge_yamanokuchi.jpg" width="1200" height="1500" alt="山之口理香子" loading="lazy"></picture></div>
