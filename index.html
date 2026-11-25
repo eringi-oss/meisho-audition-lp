@@ -49,12 +49,12 @@ try{if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.d
 :root{--ink:#0A1A2F;--accent:#87F035;--paper:#F3F0E8;--card:#FBFAF6;--muted:#5C675F;--line:#DDD6C8;--display:"Archivo","Zen Kaku Gothic New",sans-serif;--heading:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;--body:"Noto Sans JP",sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:200px;overflow-x:clip}
-body{margin:0;max-width:100%;overflow-x:clip;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75;text-wrap:pretty;line-break:strict;word-break:keep-all;overflow-wrap:anywhere}
+body{margin:0;max-width:100%;overflow-x:clip;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75;text-wrap:pretty;line-break:strict;word-break:normal;overflow-wrap:break-word}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-h1,h2,h3{font-family:var(--heading);line-height:1.35;text-wrap:balance;font-weight:700;word-break:keep-all;overflow-wrap:anywhere}
-p,li,dd{line-height:1.75;word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+h1,h2,h3{font-family:var(--heading);line-height:1.35;text-wrap:balance;font-weight:700;word-break:normal;overflow-wrap:break-word;line-break:strict}
+p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:strict}
 .wrap,.bar,.nav{width:min(1080px,100%);margin-inline:auto;padding-inline:20px}
 .site-header{position:sticky;top:0;z-index:30;max-width:100%;background:var(--paper);border-bottom:1px solid var(--line)}
 .bar{min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}
@@ -152,7 +152,7 @@ p,li,dd{line-height:1.75;word-break:keep-all;overflow-wrap:anywhere;line-break:s
 .member-photo img.toggy{top:5.95%;left:-26.6%}
 .tag{display:block;margin:8px 0 0;padding:2px 6px;background:#E7E2D6;font-size:12px;font-weight:700;line-height:1.5;min-height:2.8em}
 .members h3{margin:6px 0 4px;font-size:18px}
-.members p{margin:0;font-size:15px;line-height:1.7;word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+.members p{margin:0;font-size:15px;line-height:1.7;word-break:normal;overflow-wrap:break-word;line-break:strict}
 .notes{margin:0;padding:0;list-style:none;color:var(--muted);font-size:13px;line-height:1.7}
 .notes li{position:relative;padding:6px 0 6px 14px}
 .notes li::before{content:"";position:absolute;left:0;top:.75em;width:4px;height:4px;border-radius:50%;background:#B7B1A4}
@@ -258,7 +258,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <h2 class="stagger">概要</h2>
 <p class="catch stagger">泣けるライブから、心を動かす<span class="nowrap">“本物”へ。</span></p>
 <p class="lead stagger">名称非公開、第二章へ。<span class="nowrap">新たな仲間と、日本武道館を目指す。</span></p>
-<p class="lead stagger">名称非公開は、2025年9月、<span class="nowrap">ヒューリックホール東京</span>でのワンマンライブでデビューしました。翌年には<span class="nowrap">品川インターシティホール</span>で、2度目のホールワンマンを開催。2026年夏には、TVアニメ『ここ俺』『モブせか2』のエンディングテーマを担当し、<span class="nowrap">エスコンフィールドHOKKAIDO</span>での試合後ライブや、インドネシアの<span class="nowrap">Anime Festival Asia</span>にも出演しました。</p>
+<p class="lead stagger">名称非公開は、2025年9月、<span class="nowrap">ヒューリックホール東京</span>でのワンマンライブでデビューしました。翌年には<span class="nowrap">品川インターシティホール</span>で、2度目の<span class="nowrap">ホールワンマン</span>を開催。2026年夏には、TVアニメ<span class="nowrap">『ここ俺』</span><span class="nowrap">『モブせか2』</span>の<span class="nowrap">エンディングテーマ</span>を担当し、<span class="nowrap">エスコンフィールドHOKKAIDO</span>での<span class="nowrap">試合後ライブ</span>や、<wbr>インドネシアの<span class="nowrap">Anime Festival Asia</span>にも<span class="nowrap">出演しました。</span></p>
 <p class="lead stagger">第一章を経て、2027年はさらなるタイアップも決定。2028年の日本武道館公演を目標に、第二章をともに歩む仲間を迎えるため、新メンバーオーディションを開催します。</p>
 <p class="lead stagger">求めているのは、“上手い人”より<span class="nowrap">“心を動かせる人”。</span></p>
 <ol class="qualities stagger">
@@ -266,14 +266,14 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <li><b>02</b><strong>個性</strong><p>誰とも似ていない“自分”を武器にできる人</p></li>
 <li><b>03</b><strong>表現</strong><p>ステージで人の人生を揺さぶりたい人</p></li>
 </ol>
-<p class="closer stagger">そして、本気で武道館を目指せる人。</p>
+<p class="closer stagger">そして、<span class="nowrap">本気で武道館を目指せる人。</span></p>
 <h3 class="stagger">これまでの歩み</h3>
 <ul class="history stagger">
-<li><span class="h-date">2025年9月14日</span><span class="h-body"><span class="nowrap">ヒューリックホール東京</span>でワンマンライブデビュー</span></li>
-<li><span class="h-date">2026年4月18日</span><span class="h-body"><span class="nowrap">品川インターシティホール</span>でワンマンライブ「拝啓、名もない私たちへ。」開催</span></li>
-<li><span class="h-date">2026年夏</span><span class="h-body">TVアニメ『ここは俺に任せて先に行けと言ってから<wbr>10年がたったら伝説になっていた。』EDテーマ「在り来たりな日常と<wbr>幸運な日々へ」担当</span></li>
-<li><span class="h-date">2026年夏</span><span class="h-body">TVアニメ『乙女ゲー世界はモブに厳しい世界です2』ED主題歌「あしたはあしたのけせらせら！」担当</span></li>
-<li><span class="h-date">2026年7月15日</span><span class="h-body"><span class="nowrap">エスコンフィールドHOKKAIDO</span> 試合後スペシャルライブ出演</span></li>
+<li><span class="h-date">2025年9月14日</span><span class="h-body"><span class="nowrap">ヒューリックホール東京</span>で<span class="nowrap">ワンマンライブデビュー</span></span></li>
+<li><span class="h-date">2026年4月18日</span><span class="h-body"><span class="nowrap">品川インターシティホール</span>で<span class="nowrap">ワンマンライブ</span>「拝啓、名もない私たちへ。」開催</span></li>
+<li><span class="h-date">2026年夏</span><span class="h-body">TVアニメ『ここは俺に任せて先に行けと<wbr><span class="nowrap">言ってから</span>10年がたったら伝説になっていた。』<span class="nowrap">EDテーマ</span><span class="nowrap">「在り来たりな日常と幸運な日々へ」</span>担当</span></li>
+<li><span class="h-date">2026年夏</span><span class="h-body">TVアニメ『乙女ゲー世界はモブに厳しい<wbr><span class="nowrap">世界です2』</span><span class="nowrap">ED主題歌</span><span class="nowrap">「あしたはあしたのけせらせら！」</span>担当</span></li>
+<li><span class="h-date">2026年7月15日</span><span class="h-body"><span class="nowrap">エスコンフィールドHOKKAIDO</span> <span class="nowrap">試合後スペシャルライブ出演</span></span></li>
 <li><span class="h-date">2026年8月</span><span class="h-body">Anime Festival Asia Indonesia 2026 Next Stage出演</span></li>
 <li><span class="h-date">2027年</span><span class="h-body">新たなタイアップが決定</span></li>
 </ul>
@@ -309,7 +309,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <ol class="stages stagger">
 <li><p class="name">応募受付</p><p class="when"><span class="nowrap">11月25日(水) 0:00</span>〜<span class="nowrap">12月15日(火) 23:59</span></p><p class="desc">先着順ではありません。</p></li>
 <li><p class="name">一次審査（書類・動画）</p><p class="when">書類・動画による審査</p><p class="result">結果は<span class="nowrap">12月15日(火)</span>までに順次ご連絡</p></li>
-<li><p class="name">二次審査（対面）</p><p class="when"><span class="nowrap">12月17日(木)〜19日(土)</span></p><p class="result">結果は<span class="nowrap">12月21日(月)</span>。日時は個別にご案内します</p></li>
+<li><p class="name">二次審査（対面）</p><p class="when"><span class="nowrap">12月17日(木)〜19日(土)</span></p><p class="result">結果は<span class="nowrap">12月21日(月)。</span>日時は個別にご案内します</p></li>
 <li><p class="name">三次審査（合宿・2泊3日）</p><p class="when"><span class="nowrap">12月26日(土)〜28日(月)</span></p><p class="place"><span class="nowrap">NOAH HAKONE（箱根）</span></p><p class="desc">顔合わせ、グループ課題、最終パフォーマンス。</p></li>
 <li><p class="name">デビュー</p><p class="when">2027年1月</p></li>
 <li><p class="name">本格始動</p><p class="when">2027年5月中旬</p></li>
@@ -328,7 +328,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <h2 class="stagger">応募方法</h2>
 <ol class="join stagger">
 <li><span class="n">1</span><div class="card"><p>公式LINEを友だち追加</p><picture><source srcset="images/line_qr.webp" type="image/webp"><img class="qr" src="images/line_qr.png" width="540" height="540" alt="公式LINEの友だち追加QRコード" loading="lazy"></picture><a class="btn" id="entry-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">友だち追加する</a></div></li>
-<li><span class="n">2</span><div class="card"><p>LINEに届く<span class="nowrap">応募フォーム</span>に回答</p></div></li>
+<li><span class="n">2</span><div class="card"><p>LINEに届く<span class="nowrap">応募フォームに回答</span></p></div></li>
 <li><span class="n">3</span><div class="card"><p>結果は公式LINEでお知らせ</p></div></li>
 </ol>
 <div class="stagger">
@@ -351,7 +351,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <div class="portrait"><picture><source srcset="images/anchor.webp" type="image/webp"><img src="images/anchor.jpg" width="800" height="800" alt="ANCHOR" loading="lazy"></picture></div>
 <p class="role">企画・音楽・最終審査のクリエイティブディレクション</p>
 <h3 class="person-name">ANCHOR</h3>
-<p class="credits">地縛少年花子くん OP／ZiNG／Ando／名称非公開 全曲プロデュース</p>
+<p class="credits">地縛少年花子くん OP／ZiNG／Ando／<span class="nowrap">名称非公開</span> 全曲プロデュース</p>
 <div class="sns">
 <a href="https://x.com/anchor_suzuki" target="_blank" rel="noopener" aria-label="ANCHORのX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
 <a href="https://www.instagram.com/anchor_sound" target="_blank" rel="noopener" aria-label="ANCHORのInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
@@ -407,7 +407,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <div class="member-photo"><picture><source srcset="images/member_hyuga.webp" type="image/webp"><img class="hyuga" src="images/member_hyuga.jpg" width="600" height="800" alt="ヒューガー" loading="lazy"></picture></div>
 <p class="tag">元BiS第3期</p>
 <h3>ヒューガー</h3>
-<p>BiS第3期でオリコン週間3位獲得。圧倒的なライブパフォーマンスでグループの核を担う実力派。</p>
+<p>BiS第3期でオリコン週間3位獲得。圧倒的な<span class="nowrap">ライブパフォーマンス</span>でグループの核を担う実力派。</p>
 <div class="sns">
 <a href="https://x.com/HYUGA_MEISHO" target="_blank" rel="noopener" aria-label="ヒューガーのX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
 <a href="https://www.instagram.com/hyuga_meisho/" target="_blank" rel="noopener" aria-label="ヒューガーのInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
@@ -415,9 +415,9 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 </article>
 <article>
 <div class="member-photo"><picture><source srcset="images/togi-retouched.webp" type="image/webp"><img class="toggy" src="images/togi-retouched.jpg" width="600" height="812" alt="トギー" loading="lazy"></picture></div>
-<p class="tag">第3期BiS唯一のオリジナルメンバー</p>
+<p class="tag">第3期BiS唯一の<span class="nowrap">オリジナルメンバー</span></p>
 <h3>トギー</h3>
-<p>2019年のBiS始動から約5年半にわたり中核を担い続けた。解散後11カ月の沈黙を経て2025年12月に電撃加入。</p>
+<p>2019年のBiS始動から約5年半にわたり中核を担い続けた。解散後11カ月の沈黙を経て2025年12月に<span class="nowrap">電撃加入。</span></p>
 <div class="sns">
 <a href="https://x.com/TOGGY_MEISHO" target="_blank" rel="noopener" aria-label="トギーのX（新しいタブで開く）"><svg><use href="#i-x"/></svg></a>
 <a href="https://www.instagram.com/toggy_meisho" target="_blank" rel="noopener" aria-label="トギーのInstagram（新しいタブで開く）"><svg><use href="#i-ig"/></svg></a>
@@ -436,7 +436,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <details class="q"><summary><span class="ql">Q3</span><span class="qtext">審査結果はどのように<span class="nowrap">届きますか？</span></span></summary><div class="answer"><p>審査結果のご連絡は、名称非公開の<span class="nowrap">公式LINE</span>からお送りします。一次審査の結果は、12月15日(火)までに通過した方へ順次ご連絡します。公式LINEをブロックしないようにお願いします。SNSでお声がけする場合は、名称非公開の公式アカウントからのみご連絡します。</p></div></details>
 <details class="q"><summary><span class="ql">Q4</span><span class="qtext">他の事務所に所属していても応募できますか？</span></summary><div class="answer"><p>ご応募いただけます。応募後に、所属先へ確認のご連絡をさせていただく場合があります。</p></div></details>
 <details class="q"><summary><span class="ql">Q5</span><span class="qtext">動画はスマートフォンで撮影してもいいですか？</span></summary><div class="answer"><p>問題ありません。秒数の指定はなく、縦・横、曲は自由です。過度な加工は避けてください。</p></div></details>
-<details class="q"><summary><span class="ql">Q6</span><span class="qtext">遠方のため、二次審査に行けないかもしれません。</span></summary><div class="answer"><p>二次審査は12月17日(木)〜19日(土)に対面で実施します。日時は個別にご案内します。オンラインでの参加もご相談いただけます。</p></div></details>
+<details class="q"><summary><span class="ql">Q6</span><span class="qtext">遠方のため、二次審査に行けない<span class="nowrap">かもしれません。</span></span></summary><div class="answer"><p>二次審査は12月17日(木)〜19日(土)に対面で実施します。日時は個別にご案内します。オンラインでの参加もご相談いただけます。</p></div></details>
 <details class="q"><summary><span class="ql">Q7</span><span class="qtext">合宿に参加できない<span class="nowrap">場合は？</span></span></summary><div class="answer"><p>フォームまたは公式LINEでご相談ください。</p></div></details>
 <details class="q"><summary><span class="ql">Q8</span><span class="qtext">合格したら、いつから<span class="nowrap">活動しますか？</span></span></summary><div class="answer"><p>2027年1月にデビューし、1月下旬からライブに参加いただきます。5月中旬から本格始動します。活動拠点は東京です。</p></div></details>
 <details class="q"><summary><span class="ql">Q9</span><span class="qtext">お問い合わせはどこへすれば<span class="nowrap">いいですか？</span></span></summary><div class="answer"><p><a href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">公式LINEよりお問い合わせください（対応時間：平日10:00〜18:00。土日祝は翌営業日にご返信します）</a></p><p>メール：<a href="mailto:management@meisho.tokyo">management@meisho.tokyo</a></p></div></details>
@@ -453,10 +453,10 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <li>応募内容に虚偽があった場合は、合格を取り消すことがあります。</li>
 <li>未成年の方は、保護者の同意を得たうえでご応募ください。</li>
 <li>他の芸能プロダクションに所属している方は、応募後に所属先へ確認のご連絡をさせていただく場合があります。</li>
-<li>審査結果に関する個別のお問い合わせには応じられません。</li>
-<li>お送りいただいた応募資料は返却いたしません。</li>
-<li>個人情報は、審査およびご連絡の目的以外には使用しません。</li>
-<li>審査の内容や結果を、SNSなどで公開しないでください。</li>
+<li>審査結果に関する個別のお問い合わせには<span class="nowrap">応じられません。</span></li>
+<li>お送りいただいた応募資料は<span class="nowrap">返却いたしません。</span></li>
+<li>個人情報は、審査およびご連絡の目的以外には<span class="nowrap">使用しません。</span></li>
+<li>審査の内容や結果を、SNSなどで<span class="nowrap">公開しないでください。</span></li>
 <li>天候や災害などにより、日程を変更する場合があります。変更がある場合は<span class="nowrap">公式LINE</span>でお知らせします。</li>
 <li>公式LINEをブロックすると、審査結果などのご連絡が届きません。</li>
 <li>審査結果は、応募者ご本人にのみお知らせします。</li>
