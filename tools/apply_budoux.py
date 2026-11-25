@@ -17,11 +17,16 @@ PARSER = budoux.load_default_japanese_parser()
 # can wrap at phrase boundaries when they exceed the viewport.
 ATOMS = sorted(
     {
-        "ヒューリックホール",
-        "インターシティホール",
-        "エスコンフィールド",
+        "ヒューリックホール東京",
+        "品川インターシティホール",
+        "エスコンフィールドHOKKAIDO",
         "目指せる人。",
         "目指せる人",
+        "“本物”へ。",
+        "“本物”へ",
+        "“心を動かせる人”。",
+        "“心を動かせる人”",
+        "“上手い人”",
         "Anime Festival Asia",
         "Next Stage",
         "NOAH HAKONE（箱根）",
@@ -190,9 +195,12 @@ def _explode_brackets(text: str) -> list[str]:
     brackets do not stay glued to the following word.
     ワンマンライブ「拝啓… → ワンマンライブ / 「拝啓…
     なっていた。』EDテーマ → なっていた。』 / EDテーマ
+    Quoted atoms such as “本物”へ。 must stay intact.
     """
     if not text:
         return []
+    if text in ATOMS or text in NOWRAP_ATOMS or DATE_RE.fullmatch(text):
+        return [text]
     parts: list[str] = []
     buf: list[str] = []
     for ch in text:
@@ -353,6 +361,7 @@ def update_css(html: str) -> str:
     # WebKit fills lines instead of wrapping at earlier phrase breaks.
     html = html.replace("overflow-wrap:anywhere", "overflow-wrap:break-word")
     html = html.replace("text-wrap:pretty", "text-wrap:wrap")
+    html = html.replace(".catch{margin:16px 0 0;", ".catch{margin:16px 0 14px;")
     html = html.replace(
         "word-break:normal;overflow-wrap:break-word;line-break:strict",
         "word-break:keep-all;overflow-wrap:break-word;line-break:strict",
