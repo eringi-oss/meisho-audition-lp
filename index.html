@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <title>名称非公開 新メンバーオーディション</title>
-<meta name="description" content="次のステージに立つのは、あなただ。音楽グループ「名称非公開」の新体制メンバーオーディション。応募受付は2026年11月25日(水)0:00〜12月15日(火)23:59。デビューは2027年1月。">
+<meta name="description" content="次のステージに立つのは、あなただ。音楽グループ「名称非公開」の新体制メンバーオーディション。応募受付は2026年11月25日(水)0:00〜12月15日(火)23:59。">
 <link rel="canonical" href="https://audition.meisho.tokyo/">
 <meta name="theme-color" content="#0A1A2F">
 <meta property="og:title" content="名称非公開 新メンバーオーディション">
@@ -55,7 +55,7 @@ a{color:inherit}
 a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 h1,h2,h3{font-family:var(--heading);line-height:1.35;text-wrap:balance;font-weight:700;word-break:normal;overflow-wrap:break-word;line-break:strict}
 p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:strict}
-.wrap,.bar,.nav{width:min(1080px,100%);margin-inline:auto;padding-inline:20px}
+.wrap,.bar,.nav{width:min(1080px,100%);margin-inline:auto;padding-inline:20px;--photo-col:calc((min(1080px, 100vw) - 40px - 12px) / 2)}
 .site-header{position:sticky;top:0;z-index:30;max-width:100%;background:var(--paper);border-bottom:1px solid var(--line)}
 .bar{min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}
 .bar>*{min-width:0}
@@ -79,7 +79,7 @@ p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:s
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;background:var(--accent);color:var(--ink);text-decoration:none;font-weight:700;border:1px solid var(--accent)}
 .btn:active{transform:scale(.98)}.btn-ghost{margin-top:10px;background:transparent;color:var(--ink);border:1px solid var(--ink)}
 .sec{display:flow-root;position:relative;padding:56px 0;scroll-margin-top:0}
-.nowrap{white-space:nowrap}
+.nowrap{white-space:nowrap}.sp-break{display:none}@media (max-width:799px){.sp-break{display:block}}
 .sec h2{margin:0 0 22px;padding-bottom:12px;border-bottom:1px solid var(--ink);font-size:clamp(26px,7vw,36px)}
 .lead{margin:0 0 16px}
 .marquee{overflow:clip;contain:paint;width:100%;max-width:100%;background:var(--ink);color:#F4F1EA;border-bottom:1px solid rgba(135,240,53,.45)}
@@ -135,7 +135,7 @@ p,li,dd{line-height:1.75;word-break:normal;overflow-wrap:break-word;line-break:s
 .sns svg{width:18px;height:18px;display:block}
 .people{display:grid;gap:28px}
 .people article{padding-top:8px;border-top:1px solid var(--line)}
-#judges .portrait{width:calc((100% - 12px) / 2);margin:0 0 14px}
+#produce .portrait,#judges .portrait{width:var(--photo-col);margin:0 0 14px}
 #judges .portrait img{object-position:center 14%}
 
 .ink .people article{border-top-color:rgba(244,241,234,.2)}
@@ -183,8 +183,8 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
   .marquee span{font-size:clamp(28px,4vw,48px)}
   .people{grid-template-columns:1fr 1fr 1fr;gap:22px}
   #judges .people{grid-template-columns:1fr 1fr}
-  #judges .judge-card.has-photo{display:grid;grid-template-columns:200px minmax(0,1fr);gap:8px 16px;align-items:start}
-  #judges .judge-card.has-photo .portrait{margin:0;width:auto}
+  #judges .judge-card.has-photo{grid-column:1/-1;display:grid;grid-template-columns:var(--photo-col) minmax(0,1fr);gap:8px 16px;align-items:start}
+  #judges .judge-card.has-photo .portrait{margin:0;width:var(--photo-col)}
   .sheet>div{grid-template-columns:7.5em minmax(0,1fr);gap:8px 16px}
   .sec{padding:72px 0}
 }
@@ -247,7 +247,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <p class="eyebrow">名称非公開 新体制メンバーオーディション</p>
 <h1><span>NEW</span><span>MEMBER</span><span>AUDITION</span></h1>
 <p class="catch">次のステージに立つのは、<span class="nowrap">あなただ。</span></p>
-<p class="deadline"><span class="dl-label">応募受付</span><span class="dl-range"><span class="nowrap">2026年11月25日(水) 0:00</span><span class="dl-to">〜</span><span class="nowrap">12月15日(火) 23:59</span></span></p>
+<p class="deadline"><span class="dl-label">応募受付</span><span class="dl-range"><span class="nowrap">2026年11月25日(水) 0:00</span> <span class="nowrap">〜 12月15日(火) 23:59</span></span></p>
 <div class="hero-actions"><a class="btn" id="hero-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">応募する</a></div>
 </div>
 </section>
@@ -258,11 +258,11 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <h2 class="stagger">概要</h2>
 <p class="catch stagger">泣けるライブから、心を動かす<span class="nowrap">“本物”へ。</span></p>
 <p class="lead stagger">名称非公開、第二章へ。<span class="nowrap">新たな仲間と、日本武道館を目指す。</span></p>
-<p class="lead stagger">名称非公開は、2025年9月、<span class="nowrap">ヒューリックホール東京</span>でのワンマンライブでデビューしました。翌年には<span class="nowrap">品川インターシティホール</span>で、2度目の<span class="nowrap">ホールワンマン</span>を開催。2026年夏には、TVアニメ<span class="nowrap">『ここ俺』</span><span class="nowrap">『モブせか2』</span>の<span class="nowrap">エンディングテーマ</span>を担当し、<span class="nowrap">エスコンフィールドHOKKAIDO</span>での<span class="nowrap">試合後ライブ</span>や、<wbr>インドネシアの<span class="nowrap">Anime Festival Asia</span>にも<span class="nowrap">出演しました。</span></p>
-<p class="lead stagger">第一章を経て、2027年はさらなるタイアップも決定。2028年の日本武道館公演を目標に、第二章をともに歩む仲間を迎えるため、新メンバーオーディションを開催します。</p>
+<p class="lead stagger">名称非公開は、2025年9月、<wbr><span class="nowrap">ヒューリックホール東京での</span><wbr><span class="nowrap">ワンマンライブでデビューしました。</span><span class="sp-break"></span><span class="nowrap">翌年には品川インターシティホールで、</span><wbr><span class="nowrap">2度目のホールワンマンを開催。</span><span class="sp-break"></span><span class="nowrap">2026年夏には、</span>TVアニメ<span class="nowrap">『ここ俺』</span><span class="nowrap">『モブせか2』</span>の<wbr><span class="nowrap">エンディングテーマを担当し、</span><wbr><span class="nowrap">エスコンフィールドHOKKAIDOでの</span><wbr><span class="nowrap">試合後ライブや、</span><wbr>インドネシアの<span class="nowrap">Anime Festival Asia</span>にも<span class="nowrap">出演しました。</span></p>
+<p class="lead stagger">第一章を経て、2027年はさらなる<span class="nowrap">タイアップ</span>も決定。2028年の日本武道館公演を目標に、第二章をともに歩む仲間を迎えるため、新メンバーオーディションを開催します。</p>
 <p class="lead stagger">求めているのは、“上手い人”より<span class="nowrap">“心を動かせる人”。</span></p>
 <ol class="qualities stagger">
-<li><b>01</b><strong>音楽</strong><p>名称非公開の音を、自分の声で<span class="nowrap">鳴らしたい人</span></p></li>
+<li><b>01</b><strong>音楽</strong><p>名称非公開の音を、<wbr><span class="nowrap">自分の声で鳴らしたい人</span></p></li>
 <li><b>02</b><strong>個性</strong><p>誰とも似ていない“自分”を武器にできる人</p></li>
 <li><b>03</b><strong>表現</strong><p>ステージで人の人生を揺さぶりたい人</p></li>
 </ol>
@@ -293,7 +293,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <div><dt>募集内容</dt><dd>名称非公開の新体制を担うメンバー</dd></div>
 <div><dt>募集人数</dt><dd>4名程度<span class="note">※最終的な人数は、審査の結果により変わる場合があります。</span></dd></div>
 <div><dt>応募資格</dt><dd>年齢不問・未経験可。<span class="note">※他事務所に所属中の方は、応募後に所属先へ確認のご連絡をさせていただく場合があります。</span><span class="note">※未成年の方は保護者の同意が必要です。</span></dd></div>
-<div><dt>活動条件</dt><dd>2027年1月下旬からライブに参加できる方。開始時期はご相談ください。2027年1月にデビューし、5月中旬から本格始動します。</dd></div>
+<div><dt>活動条件</dt><dd>2027年1月下旬からライブに参加できる方。開始時期はご相談ください。5月中旬から本格始動します。</dd></div>
 <div><dt>活動環境</dt><dd>レッスン・リハーサルを実施。プロユースのスタジオでのレコーディングや、レーベルスタッフによるサポートがあります。</dd></div>
 <div><dt>所属後の待遇</dt><dd>レッスン無料。<span class="note">※チェキバックなど、そのほかの条件は合格後に書面でご案内します。</span></dd></div>
 <div><dt>活動拠点</dt><dd>東京</dd></div>
@@ -307,11 +307,10 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <div class="wrap">
 <h2 class="stagger">選考スケジュール</h2>
 <ol class="stages stagger">
-<li><p class="name">応募受付</p><p class="when"><span class="nowrap">11月25日(水) 0:00</span>〜<span class="nowrap">12月15日(火) 23:59</span></p><p class="desc">先着順ではありません。</p></li>
+<li><p class="name">応募受付</p><p class="when"><span class="nowrap">11月25日(水) 0:00</span> <span class="nowrap">〜 12月15日(火) 23:59</span></p><p class="desc">先着順ではありません。</p></li>
 <li><p class="name">一次審査（書類・動画）</p><p class="when">書類・動画による審査</p><p class="result">結果は<span class="nowrap">12月15日(火)</span>までに順次ご連絡</p></li>
 <li><p class="name">二次審査（対面）</p><p class="when"><span class="nowrap">12月17日(木)〜19日(土)</span></p><p class="result">結果は<span class="nowrap">12月21日(月)。</span>日時は個別にご案内します</p></li>
 <li><p class="name">三次審査（合宿・2泊3日）</p><p class="when"><span class="nowrap">12月26日(土)〜28日(月)</span></p><p class="place"><span class="nowrap">NOAH HAKONE（箱根）</span></p><p class="desc">顔合わせ、グループ課題、最終パフォーマンス。</p></li>
-<li><p class="name">デビュー</p><p class="when">2027年1月</p></li>
 <li><p class="name">本格始動</p><p class="when">2027年5月中旬</p></li>
 </ol>
 <div class="notes-block stagger">
@@ -438,7 +437,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,80px)}
 <details class="q"><summary><span class="ql">Q5</span><span class="qtext">動画はスマートフォンで撮影してもいいですか？</span></summary><div class="answer"><p>問題ありません。秒数の指定はなく、縦・横、曲は自由です。過度な加工は避けてください。</p></div></details>
 <details class="q"><summary><span class="ql">Q6</span><span class="qtext">遠方のため、二次審査に行けない<span class="nowrap">かもしれません。</span></span></summary><div class="answer"><p>二次審査は12月17日(木)〜19日(土)に対面で実施します。日時は個別にご案内します。オンラインでの参加もご相談いただけます。</p></div></details>
 <details class="q"><summary><span class="ql">Q7</span><span class="qtext">合宿に参加できない<span class="nowrap">場合は？</span></span></summary><div class="answer"><p>フォームまたは公式LINEでご相談ください。</p></div></details>
-<details class="q"><summary><span class="ql">Q8</span><span class="qtext">合格したら、いつから<span class="nowrap">活動しますか？</span></span></summary><div class="answer"><p>2027年1月にデビューし、1月下旬からライブに参加いただきます。5月中旬から本格始動します。活動拠点は東京です。</p></div></details>
+<details class="q"><summary><span class="ql">Q8</span><span class="qtext">合格したら、いつから<span class="nowrap">活動しますか？</span></span></summary><div class="answer"><p>2027年1月下旬からライブに参加いただきます。5月中旬から本格始動します。活動拠点は東京です。</p></div></details>
 <details class="q"><summary><span class="ql">Q9</span><span class="qtext">お問い合わせはどこへすれば<span class="nowrap">いいですか？</span></span></summary><div class="answer"><p><a href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">公式LINEよりお問い合わせください（対応時間：平日10:00〜18:00。土日祝は翌営業日にご返信します）</a></p><p>メール：<a href="mailto:management@meisho.tokyo">management@meisho.tokyo</a></p></div></details>
 </div>
 </div>
