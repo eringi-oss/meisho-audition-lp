@@ -127,17 +127,16 @@ p,li,dd,dt{line-height:1.75;text-wrap:wrap;word-break:normal;overflow-wrap:break
 .stages .desc,.stages .place{margin:6px 0 0;color:#314039;font-size:15px;line-height:1.6}.stages .place{font-weight:700}
 .notes-block{margin-top:8px}
 .notes-block .note{margin:0}
-.band-accent,.apply{background:var(--accent);color:var(--ink)}
-.apply h2,.apply h3,.band-accent h2,.band-accent h3{color:var(--ink);border-color:rgba(10,26,47,.28)}
+.band-accent,.apply{background:var(--card-tint);color:var(--ink);border-top:3px solid var(--accent)}
+.apply h2,.apply h3,.band-accent h2,.band-accent h3{color:var(--ink);border-color:var(--accent)}
 .apply h3{margin:22px 0 8px;font-size:18px;border:0}
 .band-accent{padding:32px 0}
-.apply .btn{background:var(--ink);color:var(--accent);border-color:var(--ink)}
 .join{list-style:none;margin:0;padding:0}
 .join li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;position:relative;padding-bottom:8px}
-.join li::before{content:"";position:absolute;left:21px;top:42px;bottom:0;width:2px;background:rgba(10,26,47,.35)}
+.join li::before{content:"";position:absolute;left:21px;top:42px;bottom:0;width:2px;background:rgba(135,240,53,.75)}
 .join li:last-child::before{display:none}
-.join .n{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--accent);display:grid;place-items:center;font-size:18px;font-weight:700;position:relative;z-index:1}
-.join .card{background:rgba(10,26,47,.06);border:1px solid rgba(10,26,47,.16);padding:14px 14px 16px;margin-bottom:12px}
+.join .n{width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-size:18px;font-weight:700;position:relative;z-index:1}
+.join .card{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);padding:14px 14px 16px;margin-bottom:12px}
 .join .card p{margin:0 0 10px;font-size:18px;font-weight:700;line-height:1.45}
 .join .card p:last-child{margin:0}
 .qr{width:140px;height:140px;margin:8px 0;background:#fff;object-fit:contain}
