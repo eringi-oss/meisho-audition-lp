@@ -63,7 +63,8 @@ p,li,dd,dt{line-height:1.75;text-wrap:wrap;word-break:normal;overflow-wrap:break
 .logo img{height:40px;width:auto;max-width:100%}
 .nav{display:flex;flex-wrap:nowrap;gap:0 4px;min-width:0;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:thin}
 .nav a,.nav-entry{min-height:44px;display:inline-flex;align-items:center;padding:0 8px;text-decoration:none;font-family:var(--heading);font-size:14px;font-weight:700;white-space:nowrap}
-.nav-entry{background:var(--ink);color:var(--accent);padding:0 14px}
+.nav-entry{background:var(--ink);color:var(--accent);padding:0 14px;transition:transform .16s ease,opacity .16s ease}
+.nav-entry:active{transform:scale(.97)}
 .hero{position:relative;color:#F4F1EA;background:var(--ink);overflow:clip;display:flex;align-items:flex-end;min-height:560px;max-width:100%}
 .hero-media{position:absolute;inset:0;overflow:clip;contain:paint}
 .hero-zoom{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1.8s ease}
@@ -92,12 +93,20 @@ p,li,dd,dt{line-height:1.75;text-wrap:wrap;word-break:normal;overflow-wrap:break
 .join .card p.done{margin:0;font-size:15px;font-weight:400;line-height:1.7}
 .contact-inquire{margin:0}
 .contact-apply{margin:24px 0 0;padding-top:20px;border-top:1px solid var(--line-on-ink)}
-.contact-apply .apply-link{display:inline-flex;align-items:center;min-height:44px;color:var(--accent);font-weight:700;text-decoration:underline}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;background:var(--accent);color:var(--ink);text-decoration:none;font-weight:700;border:1px solid var(--accent)}
-.btn:active{transform:scale(.98)}.btn-ghost{margin-top:10px;background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.contact-apply .apply-link{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;background:var(--accent);color:var(--ink);font-weight:700;text-decoration:none;border:1px solid #9DF557}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;background:var(--accent);color:var(--ink);text-decoration:none;font-weight:700;border:1px solid #9DF557}
+.btn:active{transform:scale(.98)}
+.cta-btn{position:relative;z-index:1;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 4px 0 #3D8C28,0 10px 22px rgba(10,26,47,.26);transition:transform .18s cubic-bezier(.22,1,.36,1),box-shadow .18s cubic-bezier(.22,1,.36,1)}
+.hero .cta-btn,.sec-ink .cta-btn,#sticky-entry .cta-btn{box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 4px 0 #3D8C28,0 10px 26px rgba(0,0,0,.44)}
+.cta-btn::before{content:"";position:absolute;inset:-2px;z-index:-1;pointer-events:none;box-shadow:0 0 22px 4px rgba(135,240,53,.62);opacity:0;will-change:transform,opacity}
+.cta-fx{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+.cta-fx::after{content:"";position:absolute;top:-20%;bottom:-20%;left:0;width:44%;background:linear-gradient(108deg,transparent 0%,rgba(255,255,255,.58) 48%,transparent 100%);transform:translate3d(-180%,0,0) skewX(-18deg);opacity:0;will-change:transform,opacity}
+.cta-label{position:relative;z-index:2}
+.btn-ghost{margin-top:10px;background:transparent;color:var(--ink);border:1px solid var(--ink);transition:transform .16s ease,border-color .2s ease,background-color .2s ease}
 .sec{display:flow-root;position:relative;padding:40px 0;scroll-margin-top:0}
 .nowrap{white-space:nowrap}
-.sec h2{margin:0 0 20px;padding-bottom:10px;border-bottom:1px solid var(--ink);font-size:clamp(32px,8.5vw,48px);letter-spacing:.02em;line-height:1.2}
+.sec h2{position:relative;margin:0 0 20px;padding-bottom:10px;border-bottom:0;font-size:clamp(32px,8.5vw,48px);letter-spacing:.02em;line-height:1.2}
+.sec h2::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform-origin:left center}
 .lead{margin:0 0 16px;font-size:16px;font-weight:400;line-height:1.75}
 .marquee{overflow:clip;contain:paint;width:100%;max-width:100%;background:var(--ink);color:#F4F1EA;border-bottom:1px solid rgba(135,240,53,.45)}
 .marquee-track{display:flex;width:max-content;align-items:center}
@@ -121,6 +130,7 @@ p,li,dd,dt{line-height:1.75;text-wrap:wrap;word-break:normal;overflow-wrap:break
 .history li.history-now .h-body{margin-top:2px;font-family:var(--heading);font-size:18px;font-weight:700;line-height:1.5}
 .photos{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr) minmax(0,.9fr);gap:4px;width:100%;max-width:100%}
 .photos>*{min-width:0}
+.photos picture{display:block;overflow:clip}
 .photos img{width:100%;height:148px;object-fit:cover}
 .support-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:0}
 .support-grid li{margin:0;padding:16px 0;border-bottom:1px solid var(--line)}
@@ -177,6 +187,8 @@ p,li,dd,dt{line-height:1.75;text-wrap:wrap;word-break:normal;overflow-wrap:break
 .ink .bio summary{color:#D5DDD6}
 .sec-ink{background:var(--ink);color:var(--ink-soft)}
 .sec-ink h2,.sec-ink h3{color:var(--ink-soft);border-color:var(--line-on-ink)}
+.sec-ink h2::after{background:var(--line-on-ink)}
+.apply h2::after,.band-accent h2::after{background:var(--accent)}
 .sec-ink .lead,.sec-ink .sheet dd,.sec-ink .support-grid p,.sec-ink p,.sec-ink .stages .result,.sec-ink details.q .qtext,.sec-ink details.q .answer,.sec-ink details.q .answer p{color:var(--ink-soft)}
 .sec-ink .sheet dt{color:var(--accent)}
 .sec-ink .note,.sec-ink .notes,.sec-ink .stages .name,.sec-ink details.q .ql,.sec-ink details.q summary::after,.sec-ink .legal p{color:var(--muted-on-ink)}
@@ -222,9 +234,9 @@ details.q .answer p{margin:0}
 .footer nav{display:flex;flex-wrap:wrap;gap:4px}
 .footer nav a{min-height:44px;display:inline-flex;align-items:center;padding:8px;color:var(--muted);text-decoration:none}
 .legal p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
-#sticky-entry{display:none}
-#sticky-entry.is-on{display:block;position:fixed;left:0;right:0;bottom:0;z-index:40;width:100%;max-width:100%;box-sizing:border-box;overflow:clip;background:#0A1A2F;border-top:2px solid var(--accent);padding:8px 16px calc(8px + env(safe-area-inset-bottom))}
-#sticky-entry a{display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;background:var(--accent);color:var(--ink);font-weight:700;text-decoration:none;font-size:16px}
+#sticky-entry{position:fixed;left:0;right:0;bottom:0;z-index:40;width:100%;max-width:100%;box-sizing:border-box;overflow:clip;background:#0A1A2F;border-top:2px solid var(--accent);padding:12px 16px calc(14px + env(safe-area-inset-bottom));opacity:0;visibility:hidden;pointer-events:none;transform:translate3d(0,105%,0);transition:transform .38s cubic-bezier(.22,1,.36,1),opacity .28s ease,visibility 0s linear .38s}
+#sticky-entry.is-on{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .28s ease,visibility 0s}
+#sticky-entry a{display:flex;align-items:center;justify-content:center;width:100%;max-width:560px;margin-inline:auto;min-height:48px;padding:0 16px;background:var(--accent);color:var(--ink);font-weight:700;text-decoration:none;font-size:16px;border:1px solid #9DF557}
 html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 @media (min-width:800px){
   .hero{min-height:calc(100svh - 108px)}
@@ -244,39 +256,61 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 @media (max-width:799px){.qr{display:none}}
 @media (prefers-reduced-motion:no-preference){
   html.motion .hero-zoom.is-on img{animation:ken 18s ease-out both}
-  html.motion .hero-media{animation:unmask 1.05s cubic-bezier(.2,.7,.2,1) both}
-  html.motion .hero-copy>*{animation:rise .7s ease both}
-  html.motion .hero-copy>*:nth-child(2){animation-delay:.1s}
-  html.motion .hero-copy>*:nth-child(3){animation-delay:.2s}
-  html.motion .hero-copy>*:nth-child(4){animation-delay:.3s}
-  html.motion .hero-copy>*:nth-child(5){animation-delay:.4s}
-  html.motion.animate .reveal:not(.is-in) .stagger{opacity:0;transform:translate3d(0,12px,0)}
-  html.motion.animate .reveal.is-in .stagger{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease}
+  html.motion .hero-media{animation:hero-media-in 1.15s cubic-bezier(.22,1,.36,1) both}
+  html.motion .hero-copy .eyebrow{animation:rise .65s cubic-bezier(.22,1,.36,1) .05s both}
+  html.motion .hero-copy h1 span{animation:hero-line .7s cubic-bezier(.22,1,.36,1) both}
+  html.motion .hero-copy h1 span:nth-child(1){animation-delay:.1s}
+  html.motion .hero-copy h1 span:nth-child(2){animation-delay:.18s}
+  html.motion .hero-copy h1 span:nth-child(3){animation-delay:.26s}
+  html.motion .hero-copy .catch{animation:rise .7s cubic-bezier(.22,1,.36,1) .34s both}
+  html.motion .hero-copy .deadline{animation:rise .7s cubic-bezier(.22,1,.36,1) .42s both}
+  html.motion .hero-copy .hero-actions{animation:rise .7s cubic-bezier(.22,1,.36,1) .5s both}
+  html.motion .cta-btn{animation:cta-float 3.4s ease-in-out infinite}
+  html.motion .cta-btn::before{animation:cta-glow 2.8s ease-in-out infinite}
+  html.motion .cta-fx::after{animation:cta-shine 4.6s cubic-bezier(.22,1,.36,1) infinite}
+  html.motion .cta-btn:active,html.motion #sticky-entry.is-on .cta-btn:active{animation:none;transform:translate3d(0,3px,0) scale(.985);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 1px 0 #3D8C28,0 3px 8px rgba(10,26,47,.26)}
+  html.motion.animate .reveal:not(.is-in) .stagger{opacity:0;transform:translate3d(0,16px,0)}
+  html.motion.animate .reveal.is-in .stagger{opacity:1;transform:none;transition:opacity .68s cubic-bezier(.22,1,.36,1),transform .68s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--stagger, 0) * 75ms)}
+  html.motion.animate .reveal:not(.is-in) h2::after{transform:scale3d(0,1,1)}
+  html.motion.animate .reveal.is-in h2::after{transform:scale3d(1,1,1);transition:transform .78s cubic-bezier(.22,1,.36,1) .12s}
   html.motion.animate .reveal:not(.is-in) .fade{opacity:0}
-  html.motion.animate .reveal.is-in .fade{opacity:1;transition:opacity .55s ease}
-  html.motion.animate .seq-item{opacity:0;transform:translate3d(0,12px,0)}
-  html.motion.animate .seq-item.is-in{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease;transition-delay:calc(var(--seq, 0) * 110ms)}
+  html.motion.animate .reveal.is-in .fade{opacity:1;transition:opacity .65s cubic-bezier(.22,1,.36,1)}
+  html.motion.animate .reveal:not(.is-in) .member-photo,html.motion.animate .reveal:not(.is-in) .portrait,html.motion.animate .photos.reveal:not(.is-in) picture{opacity:0;transform:translate3d(0,14px,0) scale3d(.95, .95, 1)}
+  html.motion.animate .reveal.is-in .member-photo,html.motion.animate .reveal.is-in .portrait,html.motion.animate .photos.reveal.is-in picture{opacity:1;transform:none;transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+  html.motion.animate .photos.reveal.is-in picture:nth-child(2),html.motion.animate .photos.reveal.is-in picture:nth-child(2) img{transition-delay:.1s}
+  html.motion.animate .photos.reveal.is-in picture:nth-child(3),html.motion.animate .photos.reveal.is-in picture:nth-child(3) img{transition-delay:.2s}
+  html.motion.animate .reveal:not(.is-in) .portrait img,html.motion.animate .photos.reveal:not(.is-in) img{transform:scale3d(1.07,1.07,1)}
+  html.motion.animate .reveal.is-in .portrait img,html.motion.animate .photos.reveal.is-in img{transform:scale3d(1,1,1);transition:transform 1.05s cubic-bezier(.22,1,.36,1)}
+  html.motion.animate .seq-item{opacity:0;transform:translate3d(0,16px,0)}
+  html.motion.animate .seq-item.is-in{opacity:1;transform:none;transition:opacity .62s cubic-bezier(.22,1,.36,1),transform .62s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--seq, 0) * 80ms)}
   html.motion .marquee-track{animation:marquee 48s linear infinite}
   html.motion .portrait:hover img,html.motion .portrait:focus-within img,html.motion .portrait:active img,html.motion .portrait.is-zoom img,
   html.motion .member-photo:hover img,html.motion .member-photo:focus-within img,html.motion .member-photo:active img,html.motion .member-photo.is-zoom img{transform:scale(1.06)}
-  html.motion #sticky-entry.is-on a{animation:glow 1.3s ease 1}
-  html.motion details.q[open] .answer,html.motion details.bio[open] p{animation:rise .35s ease}
+  html.motion details.q[open] .answer,html.motion details.bio[open] p{animation:rise .35s cubic-bezier(.22,1,.36,1)}
+}
+@media (prefers-reduced-motion:no-preference) and (hover:hover){
+  html.motion .cta-btn:hover{animation-play-state:paused;transform:translate3d(0,-2px,0)}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .hero-zoom{opacity:0 !important;transition:none !important;animation:none !important}
   .hero-zoom.is-on{opacity:1 !important}
   .hero-zoom img{animation:none !important;transform:none !important}
-  .stagger,.hero-copy>*,.hero-media,.seq-item{opacity:1 !important;transform:none !important;animation:none !important;transition:none !important}
+  .stagger,.hero-copy>*,.hero-copy h1 span,.hero-media,.seq-item,.member-photo,.portrait,.photos picture,.photos img,.sec h2::after,#sticky-entry{opacity:1 !important;transform:none !important;animation:none !important;transition:none !important}
+  .cta-btn,.cta-btn::before,.cta-fx::after{animation:none !important;transition:none !important}
+  .cta-btn::before,.cta-fx::after{opacity:0 !important}
   .marquee-track{animation:none !important;transform:none !important;width:100%;justify-content:center}
   .marquee span:not(:first-child){display:none}
   .portrait img,.member-photo img{transform:none !important;transition:none !important}
 }
-@keyframes rise{from{opacity:0;transform:translate3d(0,12px,0)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translate3d(0,16px,0)}to{opacity:1;transform:none}}
+@keyframes hero-line{from{opacity:0;transform:translate3d(0,20px,0)}to{opacity:1;transform:none}}
+@keyframes hero-media-in{from{opacity:.25;transform:scale3d(1.06,1.06,1)}to{opacity:1;transform:none}}
 @keyframes ken{from{transform:scale(1)}to{transform:scale(1.05)}}
-@keyframes unmask{from{clip-path:inset(10% 0 10% 0)}to{clip-path:inset(0)}}
-@keyframes glow{0%{box-shadow:0 0 0 0 rgba(135,240,53,.45)}100%{box-shadow:0 0 0 16px rgba(135,240,53,0)}}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes cta-float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-2.5px,0)}}
+@keyframes cta-glow{0%,100%{opacity:.22;transform:scale3d(.99,.96,1)}50%{opacity:.88;transform:scale3d(1.02,1.08,1)}}
+@keyframes cta-shine{0%{transform:translate3d(-180%,0,0) skewX(-18deg);opacity:0}8%{opacity:.9}34%{transform:translate3d(340%,0,0) skewX(-18deg);opacity:0}100%{transform:translate3d(340%,0,0) skewX(-18deg);opacity:0}}
+@keyframes marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 </style>
 </head>
 <body>
@@ -311,26 +345,26 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 <h1><span>NEW</span><span>MEMBER</span><span>AUDITION</span></h1>
 <p class="catch">弱虫たちのパンクロックを、次のステージへ。</p>
 <p class="deadline"><span class="dl-label">応募受付</span><span class="dl-range"><span class="nowrap">2026年11月26日(木) 0:00</span> <span class="nowrap">〜 12月15日(火) 23:59</span></span></p>
-<div class="hero-actions"><a class="btn js-apply-cta" id="hero-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">応募する</a></div>
+<div class="hero-actions"><a class="btn cta-btn js-apply-cta" id="hero-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener"><span class="cta-fx" aria-hidden="true"></span><span class="cta-label">応募する</span></a></div>
 </div>
 </section>
 <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span><span>NEW MEMBER AUDITION — 2026</span></div></div>
 
-<section class="sec reveal" id="intro">
-<div class="wrap">
-<ul class="highlights-chips">
+<section class="sec" id="intro">
+<div class="wrap reveal">
+<ul class="highlights-chips seq">
 <li>未経験可</li>
 <li>東京で活動</li>
 <li>4名程度</li>
 <li>年齢目安28歳未満</li>
 </ul>
-<p class="note">※28歳以上の方もご相談ください。</p>
+<p class="note stagger">※28歳以上の方もご相談ください。</p>
 </div>
-<div id="member">
+<div id="member" class="reveal">
 <div class="wrap">
 <h2 class="stagger">メンバー</h2>
 <p class="lead stagger">挑発的な歌詞と、銃弾のようなミクスチャーロックサウンド。この2人と、新しい名称非公開をつくります。</p>
-<div class="members fade">
+<div class="members seq">
 <article>
 <div class="member-photo"><picture><source srcset="images/member_hyuga.webp" type="image/webp"><img class="hyuga" src="images/member_hyuga.jpg" width="600" height="800" alt="ヒューガー" loading="lazy"></picture></div>
 <p class="tag">元BiS第3期</p>
@@ -356,21 +390,21 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 </div>
 </section>
 
-<section class="sec reveal" id="about">
-<div class="wrap">
+<section class="sec" id="about">
+<div class="wrap reveal">
 <h2 class="stagger">概要</h2>
 <p class="catch stagger">「弱虫たちのパンクロック」を謳い上げる。</p>
 <p class="lead stagger">名称非公開、第二章へ。新たな仲間と、次のステージを目指す。</p>
 <p class="lead stagger">名称非公開は、2025年9月、ヒューリックホール東京でのワンマンライブでデビューしました。翌年には品川インターシティホールで、2度目のホールワンマンを開催。2026年夏には、TVアニメ『ここ俺』『モブせか2』の主題歌を担当し、エスコンフィールドHOKKAIDOでのスタジアムライブや、インドネシアのAnime Festival Asiaにも出演しました。</p>
 <p class="lead stagger">第一章を経て、2027年はさらなるタイアップも決定。2028年の日本武道館公演を目標に、第二章をともに歩む仲間を迎えるため、新メンバーオーディションを開催します。</p>
 <p class="lead stagger">求めているのは、“技術”より“人生を賭けられるメンバー”。</p>
-<ol class="qualities stagger">
+<ol class="qualities seq">
 <li><b>1</b><strong>音楽</strong><p>名称非公開の音を、自分の声で鳴らしたい人</p></li>
 <li><b>2</b><strong>個性</strong><p>誰とも似ていない“自分”を武器にできる人</p></li>
 <li><b>3</b><strong>表現</strong><p>ステージで人の人生を揺さぶりたい人</p></li>
 </ol>
 </div>
-<div class="band-accent">
+<div class="band-accent reveal">
 <div class="wrap">
 <p class="closer stagger">そして、本気で武道館を目指せる人。</p>
 </div>
@@ -378,7 +412,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 </section>
 
 
-<section class="photos" aria-label="ライブ写真">
+<section class="photos reveal" aria-label="ライブ写真">
 <picture><source srcset="images/live_1.webp" type="image/webp"><img src="images/live_1.jpg" width="1000" height="700" alt="ライブ写真" loading="lazy"></picture>
 <picture><source srcset="images/live_2.webp" type="image/webp"><img src="images/live_2.jpg" width="1600" height="900" alt="ライブ写真" loading="lazy"></picture>
 <picture><source srcset="images/live_3.webp" type="image/webp"><img src="images/live_3.jpg" width="1000" height="700" alt="ライブ写真" loading="lazy"></picture>
@@ -387,7 +421,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 <section class="sec sec-ink reveal" id="overview">
 <div class="wrap">
 <h2 class="stagger">募集要項</h2>
-<dl class="sheet stagger">
+<dl class="sheet seq">
 <div><dt>募集内容</dt><dd>名称非公開の新体制を担うメンバー</dd></div>
 <div><dt>募集人数</dt><dd>4名程度<span class="note">※最終的な人数は、審査の結果により変わる場合があります。</span></dd></div>
 <div><dt>応募資格</dt><dd>28歳未満（目安）。未経験可。<span class="note">※28歳以上の方もご相談ください。</span><span class="note">※他事務所に所属中の方は、応募の前に所属先の承諾が必要です。</span><span class="note">※未成年の方は保護者の同意が必要です。</span></dd></div>
@@ -428,8 +462,8 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 <section class="sec apply reveal" id="apply">
 <div class="wrap">
 <h2 class="stagger">応募方法</h2>
-<ol class="join stagger">
-<li><span class="n">1</span><div class="card"><p>公式LINEを友だち追加</p><picture><source srcset="images/line_qr.webp" type="image/webp"><img class="qr" src="images/line_qr.png" width="540" height="540" alt="公式LINEの友だち追加QRコード" loading="lazy"></picture><a class="btn js-apply-cta" id="entry-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">友だち追加する</a></div></li>
+<ol class="join seq">
+<li><span class="n">1</span><div class="card"><p>公式LINEを友だち追加</p><picture><source srcset="images/line_qr.webp" type="image/webp"><img class="qr" src="images/line_qr.png" width="540" height="540" alt="公式LINEの友だち追加QRコード" loading="lazy"></picture><a class="btn cta-btn js-apply-cta" id="entry-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener"><span class="cta-fx" aria-hidden="true"></span><span class="cta-label">友だち追加する</span></a></div></li>
 <li><span class="n">2</span><div class="card"><p>写真・動画を準備</p><ul class="prep">
 <li>プロフィール・活動歴</li>
 <li>顔写真・全身写真</li>
@@ -445,7 +479,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 <section class="sec reveal" id="support">
 <div class="wrap">
 <h2 class="stagger">加入後のサポート</h2>
-<ul class="support-grid stagger">
+<ul class="support-grid seq">
 <li><h3>レッスン・リハーサル</h3><p>ライブに向けて、歌やダンス、ステージでの表現を磨きます。</p></li>
 <li><h3>衣装・ステージ演出</h3><p>楽曲の世界観を、衣装やステージ上の表現にもつなげていきます。</p></li>
 <li><h3>レコーディング</h3><p>プロユースのスタジオで、グループの楽曲をレコーディングします。</p></li>
@@ -497,7 +531,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 <section class="sec sec-ink reveal" id="judges">
 <div class="wrap">
 <h2 class="stagger">審査員</h2>
-<div class="people stagger">
+<div class="people seq">
 <article class="judge-card has-photo">
 <div class="portrait"><picture><source srcset="images/judge_ikasan.webp" type="image/webp"><img src="images/judge_ikasan.jpg" width="1200" height="1500" alt="いかさん" loading="lazy"></picture></div>
 <div class="judge-body">
@@ -532,7 +566,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 <section class="sec sec-ink reveal" id="faq">
 <div class="wrap">
 <h2 class="stagger">よくある質問</h2>
-<div class="faq-grid stagger">
+<div class="faq-grid seq">
 <details class="q"><summary><span class="ql">Q1</span><span class="qtext">未経験でも応募できますか？</span></summary><div class="answer"><p>はい、未経験の方もご応募いただけます。</p></div></details>
 <details class="q"><summary><span class="ql">Q2</span><span class="qtext">費用はかかりますか？</span></summary><div class="answer"><p>審査への参加は無料です。</p><p class="note">※合宿の宿泊費は運営が負担します。交通費は自己負担です。</p></div></details>
 <details class="q"><summary><span class="ql">Q3</span><span class="qtext">審査結果はどのように届きますか？</span></summary><div class="answer"><p>審査結果のご連絡は、名称非公開の公式LINEからお送りします。一次審査の結果は、通過した方にのみ、12月15日(火)を目処に公式LINEで順次ご連絡します。公式LINEをブロックしないようにお願いします。SNSでお声がけする場合は、名称非公開の公式アカウントからのみご連絡します。</p></div></details>
@@ -549,7 +583,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 <section class="sec reveal" id="notes">
 <div class="wrap">
 <h2 class="stagger">注意事項</h2>
-<ul class="notes stagger" id="caution">
+<ul class="notes seq" id="caution">
 <li>オーディションのご案内・審査結果のご連絡は、名称非公開の公式LINEからお送りします。SNSでお声がけする場合は、名称非公開の公式アカウントからのみご連絡します。個人アカウントからのご連絡や、金銭の要求、個人的な写真の送付依頼を行うことはありません。不審な連絡を受けた場合は、<a href="#contact">お問い合わせ窓口</a>へご連絡ください。</li>
 <li>応募はご本人に限ります。</li>
 <li>応募内容に虚偽があった場合は、合格を取り消すことがあります。</li>
@@ -576,7 +610,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 </div>
 <div class="contact-apply stagger">
 <p>応募の受付は、12月15日(火) 23:59までです。先着順ではありません。</p>
-<p><a class="apply-link js-apply-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">友だち追加して応募する</a></p>
+<p><a class="apply-link cta-btn js-apply-cta" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener"><span class="cta-fx" aria-hidden="true"></span><span class="cta-label">友だち追加して応募する</span></a></p>
 </div>
 </div>
 </section>
@@ -599,7 +633,7 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
 </div>
 </div>
 </footer>
-<div id="sticky-entry" aria-hidden="true"><a href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener">友だち追加して応募する</a></div>
+<div id="sticky-entry" aria-hidden="true"><a class="cta-btn" href="https://lin.ee/9cqyKYC" target="_blank" rel="noopener"><span class="cta-fx" aria-hidden="true"></span><span class="cta-label">友だち追加して応募する</span></a></div>
 <script>
 (function () {
   var bar = document.getElementById("sticky-entry");
@@ -628,14 +662,24 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
   var reduce = false;
   try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
   var nodes = document.querySelectorAll(".reveal");
+  nodes.forEach(function (n) {
+    var idx = 0;
+    n.querySelectorAll(".stagger").forEach(function (el) {
+      if (el.closest(".reveal") !== n) return;
+      el.style.setProperty("--stagger", String(Math.min(idx, 5)));
+      idx++;
+    });
+  });
   if (reduce || !root.classList.contains("motion")) {
     nodes.forEach(function (n) { n.classList.add("is-in"); });
     return;
   }
   function mark() {
+    var vh = window.innerHeight || 800;
     nodes.forEach(function (n) {
+      if (n.classList.contains("is-in")) return;
       var r = n.getBoundingClientRect();
-      if (r.top < window.innerHeight * 0.92 && r.bottom > 0) n.classList.add("is-in");
+      if (r.top < vh * 0.96) n.classList.add("is-in");
     });
   }
   mark();
@@ -647,51 +691,64 @@ html.has-sticky-entry{padding-bottom:var(--sticky-h,64px)}
         ent.target.classList.add("is-in");
         io.unobserve(ent.target);
       });
-    }, {threshold: 0.12});
+    }, {threshold: 0.02, rootMargin: "0px 0px -24px 0px"});
     nodes.forEach(function (n) { if (!n.classList.contains("is-in")) io.observe(n); });
   }
   window.addEventListener("scroll", mark, {passive: true});
-  setTimeout(function () {
-    nodes.forEach(function (n) {
-      var r = n.getBoundingClientRect();
-      if (r.top < window.innerHeight && r.bottom > 0) n.classList.add("is-in");
-    });
-  }, 1200);
+  window.addEventListener("resize", mark, {passive: true});
+  window.addEventListener("hashchange", function () { setTimeout(mark, 50); });
+  setTimeout(mark, 600);
 })();
 (function () {
   var reduce = false;
   try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
   document.querySelectorAll(".seq").forEach(function (list) {
-    list.querySelectorAll(":scope > li").forEach(function (li, i) {
-      li.classList.add("seq-item");
-      li.style.setProperty("--seq", String(i));
-      if (reduce) li.classList.add("is-in");
+    list.querySelectorAll(":scope > *").forEach(function (item, i) {
+      item.classList.add("seq-item");
+      item.style.setProperty("--seq", String(Math.min(i, 6)));
+      if (reduce) item.classList.add("is-in");
     });
   });
   if (reduce) return;
   var items = document.querySelectorAll(".seq-item");
   if (!items.length) return;
-  function showList(list) {
-    list.querySelectorAll(":scope > .seq-item").forEach(function (li) { li.classList.add("is-in"); });
-  }
   function markSeq() {
-    document.querySelectorAll(".seq").forEach(function (list) {
-      var r = list.getBoundingClientRect();
-      if (r.top < window.innerHeight * 0.9 && r.bottom > 0) showList(list);
+    var vh = window.innerHeight || 800;
+    var batch = 0;
+    items.forEach(function (item) {
+      if (item.classList.contains("is-in")) return;
+      var r = item.getBoundingClientRect();
+      if (r.bottom <= 0) {
+        item.style.setProperty("--seq", "0");
+        item.classList.add("is-in");
+      } else if (r.top < vh * 0.96) {
+        item.style.setProperty("--seq", String(Math.min(batch, 6)));
+        batch++;
+        item.classList.add("is-in");
+      }
     });
   }
   markSeq();
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (ents) {
+      var batch = 0;
       ents.forEach(function (ent) {
-        if (!ent.isIntersecting) return;
-        showList(ent.target);
+        if (!ent.isIntersecting || ent.target.classList.contains("is-in")) {
+          if (ent.target.classList.contains("is-in")) io.unobserve(ent.target);
+          return;
+        }
+        ent.target.style.setProperty("--seq", String(Math.min(batch, 6)));
+        batch++;
+        ent.target.classList.add("is-in");
         io.unobserve(ent.target);
       });
-    }, {threshold: 0.15});
-    document.querySelectorAll(".seq").forEach(function (list) { io.observe(list); });
+    }, {threshold: 0.02, rootMargin: "0px 0px -16px 0px"});
+    items.forEach(function (item) { if (!item.classList.contains("is-in")) io.observe(item); });
   }
   window.addEventListener("scroll", markSeq, {passive: true});
+  window.addEventListener("resize", markSeq, {passive: true});
+  window.addEventListener("hashchange", function () { setTimeout(markSeq, 50); });
+  setTimeout(markSeq, 600);
 })();
 (function () {
   var reduce = false;
