@@ -17,17 +17,19 @@ PARSER = budoux.load_default_japanese_parser()
 # can wrap at phrase boundaries when they exceed the viewport.
 ATOMS = sorted(
     {
-        "ヒューリックホール東京",
-        "品川インターシティホール",
-        "エスコンフィールドHOKKAIDO",
+        "ヒューリックホール",
+        "インターシティホール",
+        "エスコンフィールド",
+        "目指せる人。",
+        "目指せる人",
         "Anime Festival Asia",
         "Next Stage",
         "NOAH HAKONE（箱根）",
         "日本武道館",
-        "在り来たりな日常と幸運な日々へ",
         "在り来たりな",
-        "あしたはあしたのけせらせら！",
-        "拝啓、名もない私たちへ。",
+        "名もない",
+        "あしたの",
+        "けせらせら！",
         "モブせか2",
         "ここ俺",
         "世界です2",
@@ -44,8 +46,8 @@ ATOMS = sorted(
         "ワンマンライブデビュー",
         "ワンマンライブ",
         "ホールワンマン",
-        "試合後スペシャルライブ出演",
         "試合後ライブ",
+        "スペシャルライブ",
         "名称非公開",
         "新メンバーオーディション",
         "公式LINE",
@@ -74,8 +76,8 @@ NOWRAP_ATOMS = {
 MANUAL = {
     "Anime Festival Asia Indonesia 2026 Next Stage出演": [
         "Anime Festival Asia",
-        " Indonesia 2026 ",
-        "Next Stage",
+        " Indonesia 2026",
+        " Next Stage",
         "出演",
     ],
 }
@@ -171,11 +173,77 @@ def split_phrases(text: str) -> list[str]:
     return _split_segment(text)
 
 
-LEAD_PUNCT = re.compile("^[「『（(\x5b【［《〈“]+$")
+OPEN_CHARS = "「『（([【［《〈“"
+CLOSE_CHARS = "」』）)]】］〕》〉”"
+# Characters that must not start a line (closing punct / kinsoku).
+START_FORBIDDEN = CLOSE_CHARS + "、。,.!！?？…・：:；;"
+HAS_JP = re.compile(r"[一-龠ぁ-んァ-ヶ]")
+LEAD_PUNCT = re.compile("^[" + re.escape(OPEN_CHARS) + "]+$")
 TRAIL_ATTACH = re.compile(
     "^(?:[”」』）)]*)(?:での|では|には|にも|のは|のが|のを|とは|とも|から|まで|より|など|って|という|といった|"
     "[はがをにのともへでやかも])?[、。,.!！?？』」］】〕）)”“…・：:；;]*$"
 )
+
+
+def _explode_brackets(text: str) -> list[str]:
+    """Split so opening brackets leave the previous word and closing
+    brackets do not stay glued to the following word.
+    ワンマンライブ「拝啓… → ワンマンライブ / 「拝啓…
+    なっていた。』EDテーマ → なっていた。』 / EDテーマ
+    """
+    if not text:
+        return []
+    parts: list[str] = []
+    buf: list[str] = []
+    for ch in text:
+        if ch in OPEN_CHARS and buf and buf[-1] not in OPEN_CHARS:
+            parts.append("".join(buf))
+            buf = [ch]
+        elif (
+            buf
+            and buf[-1] in CLOSE_CHARS
+            and ch not in START_FORBIDDEN
+        ):
+            parts.append("".join(buf))
+            buf = [ch]
+        else:
+            buf.append(ch)
+    if buf:
+        parts.append("".join(buf))
+    return parts
+
+
+def _fix_kinsoku(chunks: list[str]) -> list[str]:
+    """Hard rule: no chunk ends with an opening bracket, none starts with
+    closing punctuation. Opening punct joins the following unit; closing
+    punct joins the preceding unit."""
+    exploded: list[str] = []
+    for c in chunks:
+        if c:
+            exploded.extend(_explode_brackets(c))
+    merged: list[str] = []
+    for ph in exploded:
+        if not ph:
+            continue
+        if merged and ph[0] in START_FORBIDDEN:
+            merged[-1] += ph
+            continue
+        if merged and merged[-1][-1] in OPEN_CHARS:
+            merged[-1] += ph
+            continue
+        merged.append(ph)
+    # leftover opening-only punct attaches to the next chunk
+    out: list[str] = []
+    i = 0
+    while i < len(merged):
+        if i + 1 < len(merged) and all(ch in OPEN_CHARS for ch in merged[i]):
+            out.append(merged[i] + merged[i + 1])
+            i += 2
+        else:
+            out.append(merged[i])
+            i += 1
+    return out
+
 
 def _merge_chunks(chunks: list[str]) -> list[str]:
     merged: list[str] = []
@@ -192,30 +260,52 @@ def _merge_chunks(chunks: list[str]) -> list[str]:
             merged.append(ph)
             continue
         if TRAIL_ATTACH.fullmatch(ph) and ph != "":
-            # Keep a break after a long proper noun rather than gluing
-            # での/では onto it (that forced earlier wraps on narrow screens).
-            if re.fullmatch(r"^(?:での|では)[、。]*$", ph) and len(merged[-1]) >= 6:
+            # Do not glue での/では onto a long Japanese proper noun
+            # (that forced earlier wraps). Latin tails like HOKKAIDOでの
+            # should still stay together.
+            if (
+                re.fullmatch(r"^(?:での|では)[、。]*$", ph)
+                and len(merged[-1]) >= 6
+                and HAS_JP.search(merged[-1])
+            ):
                 merged.append(ph)
                 continue
             merged[-1] += ph
             continue
-        if ph[0] in "”」』）)]" and not LEAD_PUNCT.fullmatch(ph):
+        if ph[0] in START_FORBIDDEN and not LEAD_PUNCT.fullmatch(ph):
             merged[-1] += ph[0]
             ph = ph[1:]
             if not ph:
                 continue
         merged.append(ph)
-    # attach a leftover opening punct to the following chunk if it is last-but dangling
-    i = 0
-    out: list[str] = []
-    while i < len(merged):
-        if i + 1 < len(merged) and LEAD_PUNCT.fullmatch(merged[i]):
-            out.append(merged[i] + merged[i + 1])
-            i += 2
-        else:
-            out.append(merged[i])
-            i += 1
-    return out
+    return _fix_kinsoku(merged)
+
+
+def _should_nowrap(ph: str) -> bool:
+    if not ph:
+        return False
+    raw = ph.strip()
+    if raw in NOWRAP_ATOMS or ph in NOWRAP_ATOMS or any(
+        s == a or (s.startswith(a) and len(s) - len(a) <= 4)
+        for a in NOWRAP_ATOMS
+        for s in (ph, raw)
+    ):
+        return True
+    # Keep short quoted fragments intact so WebKit cannot break after
+    # 「 or before 」. Long complete titles are split at phrases instead.
+    if ph[0] in OPEN_CHARS or ph[-1] in CLOSE_CHARS:
+        return len(raw) <= 12
+    return False
+
+
+# Split Latin/Japanese at a space, or after a 4+ letter Latin word
+# (HOKKAIDO / 試合後, Asia / にも). Do not split short prefixes
+# (TVアニメ, EDテーマ) or digits (モブせか2).
+SCRIPT_BOUND = re.compile(
+    r"(?<=[A-Za-z]{4})(?=\s*[一-龠ぁ-んァ-ヶ])"
+    r"|(?<=[一-龠ぁ-んァ-ヶ])(?=\s*[A-Za-z]{4})"
+)
+
 
 def _split_segment(text: str) -> list[str]:
     if not text:
@@ -227,19 +317,31 @@ def _split_segment(text: str) -> list[str]:
             continue
         if part in ATOMS or DATE_RE.fullmatch(part):
             chunks.append(part)
-        else:
-            chunks.extend(PARSER.parse(part))
+            continue
+        for sub in SCRIPT_BOUND.split(part):
+            if sub == "":
+                continue
+            if sub in ATOMS or DATE_RE.fullmatch(sub):
+                chunks.append(sub)
+            else:
+                chunks.extend(PARSER.parse(sub))
     return _merge_chunks(chunks)
 
 
 def phrases_to_html(phrases: list[str]) -> str:
-    if len(phrases) <= 1 and not (phrases and phrases[0] in NOWRAP_ATOMS):
+    phrases = _fix_kinsoku(phrases)
+    if len(phrases) <= 1 and not (phrases and _should_nowrap(phrases[0])):
         return phrases[0] if phrases else ""
     out = []
     for i, ph in enumerate(phrases):
         if i:
-            out.append("<wbr>")
-        if ph in NOWRAP_ATOMS or any(ph == a or (ph.startswith(a) and len(ph) - len(a) <= 4) for a in NOWRAP_ATOMS):
+            # Defensive: never insert a wrap opportunity that would leave
+            # an opening bracket at EOL or a closing mark at SOL.
+            if phrases[i - 1][-1] in OPEN_CHARS or ph[0] in START_FORBIDDEN:
+                pass
+            else:
+                out.append("<wbr>")
+        if _should_nowrap(ph):
             out.append(f'<span class="nowrap">{ph}</span>')
         else:
             out.append(ph)
@@ -247,13 +349,17 @@ def phrases_to_html(phrases: list[str]) -> str:
 
 
 def update_css(html: str) -> str:
+    # Keep typography on wrap + break-word (not pretty / anywhere), so
+    # WebKit fills lines instead of wrapping at earlier phrase breaks.
+    html = html.replace("overflow-wrap:anywhere", "overflow-wrap:break-word")
+    html = html.replace("text-wrap:pretty", "text-wrap:wrap")
     html = html.replace(
         "word-break:normal;overflow-wrap:break-word;line-break:strict",
-        "word-break:keep-all;overflow-wrap:anywhere;line-break:strict",
+        "word-break:keep-all;overflow-wrap:break-word;line-break:strict",
     )
     html = html.replace(
         "line-break:strict;word-break:normal;overflow-wrap:break-word",
-        "line-break:strict;word-break:keep-all;overflow-wrap:anywhere",
+        "line-break:strict;word-break:keep-all;overflow-wrap:break-word",
     )
     html = html.replace("p,li,dd{", "p,li,dd,dt{", 1)
     html = html.replace(".bio{margin-top:4px}", ".bio{margin-top:10px}")
