@@ -33,7 +33,6 @@ ATOMS = sorted(
         "“上手い人”",
         "Anime Festival Asia",
         "Next Stage",
-        "NOAH HAKONE（箱根）",
         "日本武道館",
         "在り来たりな",
         "名もない",
@@ -77,7 +76,7 @@ ATOMS = sorted(
 
 # Multi-word Latin units must not wrap at their internal spaces.
 NOWRAP_ATOMS = {
-    "Anime Festival Asia", "Next Stage", "NOAH HAKONE（箱根）",
+    "Anime Festival Asia", "Next Stage",
     "“本物”へ。", "“本物”へ", "“心を動かせる人”。", "“心を動かせる人”", "“上手い人”",
     "『ここ俺』", "『モブせか2』",
 }
