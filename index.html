@@ -129,7 +129,7 @@ p,li,dd,dt{line-height:1.75;text-wrap:wrap;word-break:normal;overflow-wrap:break
 .history li.history-now::before{background:var(--accent);box-shadow:0 0 0 3px rgba(135,240,53,.3)}
 .history li.history-now .h-date{color:var(--green-deep)}
 .history li.history-now .h-body{margin-top:2px;font-family:var(--heading);font-size:18px;font-weight:700;line-height:1.5}
-.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;width:100%;max-width:100%;align-items:start}
+.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;width:min(1080px,100%);max-width:100%;margin-inline:auto;padding-inline:20px;align-items:start}
 .photos>*{min-width:0}
 .photos picture{display:block;overflow:clip;position:relative;width:100%;height:auto;aspect-ratio:10/7}
 .photos img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center 20%}
